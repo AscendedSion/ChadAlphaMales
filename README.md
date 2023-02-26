@@ -18,3 +18,6 @@ The offsets are fucked from the june (?) + january update, feel free to fix it y
 Have fun with the semi-old src code (IIRC 1.7 or 1.8 was the latest), the development has been discontinued since february due to lots of funny stuff that happened between me and legacy.
 
 guh
+
+# important note from the fork creators
+this cheat will NOT be activly updated unless me and sion find motivation to add anything ))
