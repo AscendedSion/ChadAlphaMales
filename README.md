@@ -21,3 +21,4 @@ guh
 
 # important note from the fork creators
 this cheat will NOT be activly updated unless me and sion find motivation to add anything ))
+eaueerghauerhhjg ever since getterhook stopped compiling i forgot how to code aiusdfrujedkmaruuureueurgh - sion
