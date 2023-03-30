@@ -78,6 +78,7 @@ void CDMEChams::Init()
 		_("\"UnlitGeneric\"\
 		\n{\
 		\n\t\"$basetexture\" \"vgui/white_additive\"\
+                \n\t\"$ignorez\" \"1\"\
 		\n}\n")
 	});
 
