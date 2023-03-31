@@ -145,7 +145,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	g_Visuals.AddToEventLog(_("Press \"Insert\" to open menu!"));
 
 	g_Interfaces.CVars->ConsoleColorPrintf({ 0, 255, 0, 255 }, _("[!] CAM Loaded!\n"));
-	g_Interfaces.Surface->PlaySound(_("vo//items//wheatley_sapper//wheatley_sapper_attached14.mp3"));
+	g_Interfaces.Surface->PlaySound(_("misc//boring_applause_1.wav"));
 	
 	std::wstring defaultConfig = _(L"Default"); // Thank you Mr.Fedora lmao
 	if (!std::filesystem::exists(g_CFG.m_sConfigPath + L"\\" + defaultConfig)) {
