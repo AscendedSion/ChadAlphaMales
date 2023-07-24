@@ -391,7 +391,7 @@ void AimbotTab() {
         ImGui::MenuChild(_("Projectile"), ImVec2(260, 186), false, ImGuiWindowFlags_NoScrollWithMouse);
         {
             ImGui::Checkbox(_("Active###Projectile"), &Vars::Aimbot::Projectile::Active.m_Var);
-            //ImGui::Checkbox(_("Performance mode"), &Vars::Aimbot::Projectile::PerformanceMode.m_Var);
+            ImGui::Checkbox(_("Performance mode"), &Vars::Aimbot::Projectile::PerformanceMode.m_Var);
             //static const char* projectileSortMethod[]{ "FOV", "Distance" };
             //ImGui::Combo(_("Sort method###projectileSortMethod"), &Vars::Aimbot::Projectile::SortMethod.m_Var, projectileSortMethod, IM_ARRAYSIZE(projectileSortMethod));
 
@@ -401,7 +401,7 @@ void AimbotTab() {
             static const char* projectileAimHitbox[]{ "Body", "Feet", "Auto" };
             ImGui::Combo(_("Aim position###projectileAimPosition"), &Vars::Aimbot::Projectile::AimPosition.m_Var, projectileAimHitbox, IM_ARRAYSIZE(projectileAimHitbox));
 
-            ImGui::Checkbox(_("R8 Method"), &Vars::Aimbot::Projectile::R8Method.m_Var);
+           //ImGui::Checkbox(_("R8 Method"), &Vars::Aimbot::Projectile::R8Method.m_Var);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -1250,8 +1250,8 @@ void MiscTab() {
 
             ImGui::Checkbox(_("AntiAim"), &Vars::AntiHack::AntiAim::Active.m_Var);
             const char* pitch[]{ "None", "Up", "Down", "Fake up", "Fake down", "Center", "Half Up" }; ImGui::Combo(_("Pitch"), &Vars::AntiHack::AntiAim::Pitch.m_Var, pitch, IM_ARRAYSIZE(pitch));
-            const char* realYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge" }; ImGui::Combo(_("Real yaw"), &Vars::AntiHack::AntiAim::YawReal.m_Var, realYaw, IM_ARRAYSIZE(realYaw));
-            const char* fakeYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge" }; ImGui::Combo(_("Fake yaw"), &Vars::AntiHack::AntiAim::YawFake.m_Var, fakeYaw, IM_ARRAYSIZE(fakeYaw));
+            const char* realYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge", "Static"}; ImGui::Combo(_("Real yaw"), &Vars::AntiHack::AntiAim::YawReal.m_Var, realYaw, IM_ARRAYSIZE(realYaw));
+            const char* fakeYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge", "Static"}; ImGui::Combo(_("Fake yaw"), &Vars::AntiHack::AntiAim::YawFake.m_Var, fakeYaw, IM_ARRAYSIZE(fakeYaw));
             FixSlider;
             ImGui::SliderInt(_("Spin Speed"), &Vars::AntiHack::AntiAim::SpinSpeed.m_Var, 1, 20, _("%d"), ImGuiSliderFlags_AlwaysClamp);
 
@@ -1704,8 +1704,8 @@ void CMenu::Render(IDirect3DDevice9* pDevice) {
 
             ImGui::SetCursorPosY(32);
             if (ImGui::Button(_("Force SV_Cheats"), ImVec2(120, 20))) {
-                //ConVar* sv_cheats = g_Interfaces.CVars->FindVar("sv_cheats");
-                //sv_cheats->SetValue(1);
+                ConVar* sv_cheats = g_Interfaces.CVars->FindVar("sv_cheats");
+                sv_cheats->SetValue(1);
                 Vars::Misc::CheatsBypass.m_Var = 1;
             }
 
