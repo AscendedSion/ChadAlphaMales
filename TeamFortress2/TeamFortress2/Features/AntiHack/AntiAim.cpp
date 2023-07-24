@@ -184,7 +184,8 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 			case 2: { pCmd->viewangles.y -= 90.0f; break; }
 			case 3: { pCmd->viewangles.y += 180.0f; break; }
 			case 4: { pCmd->viewangles.y = SpinSpeed; break; }//Spin
-			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-65536.0f, 65536.0f); break; }//Random
+			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-360.0f, 360.0f); break; }//Random
+			case 7: { pCmd->viewangles.y = Utils::RandFloatRange(0.f, -0.f); break; }
 			case 6:
 			{
 				if (FindEdge(pCmd->viewangles.y))
@@ -205,7 +206,8 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 			case 2: { pCmd->viewangles.y -= 90.0f; break; }
 			case 3: { pCmd->viewangles.y += 180.0f; break; }
 			case 4: { pCmd->viewangles.y = SpinSpeed; break; }//Spin
-			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-65536.0f, 65536.0f); break; }//Random
+			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-360.0f, 360.0f); break; }//Random
+			case 7: { pCmd->viewangles.y = Utils::RandFloatRange(0.f, -0.f); break; }
 			case 6:
 			{
 				if (FindEdge(pCmd->viewangles.y))
