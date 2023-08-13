@@ -103,10 +103,7 @@
     <ClCompile Include="TeamFortress2\Features\Aimbot\AimbotMelee\AimbotMelee.cpp" />
     <ClCompile Include="TeamFortress2\Features\Aimbot\AimbotProjectile\AimbotProjectile.cpp" />
     <ClCompile Include="TeamFortress2\Features\AntiHack\AntiAim.cpp" />
-    <ClCompile Include="TeamFortress2\Features\Auto\AutoBlast\AutoBlast.cpp" />
     <ClCompile Include="TeamFortress2\Features\Auto\AutoDetonate\AutoDetonate.cpp" />
-    <ClCompile Include="TeamFortress2\Features\Auto\AutoUber\AutoUber.cpp" />
-    <ClCompile Include="TeamFortress2\Features\Auto\AutoVaccinator\AutoVaccinator.cpp" />
     <ClCompile Include="TeamFortress2\Features\Backtrack\Backtrack.cpp" />
     <ClCompile Include="TeamFortress2\Features\Cache\Cache.cpp" />
     <ClCompile Include="TeamFortress2\Features\ChatInfo\ChatInfo.cpp" />
@@ -197,10 +194,7 @@
     <ClInclude Include="TeamFortress2\Features\Aimbot\AimbotMelee\AimbotMelee.h" />
     <ClInclude Include="TeamFortress2\Features\Aimbot\AimbotProjectile\AimbotProjectile.h" />
     <ClInclude Include="TeamFortress2\Features\AntiHack\AntiAim.h" />
-    <ClInclude Include="TeamFortress2\Features\Auto\AutoBlast\AutoBlast.h" />
     <ClInclude Include="TeamFortress2\Features\Auto\AutoDetonate\AutoDetonate.h" />
-    <ClInclude Include="TeamFortress2\Features\Auto\AutoUber\AutoUber.h" />
-    <ClInclude Include="TeamFortress2\Features\Auto\AutoVaccinator\AutoVaccinator.h" />
     <ClInclude Include="TeamFortress2\Features\Backtrack\Backtrack.h" />
     <ClInclude Include="TeamFortress2\Features\Cache\Cache.h" />
     <ClInclude Include="TeamFortress2\Features\ChatInfo\ChatInfo.h" />

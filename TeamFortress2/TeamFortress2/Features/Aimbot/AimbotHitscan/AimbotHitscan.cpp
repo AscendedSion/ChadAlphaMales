@@ -164,14 +164,14 @@ bool CAimbotHitscan::ScanHitboxes(CBaseEntity* pLocal, Target_t& Target)
 {
 	if (Target.m_TargetType == ETargetType::PLAYER)
 	{
-		if (!Vars::Aimbot::Hitscan::ScanHitboxes.m_Var)
-			return false;
+		//if (!Vars::Aimbot::Hitscan::ScanHitboxes.m_Var)
+		//	return false;
 	}
 
 	else if (Target.m_TargetType == ETargetType::BUILDING)
 	{
-		if (!Vars::Aimbot::Hitscan::ScanBuildings.m_Var)
-			return false;
+		//if (!Vars::Aimbot::Hitscan::ScanBuildings.m_Var)
+		//	return false;
 	}
 
 	Vec3 vLocalPos = pLocal->GetShootPos();
@@ -195,8 +195,8 @@ bool CAimbotHitscan::ScanHitboxes(CBaseEntity* pLocal, Target_t& Target)
 
 bool CAimbotHitscan::ScanHead(CBaseEntity* pLocal, Target_t& Target)
 {
-	if (!Vars::Aimbot::Hitscan::ScanHitboxes.m_Var)
-		return false;
+	//if (!Vars::Aimbot::Hitscan::ScanHitboxes.m_Var)
+		//return false;
 
 	//if (!Vars::Aimbot::Hitscan::ScanHead.m_Var)
 		//return false;
@@ -253,8 +253,8 @@ bool CAimbotHitscan::ScanHead(CBaseEntity* pLocal, Target_t& Target)
 
 bool CAimbotHitscan::ScanBuildings(CBaseEntity* pLocal, Target_t& Target)
 {
-	if (!Vars::Aimbot::Hitscan::ScanBuildings.m_Var)
-		return false;
+	//if (!Vars::Aimbot::Hitscan::ScanBuildings.m_Var)
+		//return false;
 
 	Vec3 vLocalPos = pLocal->GetShootPos();
 
@@ -595,8 +595,8 @@ void CAimbotHitscan::Run(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapon, CUserC
 		g_GlobalInfo.m_bHitscanRunning = true;
 		g_GlobalInfo.m_bHitscanSilentActive = Vars::Aimbot::Hitscan::AimMethod.m_Var == 2;
 
-		if (Vars::Aimbot::Hitscan::SpectatedSmooth.m_Var && g_GlobalInfo.m_bLocalSpectated)
-			g_GlobalInfo.m_bHitscanSilentActive = false;
+		//if (Vars::Aimbot::Hitscan::SpectatedSmooth.m_Var && g_GlobalInfo.m_bLocalSpectated)
+		//	g_GlobalInfo.m_bHitscanSilentActive = false;
 
 		if (g_GlobalInfo.m_bHitscanSilentActive)
 			g_GlobalInfo.m_vAimPos = Target.m_vPos;

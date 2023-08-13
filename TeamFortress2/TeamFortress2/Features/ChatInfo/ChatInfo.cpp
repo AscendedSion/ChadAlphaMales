@@ -35,12 +35,12 @@ void CChatInfo::Event(CGameEvent* pEvent, const FNV1A_t uNameHash) {
 					PlayerInfo_t pi;
 					g_Interfaces.Engine->GetPlayerInfo(nIndex, &pi);
 
-					g_Visuals.AddToEventLog(_("%s is  %s"), pi.name, Utils::GetClassByIndex(pEvent->GetInt(XorStr("class").c_str())));
+					g_Visuals.AddToEventLog(_("%s is %s"), pi.name, Utils::GetClassByIndex(pEvent->GetInt(XorStr("class").c_str())));
 					//g_Interfaces.ClientMode->m_pChatElement->ChatPrintf(nIndex, tfm::format("\x4[CAM] \x1%s is now %s", pi.name, Utils::GetClassByIndex(pEvent->GetInt("class"))).c_str());
 				}
 			}
 			if (uNameHash == FNV1A::HashConst(_("player_connect"))) {
-				g_Interfaces.ClientMode->m_pChatElement->ChatPrintf(GET_INDEX_USERID(pEvent->GetInt(_("userid"))), tfm::format(_("\x3%s\x1 connected. (%s)"), pEvent->GetString(_("name")), pEvent->GetString(_("address"))).c_str());
+				g_Interfaces.ClientMode->m_pChatElement->ChatPrintf(GET_INDEX_USERID(pEvent->GetInt(_("userid"))), tfm::format(_("\x3%s\x1 connected."), pEvent->GetString(_("name")), pEvent->GetString(_("address"))).c_str());
 			}
 		}
 

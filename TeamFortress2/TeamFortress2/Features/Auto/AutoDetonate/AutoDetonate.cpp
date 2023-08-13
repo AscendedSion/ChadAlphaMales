@@ -78,7 +78,7 @@ void CAutoDetonate::Run(CBaseEntity *pLocal, CBaseCombatWeapon *pWeapon, CUserCm
 		}
 	}
 
-	if (Vars::Triggerbot::Detonate::Flares.m_Var)
+	//if (Vars::Triggerbot::Detonate::Flares.m_Var)
 	{
 		m_flRadius = 85.0f * Vars::Triggerbot::Detonate::RadiusScale.m_Var;
 		

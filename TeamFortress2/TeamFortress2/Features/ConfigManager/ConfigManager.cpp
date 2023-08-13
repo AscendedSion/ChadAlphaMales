@@ -125,13 +125,13 @@ CConfigManager::CConfigManager()
 	if (!std::filesystem::exists(m_sConfigPath))
 		std::filesystem::create_directory(m_sConfigPath);
 
-	if (!std::filesystem::exists(m_sConfigPath + _(L"\\CAMCore")))
-		std::filesystem::create_directory(m_sConfigPath + _(L"\\CAMCore"));
+	//if (!std::filesystem::exists(m_sConfigPath + _(L"\\CAMCore")))
+		//std::filesystem::create_directory(m_sConfigPath + _(L"\\CAMCore"));
 }
 
 void CConfigManager::Save(const wchar_t *name)
 {
-	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".CAM"));
+	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".poop"));
 
 	if (m_Write.is_open())
 	{
@@ -160,12 +160,12 @@ void CConfigManager::Save(const wchar_t *name)
 				SAVE_VAR(Vars::Aimbot::Hitscan::AimFOV);
 				SAVE_VAR(Vars::Aimbot::Hitscan::SmoothingAmount);
 				SAVE_VAR(Vars::Aimbot::Hitscan::TapFire);
-				SAVE_VAR(Vars::Aimbot::Hitscan::ScanHitboxes);
-				SAVE_VAR(Vars::Aimbot::Hitscan::ScanHead);
-				SAVE_VAR(Vars::Aimbot::Hitscan::ScanBuildings);
+				//SAVE_VAR(Vars::Aimbot::Hitscan::ScanHitboxes);
+				//SAVE_VAR(Vars::Aimbot::Hitscan::ScanHead);
+				//SAVE_VAR(Vars::Aimbot::Hitscan::ScanBuildings);
 				SAVE_VAR(Vars::Aimbot::Hitscan::WaitForHeadshot);
 				SAVE_VAR(Vars::Aimbot::Hitscan::WaitForCharge);
-				SAVE_VAR(Vars::Aimbot::Hitscan::SpectatedSmooth);
+				//SAVE_VAR(Vars::Aimbot::Hitscan::SpectatedSmooth);
 				SAVE_VAR(Vars::Aimbot::Hitscan::ScopedOnly);
 				SAVE_VAR(Vars::Aimbot::Hitscan::AutoScope);
 				SAVE_VAR(Vars::Aimbot::Hitscan::AutoRev);
@@ -231,31 +231,31 @@ void CConfigManager::Save(const wchar_t *name)
 			{
 				SAVE_VAR(Vars::Triggerbot::Detonate::Active);
 				SAVE_VAR(Vars::Triggerbot::Detonate::Stickies);
-				SAVE_VAR(Vars::Triggerbot::Detonate::Flares);
+				//SAVE_VAR(Vars::Triggerbot::Detonate::Flares);
 				SAVE_VAR(Vars::Triggerbot::Detonate::RadiusScale);
 			}
 
 			//Blast
 			{
-				SAVE_VAR(Vars::Triggerbot::Blast::Active);
-				SAVE_VAR(Vars::Triggerbot::Blast::Rage);
-				SAVE_VAR(Vars::Triggerbot::Blast::Silent);
-				SAVE_VAR(Vars::Triggerbot::Blast::Fov);
+				//SAVE_VAR(Vars::Triggerbot::Blast::Active);
+				//SAVE_VAR(Vars::Triggerbot::Blast::Rage);
+				//SAVE_VAR(Vars::Triggerbot::Blast::Silent);
+				//SAVE_VAR(Vars::Triggerbot::Blast::Fov);
 			}
 
 			//Uber
 			{
-				SAVE_VAR(Vars::Triggerbot::Uber::Active);
-				SAVE_VAR(Vars::Triggerbot::Uber::OnlyFriends);
-				SAVE_VAR(Vars::Triggerbot::Uber::PopLocal);
-				SAVE_VAR(Vars::Triggerbot::Uber::HealthLeft);
+				//SAVE_VAR(Vars::Triggerbot::Uber::Active);
+				//SAVE_VAR(Vars::Triggerbot::Uber::OnlyFriends);
+				//SAVE_VAR(Vars::Triggerbot::Uber::PopLocal);
+				//SAVE_VAR(Vars::Triggerbot::Uber::HealthLeft);
 			}
 
 			//Vacc
 			{
-				SAVE_VAR(Vars::Triggerbot::AutoVaccinator::Active);
-				SAVE_VAR(Vars::Triggerbot::AutoVaccinator::OnlyFriends);
-				SAVE_VAR(Vars::Triggerbot::AutoVaccinator::UberMaxPercentage);
+				//SAVE_VAR(Vars::Triggerbot::AutoVaccinator::Active);
+				//SAVE_VAR(Vars::Triggerbot::AutoVaccinator::OnlyFriends);
+				//SAVE_VAR(Vars::Triggerbot::AutoVaccinator::UberMaxPercentage);
 			}
 		}
 
@@ -642,12 +642,12 @@ void CConfigManager::Load(const wchar_t *name)
 				LOAD_VAR(Vars::Aimbot::Hitscan::AimFOV);
 				LOAD_VAR(Vars::Aimbot::Hitscan::SmoothingAmount);
 				LOAD_VAR(Vars::Aimbot::Hitscan::TapFire);
-				LOAD_VAR(Vars::Aimbot::Hitscan::ScanHitboxes);
-				LOAD_VAR(Vars::Aimbot::Hitscan::ScanHead);
-				LOAD_VAR(Vars::Aimbot::Hitscan::ScanBuildings);
+				//LOAD_VAR(Vars::Aimbot::Hitscan::ScanHitboxes);
+				//LOAD_VAR(Vars::Aimbot::Hitscan::ScanHead);
+				//LOAD_VAR(Vars::Aimbot::Hitscan::ScanBuildings);
 				LOAD_VAR(Vars::Aimbot::Hitscan::WaitForHeadshot);
 				LOAD_VAR(Vars::Aimbot::Hitscan::WaitForCharge);
-				LOAD_VAR(Vars::Aimbot::Hitscan::SpectatedSmooth);
+				//LOAD_VAR(Vars::Aimbot::Hitscan::SpectatedSmooth);
 				LOAD_VAR(Vars::Aimbot::Hitscan::ScopedOnly);
 				LOAD_VAR(Vars::Aimbot::Hitscan::AutoScope);
 				LOAD_VAR(Vars::Aimbot::Hitscan::AutoRev);
@@ -713,30 +713,31 @@ void CConfigManager::Load(const wchar_t *name)
 			{
 				LOAD_VAR(Vars::Triggerbot::Detonate::Active);
 				LOAD_VAR(Vars::Triggerbot::Detonate::Stickies);
-				LOAD_VAR(Vars::Triggerbot::Detonate::Flares);
+				//LOAD_VAR(Vars::Triggerbot::Detonate::Flares);
 				LOAD_VAR(Vars::Triggerbot::Detonate::RadiusScale);
 			}
 
 			//Blast
 			{
-				LOAD_VAR(Vars::Triggerbot::Blast::Active);
-				LOAD_VAR(Vars::Triggerbot::Blast::Rage);
-				LOAD_VAR(Vars::Triggerbot::Blast::Silent);
-				LOAD_VAR(Vars::Triggerbot::Blast::Fov);
+				//LOAD_VAR(Vars::Triggerbot::Blast::Active);
+				//LOAD_VAR(Vars::Triggerbot::Blast::Rage);
+				//LOAD_VAR(Vars::Triggerbot::Blast::Silent);
+				//LOAD_VAR(Vars::Triggerbot::Blast::Fov);
 			}
 
 			//Uber
 			{
-				LOAD_VAR(Vars::Triggerbot::Uber::Active);
-				LOAD_VAR(Vars::Triggerbot::Uber::OnlyFriends);
-				LOAD_VAR(Vars::Triggerbot::Uber::PopLocal);
-				LOAD_VAR(Vars::Triggerbot::Uber::HealthLeft);
+				//LOAD_VAR(Vars::Triggerbot::Uber::Active);
+				//LOAD_VAR(Vars::Triggerbot::Uber::OnlyFriends);
+				//LOAD_VAR(Vars::Triggerbot::Uber::PopLocal);
+				//LOAD_VAR(Vars::Triggerbot::Uber::HealthLeft);
 			}
 
 			{
-				LOAD_VAR(Vars::Triggerbot::AutoVaccinator::Active);
-				LOAD_VAR(Vars::Triggerbot::AutoVaccinator::OnlyFriends);
-				LOAD_VAR(Vars::Triggerbot::AutoVaccinator::UberMaxPercentage);
+				//LOAD_VAR(Vars::Triggerbot::AutoVaccinator::Active);
+				//LOAD_VAR(Vars::Triggerbot::AutoVaccinator::OnlyFriends);
+				//LOAD_VAR(Vars::Triggerbot::AutoVaccinator::UberMaxPercentage);
+				//LOAD_VAR(Vars::Triggerbot::AutoVaccinator::UberMaxPercentage);
 			}
 		}
 
