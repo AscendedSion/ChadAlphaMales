@@ -328,7 +328,7 @@ void AimbotTab() {
         ImGui::SetCursorPosY(302);
         ImGui::BeginGroup();
         ImGui::SetCursorPosX(7);
-      /*  ImGui::MenuChild(_("Crithack"), ImVec2(250, 210), false, ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::MenuChild(_("Crithack"), ImVec2(250, 210), false, ImGuiWindowFlags_NoScrollWithMouse);
         {
             static bool lefunny = false;
             static bool lefunny2 = false;
@@ -347,7 +347,7 @@ void AimbotTab() {
                     lefunny2 = true;
                 }
             }
-        }*/
+        }
         ImGui::EndChild();
         ImGui::EndGroup();
     }
@@ -374,7 +374,7 @@ void AimbotTab() {
             static const char* hitscanTapFire[]{ "Off", "Distance", "Always" };
             ImGui::Combo(_("Tap-fire"), &Vars::Aimbot::Hitscan::TapFire.m_Var, hitscanTapFire, IM_ARRAYSIZE(hitscanTapFire));
             ImGui::Checkbox(_("Minigun rev up"), &Vars::Aimbot::Hitscan::AutoRev.m_Var);
-            //ImGui::Checkbox(_("Multipoint"), &Vars::Aimbot::Hitscan::ScanHitboxes.m_Var);
+            ImGui::Checkbox(_("Multipoint"), &Vars::Aimbot::Hitscan::ScanHitboxes.m_Var);
             //ImGui::Checkbox("Head multipoint", &Vars::Aimbot::Hitscan::ScanHead.m_Var); // uh
             ImGui::Checkbox(_("Wait for headshot"), &Vars::Aimbot::Hitscan::WaitForHeadshot.m_Var);
             ImGui::Checkbox(_("Wait for charge"), &Vars::Aimbot::Hitscan::WaitForCharge.m_Var);
@@ -398,10 +398,10 @@ void AimbotTab() {
             static const char* projectileAimMethod[]{ "Plain", "Silent" };
             ImGui::Combo(_("Aim method###projectileAimMethod"), &Vars::Aimbot::Projectile::AimMethod.m_Var, projectileAimMethod, IM_ARRAYSIZE(projectileAimMethod));
 
-           // static const char* projectileAimHitbox[]{ "Body", "Feet", "Auto" };
-           // ImGui::Combo(_("Aim position###projectileAimPosition"), &Vars::Aimbot::Projectile::AimPosition.m_Var, projectileAimHitbox, IM_ARRAYSIZE(projectileAimHitbox));
+            static const char* projectileAimHitbox[]{ "Body", "Feet", "Auto" };
+            ImGui::Combo(_("Aim position###projectileAimPosition"), &Vars::Aimbot::Projectile::AimPosition.m_Var, projectileAimHitbox, IM_ARRAYSIZE(projectileAimHitbox));
 
-            ImGui::Checkbox(_("R8 Method"), &Vars::Aimbot::Projectile::R8Method.m_Var);
+           //ImGui::Checkbox(_("R8 Method"), &Vars::Aimbot::Projectile::R8Method.m_Var);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -456,10 +456,10 @@ void TriggerbotTab() {
         ImGui::BeginGroup();
         ImGui::SetCursorPosX(7);
 
-       // ImGui::MenuChild(_("Auto Airblast"), ImVec2(250, 120), false, ImGuiWindowFlags_NoScrollWithMouse);
-        //ImGui::Checkbox(_("Active##gAAB"), &Vars::Triggerbot::Blast::Active.m_Var);
-       // ImGui::Checkbox(_("Rage mode##gAABr"), &Vars::Triggerbot::Blast::Rage.m_Var);
-        //ImGui::Checkbox(_("Silent##gAABs"), &Vars::Triggerbot::Blast::Silent.m_Var);
+        ImGui::MenuChild(_("Auto Airblast"), ImVec2(250, 120), false, ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::Checkbox(_("Active##gAAB"), &Vars::Triggerbot::Blast::Active.m_Var);
+        ImGui::Checkbox(_("Rage mode##gAABr"), &Vars::Triggerbot::Blast::Rage.m_Var);
+        ImGui::Checkbox(_("Silent##gAABs"), &Vars::Triggerbot::Blast::Silent.m_Var);
 
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -472,7 +472,7 @@ void TriggerbotTab() {
         ImGui::MenuChild(_("Auto Detonator"), ImVec2(250, 130), false, ImGuiWindowFlags_NoScrollWithMouse);
         ImGui::Checkbox(_("Active###gAD"), &Vars::Triggerbot::Detonate::Active.m_Var);
         ImGui::Checkbox(_("Stickybombs###gADs"), &Vars::Triggerbot::Detonate::Stickies.m_Var);
-        //ImGui::Checkbox(_("Detonator flares###gADd"), &Vars::Triggerbot::Detonate::Flares.m_Var);
+        ImGui::Checkbox(_("Detonator flares###gADd"), &Vars::Triggerbot::Detonate::Flares.m_Var);
         //FixSlider;
         //ImGui::SliderFloat("Detonate radius###gADr", &Vars::Triggerbot::Detonate::RadiusScale.m_Var, 0.5f, 1.0f, "%.1f", ImGuiSliderFlags_Logarithmic);
 
@@ -500,7 +500,7 @@ void TriggerbotTab() {
         ImGui::EndChild();
         ImGui::EndGroup();
     }
-   /* { // Middle bottom
+    { // Middle bottom
         ImGui::SetCursorPosY(262);
         ImGui::BeginGroup();
         ImGui::SetCursorPosX(262);
@@ -514,7 +514,7 @@ void TriggerbotTab() {
 
         ImGui::EndChild();
         ImGui::EndGroup();
-    }*/
+    }
 
     { // Right upper
         ImGui::SetCursorPosY(42);
@@ -535,7 +535,7 @@ void TriggerbotTab() {
         ImGui::EndGroup();
     }
 
-    /*{ // Middle bottom
+    { // Middle bottom
         ImGui::SetCursorPosY(262);
         ImGui::BeginGroup();
         ImGui::SetCursorPosX(517);
@@ -548,7 +548,7 @@ void TriggerbotTab() {
 
         ImGui::EndChild();
         ImGui::EndGroup();
-    }*/
+    }
 }
 int nESPTab = 1;
 
@@ -1349,7 +1349,7 @@ void ConfigsTab() {
             }
             */
             for (const auto& entry : std::filesystem::directory_iterator(g_CFG.m_sConfigPath)) {
-                if (std::string(std::filesystem::path(entry).filename().string()).find(_(".poop")) == std::string_view::npos) {
+                if (std::string(std::filesystem::path(entry).filename().string()).find(_(".CAM")) == std::string_view::npos) {
                     continue;
                 }
                 nConfig++;
@@ -1709,10 +1709,10 @@ void CMenu::Render(IDirect3DDevice9* pDevice) {
                 Vars::Misc::CheatsBypass.m_Var = 1;
             }
 
-            if (ImGui::Button(_("cl_fullupdate"), ImVec2(120, 20)))
+            if (ImGui::Button(_("CL_FullUpdate"), ImVec2(120, 20)))
                 g_Interfaces.Engine->ClientCmd_Unrestricted(_("cl_fullupdate"));
 
-            if (ImGui::Button(_("snd_restart"), ImVec2(120, 20)))
+            if (ImGui::Button(_("SND_Restart"), ImVec2(120, 20)))
                 g_Interfaces.Engine->ClientCmd_Unrestricted(_("snd_restart"));
 
             if (ImGui::Button(_("StopSound"), ImVec2(120, 20)))

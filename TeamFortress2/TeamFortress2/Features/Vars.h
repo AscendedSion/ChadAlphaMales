@@ -59,14 +59,14 @@ namespace Vars
 
 	namespace Aimbot
 	{
-		/*namespace CritHack
+		namespace CritHack
 		{
 			inline CVar<bool> Active{ true, L"Active" };
 			inline CVar<int> CritKey{ VK_LSHIFT, L"Crit Key" };
 			inline CVar<bool> SaveBucket{ false, L"Save Bucket" };
 			inline CVar<bool> MeleeCrits{ false, L"Meele Crits" };
 			inline CVar<bool> CritBar{ false, L"Crit Bar" };
-		}*/
+		}
 
 		namespace Global
 		{
@@ -92,12 +92,12 @@ namespace Vars
 			inline CVar<float> AimFOV			{ 15.0f, L"Aim FOV" };
 			inline CVar<float> SmoothingAmount	{ 4.0f, L"Smoothing Amount" };
 			inline CVar<int> TapFire			{ 1, L"Tap Fire" };	//0 - Off, 1 - Distance, 2 - Always
-			//inline CVar<bool> ScanHitboxes		{ true, L"Scan Body" };
-			//inline CVar<bool> ScanHead			{ true, L"Scan Head" };
-			//inline CVar<bool> ScanBuildings		{ true, L"Scan Buildings" };
+			inline CVar<bool> ScanHitboxes		{ true, L"Scan Body" };
+			inline CVar<bool> ScanHead			{ true, L"Scan Head" };
+			inline CVar<bool> ScanBuildings		{ true, L"Scan Buildings" };
 			inline CVar<bool> WaitForHeadshot	{ true, L"Wait For Headshot" };
 			inline CVar<bool> WaitForCharge     { true, L"Wait For Charge" };
-			//inline CVar<bool> SpectatedSmooth	{ false, L"Spectated Smooth" };
+			inline CVar<bool> SpectatedSmooth	{ false, L"Spectated Smooth" };
 			inline CVar<bool> ScopedOnly		{ false, L"Scoped Only" };
 			inline CVar<bool> AutoScope			{ false, L"Auto Scope" };
 			inline CVar<bool> AutoRev			{ false, L"Auto Rev" };
@@ -165,11 +165,11 @@ namespace Vars
 		{
 			inline CVar<bool> Active	    { true, L"Active" };
 			inline CVar<bool> Stickies      { true, L"Detonate Stickies" };
-			//inline CVar<bool> Flares        { true, L"Detonate Flares" };
+			inline CVar<bool> Flares        { true, L"Detonate Flares" };
 			inline CVar<float> RadiusScale	{ 1.0f, L"Radius Scale" };
 		}
 
-		/*namespace Blast
+		namespace Blast
 		{
 			inline CVar<bool> Active    { false, L"Active" };
 			inline CVar<bool> Rage      { false, L"Rage" };
@@ -191,7 +191,7 @@ namespace Vars
 			inline CVar<bool> OnlyFriends{ false, L"nigger" };
 			inline CVar<float> UberMaxPercentage { 70.f, L"nigger" };
 			
-		}*/
+		}
 	}
 
 	namespace ESP

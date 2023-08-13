@@ -56,6 +56,8 @@
     <ClCompile Include="TeamFortress2\Features\ChatInfo\ChatInfo.cpp" />
     <ClCompile Include="TeamFortress2\Features\Chams\DMEChams.cpp" />
     <ClCompile Include="TeamFortress2\Features\ConfigManager\ConfigManager.cpp" />
+    <ClCompile Include="TeamFortress2\Features\Auto\AutoBlast\AutoBlast.cpp" />
+    <ClCompile Include="TeamFortress2\Features\Auto\AutoUber\AutoUber.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\DrawStaticPropsHook\DrawStaticPropsHook.cpp" />
     <ClCompile Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\EngineHook\EngineHook.cpp" />
@@ -86,6 +88,7 @@
     <ClCompile Include="TeamFortress2\Hooks\BulletTracer\BulletTracer.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\GameMovementHook\GameMovementHook.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Easings\easing.cpp" />
+    <ClCompile Include="TeamFortress2\Features\Auto\AutoVaccinator\AutoVaccinator.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\CalcViewModelView\CalcViewModelView.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\MaterialHook\MaterialHook.cpp" />
     <ClCompile Include="TeamFortress2\SDK\Includes\bitbuf.cpp" />
@@ -453,6 +456,8 @@
     <ClInclude Include="TeamFortress2\Features\Chams\DMEChams.h" />
     <ClInclude Include="TeamFortress2\Features\ConfigManager\ConfigManager.h" />
     <ClInclude Include="TeamFortress2\Utils\WinAPI\WinAPI.h" />
+    <ClInclude Include="TeamFortress2\Features\Auto\AutoBlast\AutoBlast.h" />
+    <ClInclude Include="TeamFortress2\Features\Auto\AutoUber\AutoUber.h" />
     <ClInclude Include="TeamFortress2\Hooks\DrawStaticPropsHook\DrawStaticPropsHook.h" />
     <ClInclude Include="TeamFortress2\SDK\Interfaces\EngineEffects\EngineEffects.h" />
     <ClInclude Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.h" />
@@ -614,6 +619,7 @@
     <ClInclude Include="TeamFortress2\SDK\Includes\Typedef.h" />
     <ClInclude Include="TeamFortress2\Hooks\BulletTracer\BulletTracer.h" />
     <ClInclude Include="TeamFortress2\Hooks\GameMovementHook\GameMovementHook.h" />
+    <ClInclude Include="TeamFortress2\Features\Auto\AutoVaccinator\AutoVaccinator.h" />
     <ClInclude Include="TeamFortress2\SDK\Interfaces\IInputSystem\InputSystem.h" />
     <ClInclude Include="TeamFortress2\Hooks\CalcViewModelView\CalcViewModelView.h" />
     <ClInclude Include="TeamFortress2\Hooks\MaterialHook\MaterialHook.h" />
