@@ -1,7 +1,6 @@
 #include "ViewRenderHook.h"
 #include "../../Features/Chams/Chams.h"
 #include "../../Features/Visuals/Visuals.h"
-#include "../../Features/RichPresence/RichPresence.h"
 void __fastcall ViewRenderHook::LevelInit::Hook() {
 	//g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[!] Level init\n"));
 

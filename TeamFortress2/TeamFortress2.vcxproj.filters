@@ -61,7 +61,6 @@
     <ClCompile Include="TeamFortress2\Hooks\DrawStaticPropsHook\DrawStaticPropsHook.cpp" />
     <ClCompile Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\EngineHook\EngineHook.cpp" />
-    <ClCompile Include="TeamFortress2\Features\RichPresence\RichPresence.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Easings\easing.cpp" />
     <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\connection_win.cpp" />
     <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\discord_register_win.cpp" />
@@ -463,7 +462,6 @@
     <ClInclude Include="TeamFortress2\SDK\Interfaces\EngineEffects\EngineEffects.h" />
     <ClInclude Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.h" />
     <ClInclude Include="TeamFortress2\Hooks\EngineHook\EngineHook.h" />
-    <ClInclude Include="TeamFortress2\Features\RichPresence\RichPresence.h" />
     <ClInclude Include="TeamFortress2\Utils\Easings\easing.h" />
     <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_register.h" />
     <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_rpc.h" />

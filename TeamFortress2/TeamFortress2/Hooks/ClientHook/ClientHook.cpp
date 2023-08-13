@@ -3,7 +3,6 @@
 #include "../../Features/Misc/Misc.h"
 #include "../../Features/Visuals/Visuals.h"
 #include "../../Features/AttributeChanger/AttributeChanger.h"
-#include "../../Features/RichPresence/RichPresence.h"
 #include "../../SDK/Includes/bitbuf.h"
 #include "../../Utils/TFM/tfm.h"
 

@@ -4,7 +4,6 @@
 #include "Features/Chams/Chams.h"
 #include "Features/Chams/DMEChams.h"
 #include "Features/Visuals/Visuals.h"
-#include "Features/RichPresence/RichPresence.h"
 #include "Utils/DiscordRPC/Discord.h"
 #include "Utils/Events/Events.h"
 #include "Features/Menu/Menu.h"
@@ -135,8 +134,6 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	//Initialize ignored set
 	g_Playerlist.GetIgnoredPlayers();
 	g_Events.Setup({ "vote_cast", "player_changeclass", "player_connect", "player_hurt", "localplayer_respawn", "achievement_earned" });
-	if (!source::features::steamrichpresence.Update())
-		return false;
 
 	g_DiscordRPC->init();
 	g_DiscordRPC->update();
@@ -190,7 +187,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	}
 
 	while (!GetAsyncKeyState(VK_F11)) {
-		source::features::steamrichpresence.Update();
+		
 		std::this_thread::sleep_for(1500ms);
 	}
 
@@ -205,7 +202,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	Discord_Shutdown();
 
 	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Stopping Steam RPC\n"));
-	source::features::steamrichpresence.Destroy();
+	
 
 	g_Events.Destroy();
 
