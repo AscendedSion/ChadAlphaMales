@@ -6,7 +6,6 @@
 #include "../../Features/Misc/Misc.h"
 #include "../../Features/Visuals/Visuals.h"
 #include "../../Features/AntiHack/AntiAim.h"
-#include "../../Features/KatzeB0t/AntiCat.h"
 #include "../../SDK/Timer.h"
 #include "../../Features/Cache/Cache.h"
 #include "../../Features/ESP/ESP.h"
@@ -61,9 +60,9 @@ static void updateAntiAfk(CUserCmd* pCmd)
 			bool flip = false;
 			pCmd->buttons |= flip ? IN_FORWARD : IN_BACK;
 			flip = !flip;
-			g_Visuals.AddToEventLog(_("Attempting to prevent AFK kick..."));
-			g_Interfaces.CVars->ConsoleColorPrintf({ 150, 255, 0, 255 }, _("Attempting to prevent AFK kick...\n"));
-			g_Interfaces.ClientMode->m_pChatElement->ChatPrintf(0, "\x4[CAM]\x1 Attempting to prevent AFK kick...");
+			//g_Visuals.AddToEventLog(_("Attempting to prevent AFK kick..."));
+			//g_Interfaces.CVars->ConsoleColorPrintf({ 150, 255, 0, 255 }, _("Attempting to prevent AFK kick...\n"));
+			g_Interfaces.ClientMode->m_pChatElement->ChatPrintf(0, "preventing afk kick...");
 			if (AntiAfkTimer.check(g_ConVars.afkTimer->GetInt() * 60 * 1000 + 1000))
 			{
 				AntiAfkTimer.update();
@@ -229,7 +228,6 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 
 	if (badcode == 100) { // very inefficient
 		//g_Visuals.AddToEventLog(_("video james!"));
-		Exploits::cathook.run_auth();
 		badcode = 0;
 	}
 	else {

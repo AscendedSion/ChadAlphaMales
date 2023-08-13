@@ -81,7 +81,6 @@
     <ClCompile Include="TeamFortress2\Hooks\Reset\Reset.cpp" />
     <ClCompile Include="TeamFortress2\Features\Menu\ImGui\imgui_stdlib.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Events\Events.cpp" />
-    <ClCompile Include="TeamFortress2\Features\KatzeB0t\AntiCat.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\Scoreboard\Scoreboard.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\InventoryExpander\InventoryExpander.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\ViewRenderHook\ViewRenderHook.cpp" />
@@ -612,7 +611,6 @@
     <ClInclude Include="TeamFortress2\Utils\TFM\tfm.h" />
     <ClInclude Include="TeamFortress2\Utils\Events\Events.h" />
     <ClInclude Include="TeamFortress2\Utils\Hash\FNV1A.h" />
-    <ClInclude Include="TeamFortress2\Features\KatzeB0t\AntiCat.h" />
     <ClInclude Include="TeamFortress2\Hooks\Scoreboard\Scoreboard.h" />
     <ClInclude Include="TeamFortress2\SDK\Timer.h" />
     <ClInclude Include="TeamFortress2\Features\Playerlist\Playerlist.h" />
