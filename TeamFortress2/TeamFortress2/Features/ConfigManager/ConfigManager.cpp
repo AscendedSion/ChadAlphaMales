@@ -125,13 +125,13 @@ CConfigManager::CConfigManager()
 	if (!std::filesystem::exists(m_sConfigPath))
 		std::filesystem::create_directory(m_sConfigPath);
 
-	if (!std::filesystem::exists(m_sConfigPath + _(L"\\CAMCore")))
-		std::filesystem::create_directory(m_sConfigPath + _(L"\\CAMCore"));
+	//if (!std::filesystem::exists(m_sConfigPath + _(L"\\CAMCore")))
+		//std::filesystem::create_directory(m_sConfigPath + _(L"\\CAMCore"));
 }
 
 void CConfigManager::Save(const wchar_t *name)
 {
-	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".CAM"));
+	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".poop"));
 
 	if (m_Write.is_open())
 	{
@@ -174,7 +174,7 @@ void CConfigManager::Save(const wchar_t *name)
 			//Projectile
 			{
 				SAVE_VAR(Vars::Aimbot::Projectile::Active);
-				//SAVE_VAR(Vars::Aimbot::Projectile::PerformanceMode);
+				SAVE_VAR(Vars::Aimbot::Projectile::PerformanceMode);
 				//SAVE_VAR(Vars::Aimbot::Projectile::SortMethod);
 				SAVE_VAR(Vars::Aimbot::Projectile::AimMethod);
 				SAVE_VAR(Vars::Aimbot::Projectile::AimPosition);
@@ -613,7 +613,7 @@ void CConfigManager::Save(const wchar_t *name)
 
 void CConfigManager::Load(const wchar_t *name)
 {
-	m_Read = std::wifstream(m_sConfigPath + L"\\" + name + _(L".CAM"));
+	m_Read = std::wifstream(m_sConfigPath + L"\\" + name + _(L".poop"));
 
 	if (m_Read.is_open())
 	{
@@ -656,7 +656,7 @@ void CConfigManager::Load(const wchar_t *name)
 			//Projectile
 			{
 				LOAD_VAR(Vars::Aimbot::Projectile::Active);
-				//LOAD_VAR(Vars::Aimbot::Projectile::PerformanceMode);
+				LOAD_VAR(Vars::Aimbot::Projectile::PerformanceMode);
 				//LOAD_VAR(Vars::Aimbot::Projectile::SortMethod);
 				LOAD_VAR(Vars::Aimbot::Projectile::AimMethod);
 				LOAD_VAR(Vars::Aimbot::Projectile::AimPosition);
@@ -1161,5 +1161,5 @@ void CConfigManager::Load(const wchar_t *name)
 
 void CConfigManager::Remove(const wchar_t *name)
 {
-	std::filesystem::remove(m_sConfigPath + L"\\" + name + _(L".CAM"));
+	std::filesystem::remove(m_sConfigPath + L"\\" + name + _(L".poop"));
 }

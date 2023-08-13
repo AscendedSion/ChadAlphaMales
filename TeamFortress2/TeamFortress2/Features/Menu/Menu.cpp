@@ -1349,7 +1349,7 @@ void ConfigsTab() {
             }
             */
             for (const auto& entry : std::filesystem::directory_iterator(g_CFG.m_sConfigPath)) {
-                if (std::string(std::filesystem::path(entry).filename().string()).find(_(".CAM")) == std::string_view::npos) {
+                if (std::string(std::filesystem::path(entry).filename().string()).find(_(".poop")) == std::string_view::npos) {
                     continue;
                 }
                 nConfig++;
@@ -1494,7 +1494,7 @@ void ConfigsTab() {
         ImGui::SetCursorPosX(5);
         ColorPicker2(_("Shadow Color"), Vars::Menu::Colors::ShadowColor, true);
         ImGui::SetCursorPosX(5);
-        ImGui::SliderInt("Menu shadow size", &Vars::Menu::ShadowSize, 0, 128, "%d", ImGuiSliderFlags_AlwaysClamp);
+        ImGui::SliderInt("Menu shadow size", &Vars::Menu::ShadowSize, 0, 1000, "%d", ImGuiSliderFlags_AlwaysClamp);
         ImGui::EndChild();
         ImGui::EndGroup();
     }
@@ -2053,8 +2053,8 @@ void CMenu::Render(IDirect3DDevice9* pDevice) {
                 draw->AddRectFilled(ImVec2(p.x, p.y + 40), ImVec2(p.x + s.x, p.y + s.y), ImColor(18, 20, 21, 200), 5, ImDrawCornerFlags_Bot); // Background
 
                 ImGui::PushFont(name);
-                draw->AddText(ImVec2(p.x + 36 / 2, p.y + 29 / 2), ImColor(255, 255, 255, 255), _("ChadAlphaMales"));
-                draw->AddText(ImVec2(p.x + 36 / 2 + ImGui::CalcTextSize(_("ChadAlphaMales")).x, p.y + 29 / 2), ImColor(MenuCol.x, MenuCol.y, MenuCol.z, 255.f), _(".club"));
+                draw->AddText(ImVec2(p.x + 36 / 2, p.y + 29 / 2), ImColor(255, 255, 255, 255), _("james"));
+                draw->AddText(ImVec2(p.x + 36 / 2 + ImGui::CalcTextSize(_("james")).x, p.y + 29 / 2), ImColor(MenuCol.x, MenuCol.y, MenuCol.z, 255.f), _(".poop"));
                 ImGui::PopFont();
             }
             {
