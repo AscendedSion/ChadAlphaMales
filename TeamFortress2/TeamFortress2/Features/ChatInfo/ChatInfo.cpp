@@ -67,11 +67,11 @@ void CChatInfo::Event(CGameEvent* pEvent, const FNV1A_t uNameHash) {
 				}
 
 				if (crit) {
-					g_Interfaces.CVars->ConsolePrintf(_("n: %s | dmg: %i | remain: %i (crit)\n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
+					g_Interfaces.CVars->ConsolePrintf(_("n: %s | d: %i | r: %i | c\n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
 					//sprintf_s(buffer, _("Hurt %s for %i (%i health remaining) (crit)\n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
 				}
 				else {
-					g_Interfaces.CVars->ConsolePrintf(_("n: %s | dmg: %i | remain: %i \n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
+					g_Interfaces.CVars->ConsolePrintf(_("n: %s | d: %i | r: %i \n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
 					//sprintf_s(buffer, _("Hurt %s for %i (%i health remaining)\n"), player_info.name, pEvent->GetInt(_("damageamount")), pEvent->GetInt(_("health")));
 				}
 				//g_Visuals.vecEventVector.push_back(EventLogging_t{ buffer });
