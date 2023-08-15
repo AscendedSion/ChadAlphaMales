@@ -23,7 +23,7 @@ struct plistPlayer
 class CPlayerlist {
 private:
 	//The location of all ignored users
-	std::wstring ignorePath = (g_CFG.m_sConfigPath + _(L"\\CAMCore\\IGNORE.cam"));
+	std::wstring ignorePath = (g_CFG.m_sConfigPath + _(L"\\CAMCore\\IGNORE.poop"));
 	//A set of friendsIDs
 	std::set<uint32_t> ignoredPlayers;
 public:

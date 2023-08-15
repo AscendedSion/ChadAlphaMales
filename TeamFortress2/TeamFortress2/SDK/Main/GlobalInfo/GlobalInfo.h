@@ -47,7 +47,7 @@ struct DoubletapInfo {
 	int ChargedReverse = 20;
 	//int ToShift = 20;
 	int ToWait = 0;
-	BYTE barAlpha = 255;
+	BYTE barAlpha = 127;
 };
 
 inline GlobalInfo_t g_GlobalInfo;

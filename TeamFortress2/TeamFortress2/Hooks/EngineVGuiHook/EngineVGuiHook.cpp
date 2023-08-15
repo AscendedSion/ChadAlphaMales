@@ -71,7 +71,7 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 					{
 						if (pLocal->GetLifeState() == LIFE_ALIVE)
 						{
-							const int nY = (g_ScreenSize.h / 2) + 20;
+							const int nY = (g_ScreenSize.h / 2) + 50;
 							/*auto vel = pLocal->GetVelocity();
 							vel.z = 0;
 							auto speed = vel.Lenght2D();
@@ -90,9 +90,9 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 							int barWidth = (tickWidth * Vars::Misc::CL_Move::DTTicks.m_Var) + 2;
 
 
-							g_Draw.Rect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 40,40,40,dt.barAlpha });
+							g_Draw.Rect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 40,40,40, dt.barAlpha });
 							g_Draw.OutlinedRect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 0, 0, 0, dt.barAlpha });
-							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Charged, nY + 51 + 4, { 0,0,0,255 },
+							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Charged, nY + 51 + 4, { Vars::Menu::Colors::WidgetActive.r, Vars::Menu::Colors::WidgetActive.g, Vars::Menu::Colors::WidgetActive.b, 255 },
 								{
 									Vars::Menu::Colors::WidgetActive.r,
 									Vars::Menu::Colors::WidgetActive.g,
@@ -181,7 +181,7 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 				int ms = std::max(0, (int)std::round(g_GlobalInfo.m_Latency * 1000.f));
 				// Change admin to something else if you really need to, it was for the protection thing
 				//_snprintf(buff, sizeof(buff), _("CAM [v1.5] | fps: %i | delay: %ims") ,fps, ms);
-				std::string waterMark = tfm::format(_("CAM [v1.6] | fps: %d | delay: %ims"), fps, ms);
+				std::string waterMark = tfm::format(_(" f:%d | d:%ims"), fps, ms);
 				std::wstring waterMarkW(waterMark.begin(), waterMark.end());
 
 				g_Interfaces.Surface->GetTextSize(g_Draw.m_vecFonts[FONT_MENU].dwFont, waterMarkW.c_str(), label_w, label_h);
@@ -197,9 +197,9 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 						//ms = 1.f / nci->GetLatency(FLOW_INCOMING);
 						//ms = std::max(0, (int)std::round(g_GlobalInfo.m_Latency * 1000.f));
 
-						g_Draw.Rect(width - 10 - boxw, 11, boxw, 18, { 0, 0, 0, 200 });
-						g_Draw.Rect(width - 10 - boxw, 10, boxw, 2, Vars::Menu::Colors::WidgetActive);
-						g_Draw.String(FONT_MENU, width - 10 - boxw + 5, 20, { 255,255,255,255 }, ALIGN_CENTERVERTICAL, waterMarkW.c_str());
+						g_Draw.Rect(width - 10 - boxw, 11, boxw, 18, { 240, 110, 140, 130 });
+						//g_Draw.Rect(width - 10 - boxw, 10, boxw, 2, { 240, 110, 140, 130 });
+						g_Draw.String(FONT_ESP, width - 10 - boxw + 5, 20, { 240, 160, 180, 250 }, ALIGN_CENTERVERTICAL, waterMarkW.c_str());
 					}
 				}
 			}
