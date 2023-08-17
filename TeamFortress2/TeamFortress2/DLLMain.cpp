@@ -4,12 +4,11 @@
 #include "Features/Chams/Chams.h"
 #include "Features/Chams/DMEChams.h"
 #include "Features/Visuals/Visuals.h"
-#include "Utils/DiscordRPC/Discord.h"
 #include "Utils/Events/Events.h"
 #include "Features/Menu/Menu.h"
 #include "Features/Playerlist/Playerlist.h"
 
-Discord* g_DiscordRPC;
+//Discord* g_DiscordRPC;
 
 // I know that this is a pretty bad idea because we're basically leaking the CAM user's accounts, but atm this is our only auth check in the dll itself
 UINT64 steamids[] = {
@@ -135,8 +134,8 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	g_Playerlist.GetIgnoredPlayers();
 	g_Events.Setup({ "vote_cast", "player_changeclass", "player_connect", "player_hurt", "localplayer_respawn", "achievement_earned" });
 
-	g_DiscordRPC->init();
-	g_DiscordRPC->update();
+	//g_DiscordRPC->init();
+	//g_DiscordRPC->update();
 
 	g_Visuals.AddToEventLog(_("Cheat injected successfully!"));
 	g_Visuals.AddToEventLog(_("Press \"Insert\" to open menu!"));
@@ -199,7 +198,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
 	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Unloading CAM...\n"));
 	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Stopping Discord RPC\n"));
-	Discord_Shutdown();
+	//Discord_Shutdown();
 
 	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Stopping Steam RPC\n"));
 	

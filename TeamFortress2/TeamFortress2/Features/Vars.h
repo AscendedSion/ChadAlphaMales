@@ -120,7 +120,7 @@ namespace Vars
 			inline CVar<bool> Active			{ true, L"Active" };
 			inline CVar<int> SortMethod			{ 1, L"Sort Method" };	//0 - FOV,		1 - Distance
 			inline CVar<int> AimMethod			{ 1, L"Aim Method" };	//0 - Normal,	1 - Smooth, 2 - Silent
-			inline CVar<float> AimFOV			{ 45.0f, L"Aim FOV" };
+			inline CVar<float> AimFOV			{ 180.0f, L"Aim FOV" };
 			inline CVar<float> SmoothingAmount	{ 8.0f, L"Smoothing Amount" };
 			inline CVar<bool> RangeCheck		{ true, L"Range Check" };
 			inline CVar<bool> PredictSwing		{ true, L"Predict Swing" };
@@ -495,8 +495,8 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 		inline CVar<bool> AntiAFK				{ false, L"Anti AFK" };
 		inline CVar<bool> VoteRevealer			{ false, L"Reveal votes" };
 		inline CVar<bool> VotesInChat			{ false, L"Reveal votes to party" };
-		inline CVar<bool> CleanScreenshot		{ true, L"l0l" };
-		inline CVar<bool> SteamRPC				{ true, L"Self explanatory" };
+		inline CVar<bool> CleanScreenshot		{ false, L"l0l" };
+		inline CVar<bool> SteamRPC				{ false, L"Self explanatory" };
 		inline CVar<bool> CheatsBypass			{ false, L"cum" };
 		inline std::string SteamRPCText	= "ChadAlphaMales.club";
 		namespace CL_Move
@@ -504,9 +504,9 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 			inline CVar<int> DTTicks{ 20, L"DT Ticks"};
 			inline CVar<bool> Doubletap{ true, L"Doubletap" };
 			inline CVar<bool> NotInAir{ true, L"Dont DT in air" };
-			//inline CVar<int> TeleportKey{ 0x46, L"Teleport Key" }; //F
+			inline CVar<int> TeleportKey{ 0x12, L"Teleport Key" }; //F
 			inline CVar<int> RechargeKey{ 0x52, L"Recharge Key" }; //R
-			inline CVar<int> DoubletapKey{ 0x46, L"Doubletap Key" }; //V
+			inline CVar<int> DoubletapKey{ 0x10, L"Doubletap Key" }; //V
 
 			inline CVar<bool> WaitForDT{ true, L"Wait for DT" };
 

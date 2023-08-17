@@ -671,7 +671,7 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 				
 				if (flHealth < flMaxHealth) {
 					g_Draw.String(
-						FONT_ESP_PICKUPS_OUTLINED, (x - 15), (y + nHeight - (nHeight * ratio)), { 255,255,255,255 }, ALIGN_CENTER, L"%d", nHealth
+						FONT_ESP_COND_OUTLINED, (x - 10), (y + nHeight - (nHeight * ratio)), { 255,255,255,255 }, ALIGN_CENTER, L"%d", nHealth
 					);
 				}
 
@@ -904,7 +904,7 @@ void CESP::DrawWorld()
 		for (const auto& Health : g_EntityCache.GetGroup(EGroupType::WORLD_HEALTH)) 
 		{
 			if (Utils::W2S(Health->GetWorldSpaceCenter(), vScreen))
-				g_Draw.String(FONT, vScreen.x, vScreen.y, Colors::Health, ALIGN_CENTER, _(L"health"));
+				g_Draw.String(FONT, vScreen.x, vScreen.y, Colors::Health, ALIGN_CENTER, _(L"HEALTH"));
 		}
 	}
 
@@ -913,7 +913,7 @@ void CESP::DrawWorld()
 		for (const auto& Ammo : g_EntityCache.GetGroup(EGroupType::WORLD_AMMO))
 		{
 			if (Utils::W2S(Ammo->GetWorldSpaceCenter(), vScreen))
-				g_Draw.String(FONT, vScreen.x, vScreen.y, Colors::Ammo, ALIGN_CENTER, _(L"ammo"));
+				g_Draw.String(FONT, vScreen.x, vScreen.y, Colors::Ammo, ALIGN_CENTER, _(L"AMMO"));
 		}
 	}
 
@@ -949,8 +949,8 @@ std::wstring CESP::GetPlayerConds(CBaseEntity* pEntity)
 	if (nCond & TFCond_Kritzkrieged)
 		szCond += _(L"KRITZ ");
 
-	if (nCond & TFCond_MegaHeal)
-		szCond += _(L"MEGAHEAL ");
+	if (nCond & TFCond_MegaHeal|| nCond & TFCond_Overhealed )
+		szCond += _(L"HEAL ");
 
 	if (nCond & TFCond_Bonked)
 		szCond += _(L"BONK ");
@@ -978,6 +978,8 @@ std::wstring CESP::GetPlayerConds(CBaseEntity* pEntity)
 
 	if (nCond & TFCond_Jarated)
 		szCond += _(L"JARATE ");
+	if (nCond & TFCond_OnFire)
+		szCond += _(L"FIRE");
 
 	if (nCond & TFCond_Bleeding)
 		szCond += _(L"BLEED ");

@@ -9,20 +9,18 @@ void __cdecl EngineHook::CL_Move::Hook(float accumulated_extra_samples, bool bFi
 	if (Vars::Misc::CL_Move::Doubletap.m_Var)
 	{
 		dt.FastStop = false;
-		/*
+		
 		if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && !g_GlobalInfo.m_nShifted) //teleport
 		{
-			g_GlobalInfo.fast_stop = false;
-			while (g_GlobalInfo.m_nShifted < MAX_NEW_COMMANDS_HEAVY)87
+			while (g_GlobalInfo.m_nShifted = MAX_NEW_COMMANDS);
 			{
-				g_GlobalInfo.fast_stop = false;
+				//dt.FastStop = false;
+				Func.Original<fn>()(accumulated_extra_samples, (g_GlobalInfo.m_nShifted == (MAX_NEW_COMMANDS - 1))); //this teleports you
 				g_GlobalInfo.m_nShifted++;
-				Func.Original<fn>()(accumulated_extra_samples, (g_GlobalInfo.m_nShifted == (MAX_NEW_COMMANDS_HEAVY - 1))); //this teleports you
-				//g_GlobalInfo.m_nShifted++;
 			}
 			return;
 		}
-		*/
+		
 		if (GetAsyncKeyState(Vars::Misc::CL_Move::RechargeKey.m_Var)) {//recharge key
 			dt.FastStop = false;
 			dt.Recharging = true;
@@ -73,6 +71,7 @@ void __cdecl EngineHook::CL_Move::Hook(float accumulated_extra_samples, bool bFi
 
 					if (pLocal->IsOnGround()) {
 						Func.Original<fn>()(accumulated_extra_samples, (dt.Charged == 1)); //this doubletaps
+						dt.FastStop = true;  	
 						dt.ChargedReverse++;
 						dt.Charged--;
 					}

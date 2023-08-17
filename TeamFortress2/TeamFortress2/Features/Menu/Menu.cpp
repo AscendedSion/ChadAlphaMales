@@ -1309,7 +1309,7 @@ void MiscTab() {
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
-            InputKeybind(_("DoubleTap Key"), Vars::Misc::CL_Move::DoubletapKey);
+            InputKeybind(_("warpkey"), Vars::Misc::CL_Move::TeleportKey);
             ImGui::PopStyleColor(3);
 
             AlignToRight(20);

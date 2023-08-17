@@ -3,7 +3,7 @@
 #include "../BaseEntity/BaseEntity.h"
 
 #define MULTIPLAYER_BACKUP 90
-
+#define MAX_NEW_COMMANDS 20
 struct GlobalInfo_t
 {
 	int m_net_sendto					= 0;
@@ -23,6 +23,7 @@ struct GlobalInfo_t
 	bool m_bModulateWorld				= true;
 	bool Unload							= false;
 	float m_flCurAimFOV					= 0.0f;
+	int m_nShifted = MAX_NEW_COMMANDS;
 	float m_Latency = 0;
 	VMatrix m_WorldToProjection = {};
 	Vec3 m_vPredictedPos				= {};

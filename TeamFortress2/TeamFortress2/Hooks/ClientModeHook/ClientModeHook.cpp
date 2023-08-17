@@ -30,7 +30,7 @@ bool __stdcall ClientModeHook::ShouldDrawViewModel::Hook()
 		/*if (g_GlobalInfo.m_bAAActive) {
 			CTFPlayerAnimState* pAnimState = pLocal->GetAnimState();
 
-			static CTFPlayerAnimState* AnimStateBackup();
+			CTFPlayerAnimState* AnimStateBackup();
 			memcpy(&AnimStateBackup, pAnimState, sizeof(CTFPlayerAnimState));
 			std::array<float, 24> PoseParamBackup = pLocal->GetPoseParam();
 
@@ -180,9 +180,9 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		}
 	};
 
-	/*if (dt.FastStop) {
+	if (dt.FastStop) {
 		AntiWarp(pCmd);
-	}*/
+	}
 
 	g_Visuals.FreecamCM(pCmd);
 

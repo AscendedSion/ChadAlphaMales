@@ -62,12 +62,6 @@
     <ClCompile Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\EngineHook\EngineHook.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Easings\easing.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\connection_win.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\discord_register_win.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\discord_rpc.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\rpc_connection.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\serialization.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\Discord.cpp" />
     <ClCompile Include="TeamFortress2\Hooks\EndSceneHook\EndSceneHook.cpp" />
     <ClCompile Include="TeamFortress2\Features\Menu\ImGui\imgui.cpp" />
     <ClCompile Include="TeamFortress2\Features\Menu\ImGui\imgui_demo.cpp" />
@@ -463,8 +457,6 @@
     <ClInclude Include="TeamFortress2\Features\AttributeChanger\AttributeChanger.h" />
     <ClInclude Include="TeamFortress2\Hooks\EngineHook\EngineHook.h" />
     <ClInclude Include="TeamFortress2\Utils\Easings\easing.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_register.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_rpc.h" />
     <ClInclude Include="TeamFortress2\Utils\rapidjson\error\en.h" />
     <ClInclude Include="TeamFortress2\Utils\rapidjson\error\error.h" />
     <ClInclude Include="TeamFortress2\Utils\rapidjson\internal\biginteger.h" />
@@ -502,12 +494,6 @@
     <ClInclude Include="TeamFortress2\Utils\rapidjson\stream.h" />
     <ClInclude Include="TeamFortress2\Utils\rapidjson\stringbuffer.h" />
     <ClInclude Include="TeamFortress2\Utils\rapidjson\writer.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\backoff.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\connection.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\msg_queue.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\rpc_connection.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\serialization.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Discord.h" />
     <ClInclude Include="TeamFortress2\Hooks\EndSceneHook\EndSceneHook.h" />
     <ClInclude Include="TeamFortress2\Features\Menu\ImGui\imconfig.h" />
     <ClInclude Include="TeamFortress2\Features\Menu\ImGui\imgui.h" />

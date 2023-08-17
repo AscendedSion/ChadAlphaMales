@@ -174,12 +174,6 @@
     <ClCompile Include="TeamFortress2\SDK\Main\TraceFilters\TraceFilters.cpp" />
     <ClCompile Include="TeamFortress2\SDK\NetVars\NetVars.cpp" />
     <ClCompile Include="TeamFortress2\Utils\CRC\CRC.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\Discord.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\connection_win.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\discord_register_win.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\discord_rpc.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\rpc_connection.cpp" />
-    <ClCompile Include="TeamFortress2\Utils\DiscordRPC\src\serialization.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Easings\easing.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Events\Events.cpp" />
     <ClCompile Include="TeamFortress2\Utils\Hash\Hash.cpp" />
@@ -654,14 +648,6 @@
     <ClInclude Include="TeamFortress2\SDK\Timer.h" />
     <ClInclude Include="TeamFortress2\Utils\Color\Color.h" />
     <ClInclude Include="TeamFortress2\Utils\CRC\CRC.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Discord.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_register.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\Include\discord_rpc.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\backoff.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\connection.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\msg_queue.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\rpc_connection.h" />
-    <ClInclude Include="TeamFortress2\Utils\DiscordRPC\src\serialization.h" />
     <ClInclude Include="TeamFortress2\Utils\Easings\easing.h" />
     <ClInclude Include="TeamFortress2\Utils\Events\Events.h" />
     <ClInclude Include="TeamFortress2\Utils\Hash\FNV1A.h" />
