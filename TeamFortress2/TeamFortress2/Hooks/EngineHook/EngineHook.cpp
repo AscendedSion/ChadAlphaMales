@@ -8,13 +8,14 @@ void __cdecl EngineHook::CL_Move::Hook(float accumulated_extra_samples, bool bFi
 {
 	if (Vars::Misc::CL_Move::Doubletap.m_Var)
 	{
-		dt.FastStop = false;
+		dt.FastStop = true;
 		
-		if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && !g_GlobalInfo.m_nShifted) //teleport
+
+
+		if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && g_GlobalInfo.m_nShifted) //teleport
 		{
 			while (g_GlobalInfo.m_nShifted = MAX_NEW_COMMANDS);
 			{
-				//dt.FastStop = false;
 				Func.Original<fn>()(accumulated_extra_samples, (g_GlobalInfo.m_nShifted == (MAX_NEW_COMMANDS - 1))); //this teleports you
 				g_GlobalInfo.m_nShifted++;
 			}

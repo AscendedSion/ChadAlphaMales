@@ -501,10 +501,10 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 		inline std::string SteamRPCText	= "ChadAlphaMales.club";
 		namespace CL_Move
 		{
-			inline CVar<int> DTTicks{ 20, L"DT Ticks"};
+			inline CVar<int> DTTicks{ 19, L"DT Ticks"};
 			inline CVar<bool> Doubletap{ true, L"Doubletap" };
 			inline CVar<bool> NotInAir{ true, L"Dont DT in air" };
-			inline CVar<int> TeleportKey{ 0x12, L"Teleport Key" }; //F
+			inline CVar<int> TeleportKey{ 0x0, L"Teleport Key" }; //F
 			inline CVar<int> RechargeKey{ 0x52, L"Recharge Key" }; //R
 			inline CVar<int> DoubletapKey{ 0x10, L"Doubletap Key" }; //V
 
@@ -512,8 +512,8 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 
 			inline CVar<bool> Fakelag{ true, L"Fakelag" };
 			inline CVar<bool> FakelagOnKey{ true, L"Fakelag On Key" };
-			inline CVar<int> FakelagKey{ 0x54, L"Fakelag Key" }; //T
-			inline CVar<int> FakelagValue{ 1, L"Fakelag value" };
+			inline CVar<int> FakelagKey{ 0x0, L"Fakelag Key" }; //T
+			inline CVar<int> FakelagValue{ 14, L"Fakelag value" };
 		}
 	}
 

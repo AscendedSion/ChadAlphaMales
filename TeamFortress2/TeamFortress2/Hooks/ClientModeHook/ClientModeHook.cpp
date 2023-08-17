@@ -163,7 +163,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 
 		if (shiftcheck < 19)
 		{
-			if (shiftcheck < 6)
+			if (shiftcheck < 19)
 			{
 				// should be -1 btw
 				cmd->forwardmove *= -1;
@@ -176,7 +176,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 			}
 		}
 		else {
-			dt.FastStop = false;
+			dt.FastStop = true;
 		}
 	};
 

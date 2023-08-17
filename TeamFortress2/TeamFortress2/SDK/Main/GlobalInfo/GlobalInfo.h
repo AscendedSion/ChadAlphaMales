@@ -45,8 +45,8 @@ struct DoubletapInfo {
 	bool Recharging = false;
 	bool FastStop = false;
 	int Charged = 0;
-	int ChargedReverse = 20;
-	//int ToShift = 20;
+	int ChargedReverse = 19;
+	int ToShift = 19;
 	int ToWait = 0;
 	BYTE barAlpha = 127;
 };
