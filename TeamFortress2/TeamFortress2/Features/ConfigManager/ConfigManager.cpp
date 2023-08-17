@@ -21,7 +21,7 @@
 #pragma warning (disable : 6031)
 #pragma warning (disable : 4477)
 
-bool CConfigManager::Find(const wchar_t *name, std::wstring &output)
+bool CConfigManager::Find(const wchar_t* name, std::wstring& output)
 {
 	m_Read.clear();
 	m_Read.seekg(0, std::ios::beg);
@@ -35,35 +35,35 @@ bool CConfigManager::Find(const wchar_t *name, std::wstring &output)
 	return false;
 }
 
-void CConfigManager::Save(const wchar_t *name, bool val)
+void CConfigManager::Save(const wchar_t* name, bool val)
 {
 	char buffer[64];
 	sprintf_s(buffer, _("%ls: %d"), name, val);
 	m_Write << buffer << "\n";
 }
 
-void CConfigManager::Save(const wchar_t *name, int val)
+void CConfigManager::Save(const wchar_t* name, int val)
 {
 	char buffer[64];
 	sprintf_s(buffer, _("%ls: %d"), name, val);
 	m_Write << buffer << "\n";
 }
 
-void CConfigManager::Save(const wchar_t *name, float val)
+void CConfigManager::Save(const wchar_t* name, float val)
 {
 	char buffer[64];
 	sprintf_s(buffer, _("%ls: %f"), name, val);
 	m_Write << buffer << "\n";
 }
 
-void CConfigManager::Save(const wchar_t *name, Color_t val)
+void CConfigManager::Save(const wchar_t* name, Color_t val)
 {
 	char buffer[64];
 	sprintf_s(buffer, _("%ls: %d %d %d %d"), name, val.r, val.g, val.b, val.a);
 	m_Write << buffer << "\n";
 }
 
-void CConfigManager::Load(const wchar_t *name, bool &val)
+void CConfigManager::Load(const wchar_t* name, bool& val)
 {
 	std::wstring line = {};
 
@@ -71,7 +71,7 @@ void CConfigManager::Load(const wchar_t *name, bool &val)
 		swscanf_s(line.c_str(), L"%*ls %d", &val);
 }
 
-void CConfigManager::Load(const wchar_t *name, int &val)
+void CConfigManager::Load(const wchar_t* name, int& val)
 {
 	std::wstring line = {};
 
@@ -79,7 +79,7 @@ void CConfigManager::Load(const wchar_t *name, int &val)
 		swscanf_s(line.c_str(), L"%*ls %d", &val);
 }
 
-void CConfigManager::Load(const wchar_t *name, float &val)
+void CConfigManager::Load(const wchar_t* name, float& val)
 {
 	std::wstring line = {};
 
@@ -87,7 +87,7 @@ void CConfigManager::Load(const wchar_t *name, float &val)
 		swscanf_s(line.c_str(), L"%*ls %f", &val);
 }
 
-void CConfigManager::Load(const wchar_t *name, Color_t &val)
+void CConfigManager::Load(const wchar_t* name, Color_t& val)
 {
 	std::wstring line = {};
 
@@ -129,7 +129,7 @@ CConfigManager::CConfigManager()
 		//std::filesystem::create_directory(m_sConfigPath + _(L"\\CAMCore"));
 }
 
-void CConfigManager::Save(const wchar_t *name)
+void CConfigManager::Save(const wchar_t* name)
 {
 	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".poop"));
 
@@ -494,9 +494,9 @@ void CConfigManager::Save(const wchar_t *name)
 			SAVE_VAR(Vars::Visuals::DevTextures);
 
 			SAVE_VAR(Vars::Visuals::PlayerList);
-//#ifdef DEVELOPER_BUILD
+			//#ifdef DEVELOPER_BUILD
 			SAVE_VAR(Vars::Visuals::Skins::Enabled);
-//#endif
+			//#endif
 			SAVE_VAR(Vars::Visuals::TracerEffect);
 			SAVE_VAR(Vars::Visuals::RagdollEffect);
 			SAVE_VAR(Vars::Visuals::AimbotViewmodel);
@@ -611,7 +611,7 @@ void CConfigManager::Save(const wchar_t *name)
 	}
 }
 
-void CConfigManager::Load(const wchar_t *name)
+void CConfigManager::Load(const wchar_t* name)
 {
 	m_Read = std::wifstream(m_sConfigPath + L"\\" + name + _(L".poop"));
 
@@ -976,9 +976,9 @@ void CConfigManager::Load(const wchar_t *name)
 			LOAD_VAR(Vars::Visuals::DevTextures);
 
 			LOAD_VAR(Vars::Visuals::PlayerList);
-//#ifdef DEVELOPER_BUILD
+			//#ifdef DEVELOPER_BUILD
 			LOAD_VAR(Vars::Visuals::Skins::Enabled);
-//#endif
+			//#endif
 			LOAD_VAR(Vars::Visuals::TracerEffect);
 			LOAD_VAR(Vars::Visuals::RagdollEffect);
 			LOAD_VAR(Vars::Visuals::AimbotViewmodel);
@@ -1097,29 +1097,30 @@ void CConfigManager::Load(const wchar_t *name)
 		g_Draw.ReInitFonts(
 			{
 				//FONT_ESP
-				{ 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 				//FONT_ESP_OUTLINED
-				{ 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 				//FONT_ESP_NAME
 				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
 				//FONT_ESP_NAME_OUTLINED
-				{ 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+				{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
 
 				//FONT_ESP_COND
-				{ 0x0, _("Segoe UI"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
 				//FONT_ESP_COND_OUTLINED
-				{ 0x0, _("Consolas"), 10, 0, FONTFLAG_OUTLINE },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 				//FONT_ESP_PICKUPS
-				{ 0x0, _("Consolas"), 13, 0, FONTFLAG_NONE },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 				//FONT_ESP_PICKUPS_OUTLINED
-				{ 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
+
 
 				//FONT_MENU
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
+				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
 				//FONT_MENU_OUTLINED
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_OUTLINE },
+				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
 
 				/*FONT_ICONS*/
 				{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
@@ -1130,36 +1131,39 @@ void CConfigManager::Load(const wchar_t *name)
 		g_Draw.ReInitFonts(
 			{
 				//FONT_ESP
-				{ 0x0, Vars::Fart::customFont.c_str(), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
 				//FONT_ESP_OUTLINED
-				{ 0x0, Vars::Fart::customFont.c_str(), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 				//FONT_ESP_NAME
-				{ 0x0, Vars::Fart::customFont.c_str(), 12, 0, FONTFLAG_DROPSHADOW },
+				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
 				//FONT_ESP_NAME_OUTLINED
-
-				{ 0x0, Vars::Fart::customFont.c_str(), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+				{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
 
 				//FONT_ESP_COND
-				{ 0x0, Vars::Fart::customFont.c_str(), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+				{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
 				//FONT_ESP_COND_OUTLINED
-				{ 0x0, Vars::Fart::customFont.c_str(), 10, 0, FONTFLAG_OUTLINE },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 				//FONT_ESP_PICKUPS
-				{ 0x0, Vars::Fart::customFont.c_str(), 13, 0, FONTFLAG_NONE },
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 				//FONT_ESP_PICKUPS_OUTLINED
-				{ 0x0, Vars::Fart::customFont.c_str(), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
+
 
 				//FONT_MENU
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
+				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
 				//FONT_MENU_OUTLINED
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_OUTLINE },
+				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
+
+				/*FONT_ICONS*/
+				{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
 			}
 		);
 	}
 }
 
-void CConfigManager::Remove(const wchar_t *name)
+void CConfigManager::Remove(const wchar_t* name)
 {
 	std::filesystem::remove(m_sConfigPath + L"\\" + name + _(L".poop"));
 }

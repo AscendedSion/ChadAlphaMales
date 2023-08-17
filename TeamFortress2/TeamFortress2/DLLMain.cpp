@@ -103,29 +103,29 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	g_Draw.InitFonts
 	({
 		//FONT_ESP
-		{ 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 		//FONT_ESP_OUTLINED
-		{ 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 		//FONT_ESP_NAME
 		{ 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
 		//FONT_ESP_NAME_OUTLINED
-		{ 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+		{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
 
 		//FONT_ESP_COND
-		{ 0x0, _("Segoe UI"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+		{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
 		//FONT_ESP_COND_OUTLINED
-		{ 0x0, _("Consolas"), 10, 0, FONTFLAG_OUTLINE },
+		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 		//FONT_ESP_PICKUPS
-		{ 0x0, _("Consolas"), 13, 0, FONTFLAG_NONE },
+		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 		//FONT_ESP_PICKUPS_OUTLINED
-		{ 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
+		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 		//FONT_MENU
-		{ 0x0, _("Verdana"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
+		{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
 		//FONT_MENU_OUTLINED
-		{ 0x0, _("Verdana"), 12, 0, FONTFLAG_OUTLINE },
+		{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
 
 		/*FONT_ICONS*/
 		{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},

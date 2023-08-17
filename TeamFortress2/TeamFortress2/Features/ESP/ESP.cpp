@@ -601,10 +601,6 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 			PlayerInfo_t pi;
 			if (g_Interfaces.Engine->GetPlayerInfo(nIndex, &pi))
 			{
-				if (g_ChatInfo.m_known_bots.find(pi.friendsID) != g_ChatInfo.m_known_bots.end()) {
-					g_Draw.String(FONT_ESP_COND, nTextX, (y + nTextOffset), { 255,0,0,255 }, ALIGN_DEFAULT, L"CAT", nHealth);
-					nTextOffset += g_Draw.m_vecFonts[FONT_ESP_COND].nTall;
-				}
 
 				if (Vars::ESP::Players::Name.m_Var)
 				{
@@ -646,7 +642,7 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 				if (!cond_str.empty())
 				{
 					cond_str.erase((cond_str.end() - 1), cond_str.end());
-					g_Draw.String(FONT, (x + (w / 2)), ((y + h) + offset), Colors::Cond, ALIGN_CENTERHORIZONTAL, cond_str.data());
+					g_Draw.String(FONT, nTextX, (y + nTextOffset), Colors::Cond, ALIGN_DEFAULT, cond_str.data());
 				}
 			}
 
@@ -687,24 +683,8 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 			}
 
 			// Backtrack ESP, for future use
-			/*
-			if (pLocal->IsAlive()) {
-				for (unsigned int t = 0; t < CBacktrack::ticks[Player->GetIndex()].size(); t++) {
-					if (CBacktrack::GoodTick(t))
-						continue;
-
-					Vector hitbox = CBacktrack::ticks[Player->GetIndex()].at(t).head_position, screen;
-
-					if (Utils::W2S(hitbox, screen)) {
-						g_Draw.Line(screen[0] - 8, screen[1] - 0, screen[0] + 8, screen[1] + 0, Color_t{ 255, 0, 0, 200 });
-						g_Draw.Line(screen[0] + 0, screen[1] - 8, screen[0] - 0, screen[1] + 8, Color_t{ 255, 0, 0, 200 });
-						g_Draw.Line(screen[0] - 4, screen[1] - 0, screen[0] + 4, screen[1] + 0, Color_t{ 255, 255, 255, 255 });
-						g_Draw.Line(screen[0] + 0, screen[1] - 4, screen[0] - 0, screen[1] + 4, Color_t{ 255, 255, 255, 255 });
-					}
-
-				}
-			}
-			*/
+			
+			
 			g_Interfaces.Surface->DrawSetAlphaMultiplier(1.0f);
 		}
 	}
