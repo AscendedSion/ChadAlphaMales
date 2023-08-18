@@ -15,8 +15,8 @@ namespace EngineHook
 	namespace sendto {
 
 	}
-	//namespace CL_SendMove
-	//{
+	namespace CL_SendMove
+	{
 
-	//}
+	}
 }

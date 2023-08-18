@@ -167,7 +167,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 			{
 				// should be -1 btw
 				cmd->forwardmove *= -1;
-				cmd->sidemove *= 1;
+				cmd->sidemove *= -1;
 			}
 			else
 			{
