@@ -1064,7 +1064,7 @@ void VisualsTab() {
             FixSlider;
             ImGui::SliderInt(_("Field of view"), &Vars::Visuals::FieldOfView.m_Var, 70, 150, _("%d"), ImGuiSliderFlags_AlwaysClamp);
             FixSlider;
-            ImGui::SliderFloat(_("Aspect Ratio"), &Vars::Visuals::AspectRatioValue.m_Var, 0.f, 200.f, _("%.f"), ImGuiSliderFlags_AlwaysClamp);
+            ImGui::SliderFloat(_("Aspect Ratio"), &Vars::Visuals::AspectRatioValue.m_Var, 0.f, 36.f, _("%.f"), ImGuiSliderFlags_AlwaysClamp);
             FixSlider;
             ImGui::SliderInt(_("Aim FOV Alpha"), &Vars::Visuals::AimFOVAlpha.m_Var, 0, 255, _("%d"), ImGuiSliderFlags_AlwaysClamp);
             static char buff[12];

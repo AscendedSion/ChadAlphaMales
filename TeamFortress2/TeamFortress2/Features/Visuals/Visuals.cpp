@@ -301,12 +301,12 @@ void CVisuals::Fullbright() {
 */
 
 void CVisuals::ARatio() {
-	float ratio = (Vars::Visuals::AspectRatioValue.m_Var * 0.1) / 2;
+	float ratio = (Vars::Visuals::AspectRatioValue.m_Var) * 0.1f / 2;
 	static ConVar* RatioVar = g_Interfaces.CVars->FindVar(_("r_aspectratio"));
-	if (ratio > 0.001)
+	if (ratio > 0.f)
 		RatioVar->SetValue(ratio);
 	else
-		RatioVar->SetValue((0,1.f) / 2);
+		RatioVar->SetValue((0.f) / 2);
 
 }
 
