@@ -562,18 +562,7 @@ void ESPTab() {
         {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 5,5 });
             ImGui::SetNextWindowSize(ImVec2(160, 0));
-            if (ImGui::BeginPopup(_("PlayerHealthBar"), ImGuiWindowFlags_NoScrollWithMouse)) {
-                ImGui::Text(_(ICON_FA_EYE " Player Health Bar"));
-                ImGui::Separator();
-                ImGui::SetCursorPosX(2);
-                ColorPicker2(_("Healthbar top color"), Colors::HealthBarTopColor, false);
-                ImGui::SetCursorPosX(2);
-                ColorPicker2(_("Healthbar bottom color"), Colors::HealthBarBottomColor, false);
-
-                ImGui::EndPopup();
-            }
             ImGui::PopStyleVar();
-
             ImGui::Checkbox(_("Enabled"), &Vars::ESP::Players::Active.m_Var);
             AlignToRight(23);
             ColorPicker(_("Team Blu"), Colors::TeamBlu, false);
@@ -586,14 +575,7 @@ void ESPTab() {
             ImGui::Checkbox(_("Player conditions"), &Vars::ESP::Players::Cond.m_Var);
             AlignToRight(23);
             ColorPicker(_("Conditions"), Colors::Cond);
-
             ImGui::Checkbox(_("Player health bar"), &Vars::ESP::Players::Healthbar::Enabled.m_Var);
-            AlignToRight(20);
-            ImGui::Text(ICON_FA_COG);
-            AlignToRight(23);
-            if (ImGui::InvisibleButton(_("PlayerHealthBar"), ImVec2(20, 20))) {
-                ImGui::OpenPopup(_("PlayerHealthBar"));
-            }
             ImGui::Checkbox(_("Player name"), &Vars::ESP::Players::Name.m_Var);
             ImGui::Checkbox(_("Custom name color"), &Vars::ESP::Players::NameCustom.m_Var);
             AlignToRight(23);
@@ -634,9 +616,7 @@ void ESPTab() {
                 ImGui::Text(_(ICON_FA_EYE " Building Health Bar"));
                 ImGui::Separator();
                 ImGui::SetCursorPosX(2);
-                ColorPicker2(_("Healthbar top color##2"), Colors::HealthBarbTopColor, false);
-                ImGui::SetCursorPosX(2);
-                ColorPicker2(_("Healthbar bottom color##2"), Colors::HealthBarbBottomColor, false);
+                ColorPicker2(_("Healthbar top color##2"), Colors::Healthbar, false);
 
                 ImGui::EndPopup();
             }
@@ -756,39 +736,6 @@ void ESPTab() {
                 std::string fart = Utils::str_tolower(Vars::Fart::customFont);
                 //std::transform(fart.begin(), fart.end(), fart.begin(), std::tolower);
                 if (Vars::Fart::customFont.c_str() == _("") || fart == _("default")) {
-                    g_Draw.ReInitFonts(
-                        {
-                            //FONT_ESP
-                            { 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-                            //FONT_ESP_OUTLINED
-                            { 0x0, _("Segoe UI"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-
-                            //FONT_ESP_NAME
-                            { 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
-                            //FONT_ESP_NAME_OUTLINED
-                            { 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
-
-                            //FONT_ESP_COND
-                            { 0x0, _("Segoe UI"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-                            //FONT_ESP_COND_OUTLINED
-                            { 0x0, _("Consolas"), 10, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_ESP_PICKUPS
-                            { 0x0, _("Consolas"), 13, 0, FONTFLAG_NONE },
-                            //FONT_ESP_PICKUPS_OUTLINED
-                            { 0x0, _("Segoe UI"), 13, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS},
-
-                            //FONT_MENU
-                            { 0x0, _("Verdana"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
-                            //FONT_MENU_OUTLINED
-                            { 0x0, _("Verdana"), 12, 0, FONTFLAG_OUTLINE },
-
-                            /*FONT_ICONS*/
-                            { 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
-                        }
-                    );
-                }
-                else {
                     g_Draw.ReInitFonts(
                         {
                             //FONT_ESP

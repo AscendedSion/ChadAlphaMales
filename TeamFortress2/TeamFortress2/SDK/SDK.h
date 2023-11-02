@@ -158,11 +158,7 @@ namespace Colors
 	inline Color_t FresnelBase = { 0,0,0,255 };
 	inline Color_t FresnelTop = { 0,255,0,255 };
 	inline Color_t IgnoredTarget = { 65,65,65,255 };
-	inline Color_t HealthBarTopColor = { 0,255,0,255 };
-	inline Color_t HealthBarBottomColor = { 255,0,0,255 };
-
-	inline Color_t HealthBarbTopColor = { 0,255,0,255 };
-	inline Color_t HealthBarbBottomColor = { 255,0,0,255 };
+	inline Color_t Healthbar = { 0, 0, 0 };
 	inline Color_t hitboxColor{ 255, 0, 0, 50 };
 }
 

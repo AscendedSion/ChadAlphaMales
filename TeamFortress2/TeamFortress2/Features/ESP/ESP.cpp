@@ -490,14 +490,6 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 		if (GetDrawBounds(Player, vTrans, x, y, w, h))
 		{
 			int nHealth = Player->GetHealth(), nMaxHealth = Player->GetMaxHealth();
-			//static Color_t HealthColor = { 0,255,0,255 };
-			static Color_t TopColor = { 0,255,0,255 };
-			static Color_t BottomColor = { 255,0,0,255 };
-
-			if(Vars::ESP::Players::Healthbar::HealthBasedColor.m_Var == 1) {
-				TopColor = Colors::HealthBarTopColor;
-				BottomColor = Colors::HealthBarBottomColor;
-			}
 
 			size_t FONT = (Vars::ESP::Main::Outline.m_Var ? FONT_ESP_OUTLINED : FONT_ESP),
 				   FONT_NAME = (Vars::ESP::Main::Outline.m_Var ? FONT_ESP_NAME_OUTLINED : FONT_ESP_NAME);
@@ -653,10 +645,12 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 				float flHealth = static_cast<float>(nHealth);
 				float flMaxHealth = static_cast<float>(nMaxHealth);
 
-				//Color_t clr = flHealth > flMaxHealth ? Colors::Overheal : HealthColor;
+				Color_t HealthColor = Utils::GetHealthColor(nHealth, nMaxHealth);
+
+				Color_t clr = flHealth > flMaxHealth ? Colors::Overheal : HealthColor;
 
 				if (!Player->IsVulnerable())
-					TopColor = Colors::Invuln;
+					Colors::Invuln;
 
 				if (flHealth > flMaxHealth)
 					flHealth = flMaxHealth;
@@ -667,17 +661,13 @@ void CESP::DrawPlayers(CBaseEntity *pLocal)
 
 				float ratio = (flHealth / flMaxHealth);
 				g_Draw.Rect(((x - nWidth) - 2), y, nWidth, nHeight2, { 0,0,0,150 });
-				g_Draw.GradientRect(((x - nWidth) - 2), (y + nHeight - (nHeight * ratio)), ((x - nWidth) - 2) + nWidth, (y + nHeight - (nHeight * ratio)) + (nHeight * ratio), TopColor, BottomColor, false);
+				g_Draw.Rect(((x - nWidth) - 2), (y + nHeight - (nHeight * ratio)), nWidth, (nHeight* ratio), clr);
 				
 				if (flHealth < flMaxHealth) {
-					g_Draw.String(
-						FONT_ESP_COND_OUTLINED, (x - 10), (y + nHeight - (nHeight * ratio)), { 255,255,255,255 }, ALIGN_CENTER, L"%d", nHealth
-					);
+					g_Draw.String(FONT_ESP_COND_OUTLINED, (x - 10), (y + nHeight - (nHeight * ratio)), { 255,255,255,255 }, ALIGN_CENTERHORIZONTAL, L"%d", nHealth);
 				}
-
-				if (Vars::ESP::Main::Outline.m_Var == 2)
-					g_Draw.OutlinedRect(((x - nWidth) - 3), (y - 1), (nWidth + 2), (nHeight2 + 2), { 0,0,0,150 });
-					g_Draw.OutlinedRect(((x - nWidth) - 2) - 1, (y + nHeight - (nHeight * ratio)) - 1, nWidth + 2, (nHeight* ratio) + 2, { 0,0,0,255 });
+				g_Draw.OutlinedRect(((x - nWidth) - 3), (y - 1), (nWidth + 2), (nHeight2 + 2), { 0,0,0,150 });
+				g_Draw.OutlinedRect(((x - nWidth) - 2) - 1, (y + nHeight - (nHeight * ratio)) - 1, nWidth + 2, (nHeight* ratio) + 2, { 0,0,0,255 });
 
 				x += 1;
 			}
@@ -715,10 +705,7 @@ void CESP::DrawBuildings(CBaseEntity *pLocal)
 			auto nHealth = Building->GetHealth(), nMaxHealth = Building->GetMaxHealth(),
 				 nTextX = ((x + w) + 3), nTextOffset = 0, nTextTopOffset = 0;
 
-			//Color_t HealthColor = Utils::GetHealthColor(nHealth, nMaxHealth);
-
-			Color_t TopColor = Colors::HealthBarbTopColor;
-			Color_t BottomColor = Colors::HealthBarbBottomColor;
+			Color_t HealthColor = Utils::GetHealthColor(nHealth, nMaxHealth);
 
 			auto nType = EBuildingType(Building->GetType());
 
@@ -877,8 +864,8 @@ void CESP::DrawBuildings(CBaseEntity *pLocal)
 				int nHeight2 = (h + 1);
 
 				float ratio = (flHealth / flMaxHealth);
-
-				g_Draw.GradientRect(((x - nWidth) - 2), (y + nHeight - (nHeight * ratio)), ((x - nWidth) - 2) + nWidth, (y + nHeight - (nHeight * ratio)) + (nHeight * ratio), TopColor, BottomColor, false);
+				
+				g_Draw.Rect(((x - nWidth) - 2), (y + nHeight - (nHeight * ratio)), nWidth, (nHeight* ratio), HealthColor);
 				if (Vars::ESP::Main::Outline.m_Var == 2)
 					g_Draw.OutlinedRect(((x - nWidth) - 2) - 1, (y + nHeight - (nHeight * ratio)) - 1, nWidth + 2, (nHeight * ratio) + 2, Colors::OutlineESP);
 

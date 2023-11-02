@@ -588,10 +588,7 @@ void CConfigManager::Save(const wchar_t* name)
 			SAVE_OTHER(Colors::SkyModulation);
 			SAVE_OTHER(Colors::FOVCircle);
 			SAVE_OTHER(Colors::Bones);
-			SAVE_OTHER(Colors::HealthBarTopColor);
-			SAVE_OTHER(Colors::HealthBarBottomColor);
-			SAVE_OTHER(Colors::HealthBarbTopColor);
-			SAVE_OTHER(Colors::HealthBarbBottomColor);
+			SAVE_OTHER(Colors::Healthbar);
 			SAVE_OTHER(Colors::hitboxColor);
 
 
@@ -1070,10 +1067,7 @@ void CConfigManager::Load(const wchar_t* name)
 			LOAD_OTHER(Colors::SkyModulation);
 			LOAD_OTHER(Colors::FOVCircle);
 			LOAD_OTHER(Colors::Bones);
-			LOAD_OTHER(Colors::HealthBarTopColor);
-			LOAD_OTHER(Colors::HealthBarBottomColor);
-			LOAD_OTHER(Colors::HealthBarbTopColor);
-			LOAD_OTHER(Colors::HealthBarbBottomColor);
+			LOAD_OTHER(Colors::Healthbar);
 			LOAD_OTHER(Colors::hitboxColor);
 
 			LOAD_OTHER(g_Radar.m_nRadarX);

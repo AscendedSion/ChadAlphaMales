@@ -10,37 +10,6 @@
 
 //Discord* g_DiscordRPC;
 
-// I know that this is a pretty bad idea because we're basically leaking the CAM user's accounts, but atm this is our only auth check in the dll itself
-UINT64 steamids[] = {
-	76561199203165083, // Sten Testing alt
-	76561198300153627, // Sten Main
-	76561197999062092, // Legacy Alt
-	76561198125167280, // Legacy Main
-	76561198839612863, // M-Fed main...? (correct me if i'm wrong)
-	76561199039632223, // Kanna
-	76561198887997678, // Mount 
-	76561199185135294, // Null
-	76561198346749036, // c1R
-	76561199205346811, // Talon / umbuku
-	76561198304525476, // s0yi
-	//76561199010783922, // Bendy
-	//76561198445705497, // Stav (maybe wrong)
-	76561198865445928, // Stav
-	76561198213922667, // jor
-    76561197960570183, // c1R new account 
-	76561199116719515, // legacy F2P alt for testing uwu uwu uwu uwu 
-	76561198304525476, // mis 1
-	76561198399908684, // mis 2 s0yi
-	76561199064409522,// lolnoenemy
-	76561198144626197,// Timing 
-	76561197960692665,// Azure main he might ever inject on
-	76561198838798126,// Azure cheating account
-	76561198868137670,// Nakori (old old friend of legacy and some others)
-	76561199086788469,// rico
-	
-};
-// this isn't even used for anything other than storing
-
 using namespace std::chrono; //lol??? 
 
 int StringToWString(std::wstring& ws, const std::string& s)
@@ -65,30 +34,20 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	while (!WinAPI::GetModuleHandleW(_(L"mss32.dll")) || !WinAPI::GetModuleHandleW(_(L"ntdll.dll")) || !WinAPI::GetModuleHandleW(_(L"stdshader_dx9.dll")))
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	
-	/*
-	AllocConsole();
-	freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
-	freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
-	SetConsoleTitleA("nig");
-	*/
+	
+	//AllocConsole();
+	//freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
+	//freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
+	//SetConsoleTitleA("hack");
+	
 	g_SteamInterfaces.Init();
 
-	static CSteamID steamid = g_SteamInterfaces.User->GetSteamID();
-	static UINT64 steamid64 = steamid.ConvertToUint64();
-	size_t myArraySize = sizeof(steamids) / sizeof(int);
-	UINT64* end = steamids + myArraySize;
-	if (std::find(steamids, end, steamid64) == end) {
-		//MessageBoxW(NULL,(LPCWSTR)L"fuck you",(LPCWSTR)L"fuck you", MB_ICONSTOP);
-		//std::exit(EXIT_FAILURE);
-		//return 0;
-	}
 
 	g_Interfaces.Init();
-	g_Interfaces.Engine->ClientCmd_Unrestricted(_("unbind f7"));
 	g_Interfaces.Engine->ClientCmd_Unrestricted(_("cl_vote_ui_active_after_voting 1"));
 	g_Interfaces.Engine->ClientCmd_Unrestricted(_("cl_timeout 99999"));
 	g_Interfaces.Engine->ClientCmd_Unrestricted(_("clear"));
-	g_Interfaces.CVars->ConsoleColorPrintf({ 0, 155, 255, 255 }, _("[!] Initializing stuff...\n"));
+	//g_Interfaces.CVars->ConsoleColorPrintf({ 0, 155, 255, 255 }, _("[!] Initializing stuff...\n"));
 	g_NetVars.Init();
 	g_Glow.Init();
 	g_Chams.Init();
@@ -134,10 +93,6 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	g_Playerlist.GetIgnoredPlayers();
 	g_Events.Setup({ "vote_cast", "player_changeclass", "player_connect", "player_hurt", "localplayer_respawn", "achievement_earned" });
 
-	//g_DiscordRPC->init();
-	//g_DiscordRPC->update();
-
-	g_Visuals.AddToEventLog(_("Cheat injected successfully!"));
 	g_Visuals.AddToEventLog(_("Press \"Insert\" to open menu!"));
 
 	g_Interfaces.CVars->ConsoleColorPrintf({ 0, 255, 0, 255 }, _("[!] CAM Loaded!\n"));
@@ -190,18 +145,10 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		std::this_thread::sleep_for(1500ms);
 	}
 
-	/*
-	fclose(static_cast<FILE*>(stdin));
-	fclose(static_cast<FILE*>(stdout));
-	FreeConsole();
-	*/
-
-	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Unloading CAM...\n"));
-	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Stopping Discord RPC\n"));
-	//Discord_Shutdown();
-
-	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 200, 0, 255 }, _("[-] Stopping Steam RPC\n"));
 	
+	//fclose(static_cast<FILE*>(stdin));
+	//fclose(static_cast<FILE*>(stdout));
+	//FreeConsole();
 
 	g_Events.Destroy();
 
@@ -210,7 +157,6 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 	
 	g_Hooks.Release();
 	g_Visuals.RestoreWorldModulation(); //needs to do this after hooks are released cuz UpdateWorldMod in FSN will override it
-	g_Interfaces.CVars->ConsoleColorPrintf({ 255, 255, 0, 255 }, _("[!] CAM Unloaded!\n"));
 
 	WinAPI::FreeLibraryAndExitThread(static_cast<HMODULE>(lpParam), EXIT_SUCCESS);
 	return EXIT_SUCCESS;

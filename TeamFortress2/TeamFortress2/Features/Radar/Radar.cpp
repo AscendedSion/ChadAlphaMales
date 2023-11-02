@@ -213,8 +213,7 @@ void CRadar::DrawPoints(CBaseEntity* pLocal)
 						float flRatio = (flHealth / flMaxHealth);
 
 						g_Draw.Rect(((nX - nW) - 1), nY, nW, nSize, Colors::OutlineESP);
-						//g_Draw.Rect(((nX - nW) - 1), (nY + nSize - (nSize * flRatio)), nW, (nSize * flRatio), clrHealth);
-						g_Draw.GradientRect(((nX - nW) - 2), (nY + nSize - (nSize * flRatio)), ((nX - nW) - 2) + nW, (nY + nSize - (nSize * flRatio)) + (nSize * flRatio), Colors::HealthBarbTopColor, Colors::HealthBarbBottomColor, false);
+						g_Draw.Rect(((nX - nW) - 1), (nY + nSize - (nSize * flRatio)), nW, (nSize * flRatio), clrHealth);
 					}
 				}
 			}
@@ -331,9 +330,7 @@ void CRadar::DrawPoints(CBaseEntity* pLocal)
 					float flRatio = (flHealth / flMaxHealth);
 
 					g_Draw.Rect(((nX - nWidth) - 1), nY, nWidth, nSize, Colors::OutlineESP);
-					//g_Draw.Rect(((nX - nWidth) - 1), (nY + nSize - (nSize * flRatio)), nWidth, (nSize* flRatio), clrHealth);
-
-					g_Draw.GradientRect(((nX - nWidth) - 2), (nY + nSize - (nSize * flRatio)), ((nX - nWidth) - 2) + nWidth, (nY + nSize - (nSize * flRatio)) + (nSize * flRatio), Colors::HealthBarTopColor, Colors::HealthBarBottomColor, false);
+					g_Draw.Rect(((nX - nWidth) - 1), (nY + nSize - (nSize * flRatio)), nWidth, (nSize* flRatio), clrHealth);
 
 					if (flOverHeal > 0.0f)
 					{
