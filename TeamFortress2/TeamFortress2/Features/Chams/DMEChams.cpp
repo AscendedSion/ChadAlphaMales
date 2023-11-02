@@ -5,7 +5,7 @@
 
 bool CDMEChams::ShouldRun()
 {
-	if (!Vars::Chams::DME::Active.m_Var || g_Interfaces.EngineVGui->IsGameUIVisible() || (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot()))
+	if (!Vars::Chams::DME::Active.m_Var || g_Interfaces.EngineVGui->IsGameUIVisible())
 		return false;
 
 	return true;

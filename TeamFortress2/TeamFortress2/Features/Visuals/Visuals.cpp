@@ -214,7 +214,7 @@ void CVisuals::AddToEventLog(const char* string...) {
 void CVisuals::RunEventLogs()
 {
 	for (auto i = 0; i < (int)vecEventVector.size(); i++) {
-		auto log = vecEventVector[i];
+		auto& log = vecEventVector[i];
 		auto time_delta = fabs(g_Interfaces.GlobalVars->realtime - log.flTime);
 
 		if (vecEventVector.size() > 12 || time_delta > flTextTime) {
@@ -306,10 +306,8 @@ void CVisuals::ARatio() {
 	if (ratio > 0.001)
 		RatioVar->SetValue(ratio);
 	else
-		RatioVar->SetValue((35 * 0.1f) / 2);
+		RatioVar->SetValue((0,1.f) / 2);
 
-	if (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot()) // There's definitely a better way to do this
-		RatioVar->SetValue((35 * 0.1f) / 2);
 }
 
 void CVisuals::ViewmodelXYZ() {
@@ -334,7 +332,7 @@ void CVisuals::ThirdPerson()
 				static float flPressedTime = g_Interfaces.Engine->Time();
 				float flElapsed = g_Interfaces.Engine->Time() - flPressedTime;
 
-				if ((GetAsyncKeyState(Vars::Visuals::ThirdPersonKey.m_Var) & 0x8000) && flElapsed > 0.2f) {
+				if ((GetAsyncKeyState(Vars::Visuals::ThirdPersonKey.m_Var) & 0x8000) && flElapsed > 0.f) {
 					Vars::Visuals::ThirdPerson.m_Var = !Vars::Visuals::ThirdPerson.m_Var;
 					flPressedTime = g_Interfaces.Engine->Time();
 				}
@@ -342,9 +340,6 @@ void CVisuals::ThirdPerson()
 		}
 
 		bool bIsInThirdPerson = g_Interfaces.Input->CAM_IsThirdPerson();
-
-		if (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot())
-			pLocal->ForceTauntCam(0);
 
 		if (!Vars::Visuals::ThirdPerson.m_Var || ((!Vars::Visuals::RemoveScope.m_Var || !Vars::Visuals::RemoveZoom.m_Var) && pLocal->IsScoped()))
 		{
@@ -360,13 +355,9 @@ void CVisuals::ThirdPerson()
 		if (bIsInThirdPerson && Vars::Visuals::ThirdPersonSilentAngles.m_Var)
 		{
 			g_Interfaces.Prediction->SetLocalViewAngles(g_GlobalInfo.m_vRealViewAngles);
-
-			if (Vars::Visuals::ThirdPersonInstantYaw.m_Var)
+			if (const auto& pAnimState = pLocal->GetAnimState())
 			{
-				if (const auto& pAnimState = pLocal->GetAnimState())
-				{
-					pAnimState->m_flCurrentFeetYaw = g_GlobalInfo.m_vRealViewAngles.y;
-				}
+				pAnimState->m_flCurrentFeetYaw = g_GlobalInfo.m_vRealViewAngles.y;
 			}
 		}
 	}

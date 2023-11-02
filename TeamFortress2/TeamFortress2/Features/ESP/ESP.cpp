@@ -7,7 +7,7 @@
 #include "../Cache/Cache.h"
 bool CESP::ShouldRun()
 {
-	if (g_Interfaces.EngineVGui->IsGameUIVisible() || Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot())
+	if (g_Interfaces.EngineVGui->IsGameUIVisible())
 		return false;
 
 	return true;
@@ -24,7 +24,7 @@ void CESP::AAIndicator() {
 		// TODO: slider
 		constexpr auto distance = 50.f;
 
-		const auto origin = pLocal->GetAbsOrigin();
+		const auto& origin = pLocal->GetAbsOrigin();
 
 		Vec3 screen1, screen2;
 		if (Utils::W2S(origin, screen1))
@@ -695,7 +695,7 @@ void CESP::DrawBuildings(CBaseEntity *pLocal)
 	if (!Vars::ESP::Buildings::Active.m_Var)
 		return;
 
-	const auto Buildings = g_EntityCache.GetGroup(Vars::ESP::Buildings::IgnoreTeammates.m_Var ? EGroupType::BUILDINGS_ENEMIES : EGroupType::BUILDINGS_ALL);
+	const auto& Buildings = g_EntityCache.GetGroup(Vars::ESP::Buildings::IgnoreTeammates.m_Var ? EGroupType::BUILDINGS_ENEMIES : EGroupType::BUILDINGS_ALL);
 
 	for (const auto &pBuilding : Buildings)
 	{

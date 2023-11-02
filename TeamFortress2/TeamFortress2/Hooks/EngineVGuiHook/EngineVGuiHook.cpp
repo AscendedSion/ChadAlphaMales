@@ -155,7 +155,7 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 			//g_Draw.GradientRect(200, 200, 250, 200, { 255, 0, 0, 255 }, { 255, 0, 0, 255 }, false);
 			//g_Draw.GradientRect(250, 150, 300, 200, { 255, 0, 0, 255 }, { 255, 0, 0, 255 }, false);
 
-			if (!(g_Interfaces.EngineVGui->IsGameUIVisible() || (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot()))) {
+			if (!(g_Interfaces.EngineVGui->IsGameUIVisible())) {
 				OtherDraws();
 
 				g_Visuals.RunEventLogs();

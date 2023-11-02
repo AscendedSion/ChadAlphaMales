@@ -434,7 +434,6 @@ namespace Vars
 		inline CVar<bool> ThirdPerson				{ false, L"Active" };
 		inline CVar<int> ThirdPersonKey				{ 0x0, L"Toggle Key"};
 		inline CVar<bool> ThirdPersonSilentAngles	{ true, L"Silent Angles" };
-		inline CVar<bool> ThirdPersonInstantYaw		{ true, L"Instant Yaw" };
 		inline CVar<bool> ThirdpersonCrosshair{ 0.f, L"cum" };
 		inline CVar<float> ThirdpersonOffsetX{ 0.f, L"cum" };
 		inline CVar<float> ThirdpersonOffsetY{ 0.f, L"cum" };
@@ -494,8 +493,6 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 		inline CVar<bool> EdgeJump				{ false, L"Edge Jump" };
 		inline CVar<bool> AntiAFK				{ false, L"Anti AFK" };
 		inline CVar<bool> VoteRevealer			{ false, L"Reveal votes" };
-		inline CVar<bool> VotesInChat			{ false, L"Reveal votes to party" };
-		inline CVar<bool> CleanScreenshot		{ false, L"l0l" };
 		inline CVar<bool> SteamRPC				{ false, L"Self explanatory" };
 		inline CVar<bool> CheatsBypass			{ false, L"cum" };
 		inline std::string SteamRPCText	= "ChadAlphaMales.club";

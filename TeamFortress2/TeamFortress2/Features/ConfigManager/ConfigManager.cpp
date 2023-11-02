@@ -480,7 +480,6 @@ void CConfigManager::Save(const wchar_t* name)
 			SAVE_VAR(Vars::Visuals::ThirdPerson);
 			SAVE_VAR(Vars::Visuals::ThirdPersonKey);
 			SAVE_VAR(Vars::Visuals::ThirdPersonSilentAngles);
-			SAVE_VAR(Vars::Visuals::ThirdPersonInstantYaw);
 			SAVE_VAR(Vars::Visuals::ThirdpersonOffsetX);
 			SAVE_VAR(Vars::Visuals::ThirdpersonOffsetY);
 			SAVE_VAR(Vars::Visuals::ThirdpersonOffsetZ);
@@ -962,7 +961,6 @@ void CConfigManager::Load(const wchar_t* name)
 			LOAD_VAR(Vars::Visuals::ThirdPerson);
 			LOAD_VAR(Vars::Visuals::ThirdPersonKey);
 			LOAD_VAR(Vars::Visuals::ThirdPersonSilentAngles);
-			LOAD_VAR(Vars::Visuals::ThirdPersonInstantYaw);
 			LOAD_VAR(Vars::Visuals::ThirdpersonOffsetX);
 			LOAD_VAR(Vars::Visuals::ThirdpersonOffsetY);
 			LOAD_VAR(Vars::Visuals::ThirdpersonOffsetZ);
@@ -1091,78 +1089,7 @@ void CConfigManager::Load(const wchar_t* name)
 
 		m_Read.close();
 	}
-
-	std::string fart2 = Utils::str_tolower(Vars::Fart::customFont);
-	if (Vars::Fart::customFont.c_str() == "" || fart2 == "default") {
-		g_Draw.ReInitFonts(
-			{
-				//FONT_ESP
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-				//FONT_ESP_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-				//FONT_ESP_NAME
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
-				//FONT_ESP_NAME_OUTLINED
-				{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
-
-				//FONT_ESP_COND
-				{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-				//FONT_ESP_COND_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-				//FONT_ESP_PICKUPS
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-				//FONT_ESP_PICKUPS_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-
-				//FONT_MENU
-				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
-				//FONT_MENU_OUTLINED
-				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
-
-				/*FONT_ICONS*/
-				{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
-			}
-		);
-	}
-	else {
-		g_Draw.ReInitFonts(
-			{
-				//FONT_ESP
-				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-				//FONT_ESP_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-				//FONT_ESP_NAME
-				{ 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
-				//FONT_ESP_NAME_OUTLINED
-				{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
-
-				//FONT_ESP_COND
-				{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-				//FONT_ESP_COND_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-				//FONT_ESP_PICKUPS
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-				//FONT_ESP_PICKUPS_OUTLINED
-				{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-
-				//FONT_MENU
-				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
-				//FONT_MENU_OUTLINED
-				{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
-
-				/*FONT_ICONS*/
-				{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
-			}
-		);
-	}
 }
-
 void CConfigManager::Remove(const wchar_t* name)
 {
 	std::filesystem::remove(m_sConfigPath + L"\\" + name + _(L".poop"));

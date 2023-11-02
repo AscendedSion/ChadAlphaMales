@@ -1086,7 +1086,6 @@ void VisualsTab() {
             ImGui::Checkbox(_("Remove recoil"), &Vars::Visuals::RemovePunch.m_Var);
             ImGui::Checkbox(_("Chat info"), &Vars::Visuals::ChatInfo.m_Var);
             ImGui::Checkbox(_("Vote revealer"), &Vars::Misc::VoteRevealer.m_Var);
-            ImGui::Checkbox(_("Clean screenshots"), &Vars::Misc::CleanScreenshot.m_Var);
             static const char* weaponTracer[]{
                  "None",
                  "Machina",
@@ -1141,7 +1140,6 @@ void VisualsTab() {
             InputKeybind(_("Thirdperson key"), Vars::Visuals::ThirdPersonKey);
             ImGui::PopStyleColor(3);
             ImGui::Checkbox(_("Show silent angles"), &Vars::Visuals::ThirdPersonSilentAngles.m_Var);
-            ImGui::Checkbox(_("Instant yaw"), &Vars::Visuals::ThirdPersonInstantYaw.m_Var);
             FixSlider;
             ImGui::SliderFloat(_("Forward offset"), &Vars::Visuals::ThirdpersonOffsetX.m_Var, -100.0f, 100.f, _("%.0f"), ImGuiSliderFlags_AlwaysClamp);
             FixSlider;
@@ -1394,74 +1392,6 @@ void ConfigsTab() {
             if (ImGui::Button(_("Load"), { ImGui::GetContentRegionMax().x - 10, 0 })) {
                 g_CFG.Load(selected.c_str());
                 selected.clear();
-                std::string fart2 = Utils::str_tolower(Vars::Fart::customFont);
-                if (Vars::Fart::customFont.c_str() == "" || fart2 == "default") {
-                    g_Draw.ReInitFonts(
-                        {
-                            //FONT_ESP
-                           { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-                            //FONT_ESP_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_ESP_NAME
-                            { 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
-                            //FONT_ESP_NAME_OUTLINED
-                            { 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
-
-                            //FONT_ESP_COND
-                            { 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-                            //FONT_ESP_COND_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_ESP_PICKUPS
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-                            //FONT_ESP_PICKUPS_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_MENU
-                            { 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
-                            //FONT_MENU_OUTLINED
-                            { 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
-
-                            /*FONT_ICONS*/
-                            { 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
-                        }
-                    );
-                }
-                else {
-                    g_Draw.ReInitFonts(
-                        {
-                            //FONT_ESP
-                            { 0x0, _("runescape uf"), 12, 0, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-                            //FONT_ESP_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_ESP_NAME
-                            { 0x0, _("Verdana"), 12, 0, FONTFLAG_DROPSHADOW },
-                            //FONT_ESP_NAME_OUTLINED
-                            { 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
-
-                            //FONT_ESP_COND
-                            { 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
-                            //FONT_ESP_COND_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-                            //FONT_ESP_PICKUPS
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-                            //FONT_ESP_PICKUPS_OUTLINED
-                            { 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
-
-
-                            //FONT_MENU
-                            { 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
-                            //FONT_MENU_OUTLINED
-                            { 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
-
-                            /*FONT_ICONS*/
-                            { 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},
-                        }
-                    );
-                }
                 g_Visuals.AddToEventLog(_("Config %s loaded!"), selected.data());
             }
             ImGui::SetCursorPosX(5);

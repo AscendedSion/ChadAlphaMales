@@ -112,7 +112,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		{ 0x0, _("Verdana"), 12, 600, FONTFLAG_DROPSHADOW },
 
 		//FONT_ESP_COND
-		{ 0x0, _("runescape uf"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
+		{ 0x0, _("Small Fonts"), 12, 100, FONTFLAG_DROPSHADOW | FONTFLAG_ANTIALIAS },
 		//FONT_ESP_COND_OUTLINED
 		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
@@ -122,9 +122,9 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 		{ 0x0, _("Small Fonts"), 8, 0, FONTFLAG_OUTLINE },
 
 		//FONT_MENU
-		{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
+		{ 0x0, ("Tahoma"), 12, 0, FONTFLAG_NONE | FONTFLAG_DROPSHADOW },
 		//FONT_MENU_OUTLINED
-		{ 0x0, _("runescape uf"), 12, 0, FONTFLAG_OUTLINE },
+		{ 0x0, _("Tahoma"), 12, 0, FONTFLAG_OUTLINE },
 
 		/*FONT_ICONS*/
 		{ 0x0, _("Tf2weaponicons Regular"), 20, 0, FONTFLAG_NONE},

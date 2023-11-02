@@ -99,9 +99,6 @@ void CGlowEffect::Render()
 
 	if (!m_DrawnEntities.empty())
 		m_DrawnEntities.clear();
-	
-	if (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot())
-		return;
 
 	if (const auto& pLocal = g_EntityCache.m_pLocal)
 		{

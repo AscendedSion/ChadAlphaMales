@@ -167,7 +167,7 @@ void CChams::RenderBT(CBaseEntity* pLocal, IMatRenderContext* pRenderContext)
 
 void CChams::RenderPlayers(CBaseEntity* pLocal, IMatRenderContext* pRenderContext)
 {
-	if (!Vars::Chams::Players::Active.m_Var || (Vars::Misc::CleanScreenshot.m_Var && g_Interfaces.Engine->IsTakingScreenshot()))
+	if (!Vars::Chams::Players::Active.m_Var )
 		return;
 
 	const auto& Players = g_EntityCache.GetGroup(EGroupType::PLAYERS_ALL);
