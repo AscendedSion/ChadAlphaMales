@@ -357,7 +357,7 @@ void CVisuals::ThirdPerson()
 			g_Interfaces.Prediction->SetLocalViewAngles(g_GlobalInfo.m_vRealViewAngles);
 			if (const auto& pAnimState = pLocal->GetAnimState())
 			{
-				pAnimState->m_flCurrentFeetYaw = g_GlobalInfo.m_vRealViewAngles.y;
+				//pAnimState->m_flCurrentFeetYaw = g_GlobalInfo.m_vRealViewAngles.y;
 			}
 		}
 	}

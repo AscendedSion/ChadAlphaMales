@@ -519,10 +519,9 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 		namespace AntiAim
 		{
 			inline CVar<bool> Active	{ false, L"Active" };
-			inline CVar<int> Pitch		{ 0, L"Pitch" };		//0 - None, 1 - Up, 2 - Down, 3 - Fake Up, 4 - Fake Down
-			inline CVar<int> SpinSpeed	{ 0, L"Spin Speed" };
-			inline CVar<int> YawReal	{ 0, L"Yaw Real" };	//0 - None, 1 - Left, 2 - Right, 3 - Backwards
-			inline CVar<int> YawFake	{ 0, L"Yaw Fake" };	//0 - None, 1 - Left, 2 - Right, 3 - Backwards
+			inline CVar<bool> Pitch{ false, L"Pitch" };
+			inline CVar<bool> Yaw{ false, L"Yaw" };
+			inline CVar<bool> Fake{ false, L"Fake Yaw" };
 		}
 	}
 }

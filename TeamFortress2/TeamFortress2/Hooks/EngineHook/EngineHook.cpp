@@ -12,7 +12,7 @@ void __cdecl EngineHook::CL_Move::Hook(float accumulated_extra_samples, bool bFi
 		
 
 
-		if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && g_GlobalInfo.m_nShifted) //teleport
+		if ((GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && g_GlobalInfo.m_nShifted) //teleport
 		{
 			while (g_GlobalInfo.m_nShifted = MAX_NEW_COMMANDS_HEAVY)87;
 			{

@@ -322,36 +322,23 @@ void AimbotTab() {
         ImGui::EndChild();
         ImGui::EndGroup();
     }
-
-
     {//left bottom
         ImGui::SetCursorPosY(302);
         ImGui::BeginGroup();
         ImGui::SetCursorPosX(7);
-        ImGui::MenuChild(_("Crithack"), ImVec2(250, 210), false, ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::MenuChild(_("HvH / Exploits"), ImVec2(250, 210), false, ImGuiWindowFlags_NoScrollWithMouse);
         {
-            static bool lefunny = false;
-            static bool lefunny2 = false;
-            ImGui::Checkbox(_("Enabled"), &lefunny);
-            AlignToRight(50);
-            InputKeybind(_("Crithack Key"), Vars::Aimbot::CritHack::CritKey);
-            ImGui::Checkbox(_("Crit Bar"), &Vars::Aimbot::CritHack::CritBar.m_Var);
-            ImGui::Checkbox(_("Melee Crits"), &Vars::Aimbot::CritHack::MeleeCrits.m_Var);
-            ImGui::Checkbox(_("Save Bucket"), &Vars::Aimbot::CritHack::SaveBucket.m_Var);
-
-            if (lefunny) {
-                ImGui::Text(_("Why did you enable this you fucking tard"));
-                ImGui::Text(_("Have patience"));
-                if (!lefunny2) {
-                    g_Interfaces.Surface->PlaySound(_("vo//taunts//sniper_taunts15.mp3"));
-                    lefunny2 = true;
-                }
+            ImGui::Checkbox("Enabled", &Vars::AntiHack::AntiAim::Active.m_Var);
+            ImGui::Checkbox("Pitch", &Vars::AntiHack::AntiAim::Pitch.m_Var);
+            ImGui::Checkbox("Yaw", &Vars::AntiHack::AntiAim::Yaw.m_Var);
+            if (Vars::AntiHack::AntiAim::Yaw.m_Var) {
+                ImGui::Checkbox("Fake", &Vars::AntiHack::AntiAim::Fake.m_Var);
             }
+            
         }
         ImGui::EndChild();
         ImGui::EndGroup();
     }
-
     {//right
         ImGui::SetCursorPosY(42);
         ImGui::BeginGroup();
@@ -1173,56 +1160,7 @@ void MiscTab() {
         ImGui::EndChild();
         ImGui::EndGroup();
     }
-    {//right
-        ImGui::SetCursorPosY(42);
-        ImGui::BeginGroup();
-        ImGui::SetCursorPosX(312);
-        ImGui::MenuChild(_("HvH (autism)"), ImVec2(300, 300), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
-        {
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 5,5 });
-            ImGui::SetNextWindowSize(ImVec2(210, 0));
-            if (ImGui::BeginPopup(_("FakeLagSettings"), ImGuiWindowFlags_NoScrollWithMouse)) {
-                ImGui::Text(_(ICON_FA_EYE " Fakelag settings"));
-                ImGui::Separator();
-                ImGui::SetCursorPosX(2);
-                ImGui::PushItemWidth(200);
-                FixSlider;
-                ImGui::SliderInt(_("Fakelag value"), &Vars::Misc::CL_Move::FakelagValue.m_Var, 1, 14, _("%d"), ImGuiSliderFlags_AlwaysClamp);
-                ImGui::Checkbox(_("Fakelag on key"), &Vars::Misc::CL_Move::FakelagOnKey.m_Var);
-                ImGui::EndPopup();
-            }
-            ImGui::PopStyleVar();
-
-            ImGui::Checkbox(_("AntiAim"), &Vars::AntiHack::AntiAim::Active.m_Var);
-            const char* pitch[]{ "None", "Up", "Down", "Fake up", "Fake down", "Center", "Half Up" }; ImGui::Combo(_("Pitch"), &Vars::AntiHack::AntiAim::Pitch.m_Var, pitch, IM_ARRAYSIZE(pitch));
-            const char* realYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge", "Static"}; ImGui::Combo(_("Real yaw"), &Vars::AntiHack::AntiAim::YawReal.m_Var, realYaw, IM_ARRAYSIZE(realYaw));
-            const char* fakeYaw[]{ "None", "Left", "Right", "Backwards", "Spin", "Random", "Edge", "Static"}; ImGui::Combo(_("Fake yaw"), &Vars::AntiHack::AntiAim::YawFake.m_Var, fakeYaw, IM_ARRAYSIZE(fakeYaw));
-            FixSlider;
-            ImGui::SliderInt(_("Spin Speed"), &Vars::AntiHack::AntiAim::SpinSpeed.m_Var, 1, 20, _("%d"), ImGuiSliderFlags_AlwaysClamp);
-
-            ImGui::Checkbox(_("Fakelag"), &Vars::Misc::CL_Move::Fakelag.m_Var);
-            AlignToRight(70);
-
-            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
-            InputKeybind(_("Fakelag key"), Vars::Misc::CL_Move::FakelagKey);
-            ImGui::PopStyleColor(3);
-
-            AlignToRight(20);
-            ImGui::Text(ICON_FA_COG);
-            AlignToRight(23);
-            if (ImGui::InvisibleButton(_("FakeLagSettings"), ImVec2(20, 20))) {
-                ImGui::OpenPopup(_("FakeLagSettings"), ImGuiWindowFlags_NoScrollWithMouse);
-            }
-
-            //ImGui::Checkbox(_("Fakelag on key"), &Vars::Misc::CL_Move::FakelagOnKey.m_Var);
-            //FixSlider;
-            //ImGui::SliderInt(_("Fakelag value"), &Vars::Misc::CL_Move::FakelagValue.m_Var, 1, 14, _("%d"), ImGuiSliderFlags_AlwaysClamp);
-        }
-        ImGui::EndChild();
-        ImGui::EndGroup();
-    }
+    
     {//right
         ImGui::SetCursorPosY(342);
         ImGui::BeginGroup();

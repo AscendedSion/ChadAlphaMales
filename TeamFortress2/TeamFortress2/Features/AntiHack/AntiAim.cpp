@@ -59,73 +59,117 @@ float EdgeDistance(float edgeRayYaw)
 }
 
 float EdgeYaw = 0;
-float EdgeToEdgeOn = 0;
 bool FindEdge(float EdgeOrigYaw)
 {
-	int edgeLeftDist = EdgeDistance(EdgeOrigYaw - 21);
-	edgeLeftDist = edgeLeftDist + EdgeDistance(EdgeOrigYaw - 27);
+	int edgeLeftDist = EdgeDistance(EdgeOrigYaw);
+	edgeLeftDist = edgeLeftDist + EdgeDistance(EdgeOrigYaw);
 
-	int edgeRightDist = EdgeDistance(EdgeOrigYaw + 21);
-	edgeRightDist = edgeRightDist + EdgeDistance(EdgeOrigYaw + 27);
+	int edgeRightDist = EdgeDistance(EdgeOrigYaw);
+	edgeRightDist = edgeRightDist + EdgeDistance(EdgeOrigYaw);
 
 	if (edgeLeftDist >= 270)
-		edgeLeftDist = 999999999;
+		edgeLeftDist = -180;
 
 	if (edgeRightDist >= 270)
-		edgeRightDist = 999999999;
+		edgeRightDist = 0;
 
 	if (edgeLeftDist == edgeRightDist)
 		return false;
-
-	if (edgeRightDist < edgeLeftDist)
-	{
-		EdgeToEdgeOn = 1;
-
-		if (((int)Vars::AntiHack::AntiAim::Pitch.m_Var)) EdgeToEdgeOn = 2;
-		return true;
-	}
-	else
-	{
-		EdgeToEdgeOn = 2;
-
-		if (((int)Vars::AntiHack::AntiAim::Pitch.m_Var)) EdgeToEdgeOn = 1;
-		return true;
-	}
 }
 
 float UseEdge(float EdgeViewAngle)
 {
+
 	bool edgeTest = true;
 	if (((EdgeViewAngle < -135) || (EdgeViewAngle > 135)) && edgeTest == true)
 	{
-		if (EdgeToEdgeOn == 1) EdgeYaw = (float)-90;
-		if (EdgeToEdgeOn == 2) EdgeYaw = (float)90;
+		EdgeYaw = (float)0;
+
 		edgeTest = false;
 	}
 
 	if ((EdgeViewAngle >= -135) && (EdgeViewAngle < -45) && edgeTest == true)
 	{
-		if (EdgeToEdgeOn == 1) EdgeYaw = (float)0;
-		if (EdgeToEdgeOn == 2) EdgeYaw = (float)179;
+		EdgeYaw = (float)-89;
 		edgeTest = false;
 	}
 
 	if ((EdgeViewAngle >= -45) && (EdgeViewAngle < 45) && edgeTest == true)
 	{
-		if (EdgeToEdgeOn == 1) EdgeYaw = (float)90;
-		if (EdgeToEdgeOn == 2) EdgeYaw = (float)-90;
+		EdgeYaw = (float)180;
 		edgeTest = false;
 	}
 
 	if ((EdgeViewAngle <= 135) && (EdgeViewAngle >= 45) && edgeTest == true)
 	{
-		if (EdgeToEdgeOn == 1) EdgeYaw = (float)179;
-		if (EdgeToEdgeOn == 2) EdgeYaw = (float)0;
+		EdgeYaw = (float)90;
 		edgeTest = false;
 	}
-
 	return EdgeYaw;
 }
+
+void CAntiAim::Pitch(CUserCmd* pCmd)
+{
+	bool bPitchSet = Vars::AntiHack::AntiAim::Pitch.m_Var;
+
+	if (!bPitchSet)
+		return;
+
+	switch (g_EntityCache.m_pLocal->GetClassNum()) {
+	case CLASS_SCOUT:
+		pCmd->viewangles.x = -89.f;
+		break;
+	case CLASS_SOLDIER:
+		pCmd->viewangles.x = -89.f;
+		break;
+	case CLASS_PYRO:
+		pCmd->viewangles.x = 89.f;
+		break;
+	case CLASS_DEMOMAN:
+		pCmd->viewangles.x = 89.f;
+		break;
+	case CLASS_HEAVY:
+		pCmd->viewangles.x = 89.f;
+		break;
+	case CLASS_ENGINEER:
+		pCmd->viewangles.x = 89.f;
+		break;
+	case CLASS_MEDIC:
+		pCmd->viewangles.x = -89.f;
+		break;
+	case CLASS_SNIPER:
+		pCmd->viewangles.x = -89.f;
+		break;
+	case CLASS_SPY:
+		pCmd->viewangles.x = -89.f;
+		break;
+	}
+}
+
+void CAntiAim::Yaw(CUserCmd* pCmd)
+{
+	bool bYawSet = Vars::AntiHack::AntiAim::Yaw.m_Var;
+	if (!bYawSet)
+		return;
+
+	if (FindEdge(pCmd->viewangles.y))
+		pCmd->viewangles.y = UseEdge(pCmd->viewangles.y);
+	else
+		pCmd->viewangles.y = 180.f;
+}
+
+void CAntiAim::FakeYaw(CUserCmd* pCmd)
+{
+	bool bFakeSet = Vars::AntiHack::AntiAim::Fake.m_Var;
+	if (!bFakeSet)
+		return;
+
+	static bool jitter;
+	jitter = !jitter;
+
+	pCmd->viewangles.y += jitter ? 35 : -35;
+}
+
 
 void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 {
@@ -155,74 +199,30 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 			}
 		}
 
-		bool bPitchSet = true;
-		bool bYawSet = true;
-
 		Vec3 vOldAngles = pCmd->viewangles;
 		float fOldSideMove = pCmd->sidemove;
 		float fOldForwardMove = pCmd->forwardmove;
 
 		Vec3 vAngles = pCmd->viewangles;
 
-		switch (Vars::AntiHack::AntiAim::Pitch.m_Var) {
-		case 1: { pCmd->viewangles.x = -89.0f; g_GlobalInfo.m_vRealViewAngles.x = -89.0f; break; }
-		case 2: { pCmd->viewangles.x = 89.0f; g_GlobalInfo.m_vRealViewAngles.x = 89.0f; break; }
-		case 3: { pCmd->viewangles.x = -271.0f; g_GlobalInfo.m_vRealViewAngles.x = 89.0f; break; }
-		case 4: { pCmd->viewangles.x = 271.0f; g_GlobalInfo.m_vRealViewAngles.x = -89.0f; break; }
-		case 5: { pCmd->viewangles.x = 0.0f; g_GlobalInfo.m_vRealViewAngles.x = 0.0f; break; }
-		case 6: { pCmd->viewangles.x = -45.0f; g_GlobalInfo.m_vRealViewAngles.x = -45.0f; break; }
-		default: { bPitchSet = false; break; }
-		}
 
 		static bool b = false;
-		float SpinSpeed = fmod(g_Interfaces.GlobalVars->realtime * Vars::AntiHack::AntiAim::SpinSpeed.m_Var / 10.0f * 360.0f, 360.0f);
 
 		if (b)
 		{
-			switch (Vars::AntiHack::AntiAim::YawReal.m_Var) {
-			case 1: { pCmd->viewangles.y += 90.0f;  break; }
-			case 2: { pCmd->viewangles.y -= 90.0f; break; }
-			case 3: { pCmd->viewangles.y += 180.0f; break; }
-			case 4: { pCmd->viewangles.y = SpinSpeed; break; }//Spin
-			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-360.0f, 360.0f); break; }//Random
-			case 7: { pCmd->viewangles.y = Utils::RandFloatRange(0.f, -0.f); break; }
-			case 6:
-			{
-				if (FindEdge(pCmd->viewangles.y))
-					pCmd->viewangles.y = UseEdge(pCmd->viewangles.y);
-
-				break;
-			}
-			default: { bYawSet = false; break; }
-			}
-
+			Yaw(pCmd);
 			g_GlobalInfo.m_vRealViewAngles.y = pCmd->viewangles.y;
 		}
 
 		else
 		{
-			switch (Vars::AntiHack::AntiAim::YawFake.m_Var) {
-			case 1: { pCmd->viewangles.y += 90.0f; break; }
-			case 2: { pCmd->viewangles.y -= 90.0f; break; }
-			case 3: { pCmd->viewangles.y += 180.0f; break; }
-			case 4: { pCmd->viewangles.y = SpinSpeed; break; }//Spin
-			case 5: { pCmd->viewangles.y = Utils::RandFloatRange(-360.0f, 360.0f); break; }//Random
-			case 7: { pCmd->viewangles.y = Utils::RandFloatRange(0.f, -0.f); break; }
-			case 6:
-			{
-				if (FindEdge(pCmd->viewangles.y))
-					pCmd->viewangles.y = UseEdge(pCmd->viewangles.y);
-
-				break;
-			}
-			default: { bYawSet = false; break; }
-			}
-
+			FakeYaw(pCmd);
 			g_GlobalInfo.m_vFakeViewAngles.y = pCmd->viewangles.y;
 		}
 
 		*pSendPacket = b = !b;
-		g_GlobalInfo.m_bAAActive = bPitchSet || bYawSet;
+		Pitch(pCmd);
+		g_GlobalInfo.m_bAAActive = pCmd->viewangles.x || pCmd->viewangles.y;
 		FixMovement(pCmd, vOldAngles, fOldSideMove, fOldForwardMove);
 	}
 }
