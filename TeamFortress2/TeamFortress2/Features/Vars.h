@@ -504,13 +504,7 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 			inline CVar<int> TeleportKey{ 0x0, L"Teleport Key" }; //F
 			inline CVar<int> RechargeKey{ 0x52, L"Recharge Key" }; //R
 			inline CVar<int> DoubletapKey{ 0x10, L"Doubletap Key" }; //V
-
 			inline CVar<bool> WaitForDT{ true, L"Wait for DT" };
-
-			inline CVar<bool> Fakelag{ true, L"Fakelag" };
-			inline CVar<bool> FakelagOnKey{ true, L"Fakelag On Key" };
-			inline CVar<int> FakelagKey{ 0x0, L"Fakelag Key" }; //T
-			inline CVar<int> FakelagValue{ 14, L"Fakelag value" };
 		}
 	}
 

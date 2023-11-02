@@ -245,22 +245,6 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 	g_Misc.CheatsBypass();
 	g_GlobalInfo.m_vViewAngles = pCmd->viewangles;
 
-	if (const auto& pLocal = g_EntityCache.m_pLocal) {
-		if (const auto& pWeapon = g_EntityCache.m_pLocalWeapon) {
-			if (g_Interfaces.Engine->GetNetChannelInfo()->m_nChokedPackets < Vars::Misc::CL_Move::FakelagValue.m_Var) {
-				if (Vars::Misc::CL_Move::Fakelag.m_Var) {
-					if (Vars::Misc::CL_Move::FakelagOnKey.m_Var && GetAsyncKeyState(Vars::Misc::CL_Move::FakelagKey.m_Var)) {
-						*pSendPacket = false;
-					}
-					else {
-						*pSendPacket = false;
-					}
-				}
-				*pSendPacket = true;
-			}
-		}
-	}
-
 	if (Vars::Misc::TauntSlide.m_Var)
 	{
 		if (const auto& pLocal = g_EntityCache.m_pLocal)

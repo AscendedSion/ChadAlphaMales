@@ -531,6 +531,7 @@ void CConfigManager::Save(const wchar_t* name)
 				SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
 				SAVE_VAR(Vars::Misc::CL_Move::RechargeKey);// { 0x52, L"Recharge Key" }; //R
 				SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
+				SAVE_VAR(Vars::Misc::CL_Move::TeleportKey);
 				SAVE_VAR(Vars::Misc::CL_Move::DTTicks);
 			}
 		}
@@ -543,14 +544,6 @@ void CConfigManager::Save(const wchar_t* name)
 				SAVE_VAR(Vars::AntiHack::AntiAim::Pitch);
 				SAVE_VAR(Vars::AntiHack::AntiAim::Yaw);
 				SAVE_VAR(Vars::AntiHack::AntiAim::Fake);
-			}
-
-			//Fakelag
-			{
-				SAVE_VAR(Vars::Misc::CL_Move::Fakelag);
-				SAVE_VAR(Vars::Misc::CL_Move::FakelagKey);
-				SAVE_VAR(Vars::Misc::CL_Move::FakelagOnKey);
-				SAVE_VAR(Vars::Misc::CL_Move::FakelagValue);
 			}
 		}
 
@@ -1009,6 +1002,7 @@ void CConfigManager::Load(const wchar_t* name)
 				LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
 				LOAD_VAR(Vars::Misc::CL_Move::RechargeKey);// { 0x52, L"Recharge Key" }; //R
 				LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
+				LOAD_VAR(Vars::Misc::CL_Move::TeleportKey);
 				LOAD_VAR(Vars::Misc::CL_Move::DTTicks);
 			}
 		}
@@ -1021,14 +1015,6 @@ void CConfigManager::Load(const wchar_t* name)
 				LOAD_VAR(Vars::AntiHack::AntiAim::Pitch);
 				LOAD_VAR(Vars::AntiHack::AntiAim::Yaw);
 				LOAD_VAR(Vars::AntiHack::AntiAim::Fake);
-			}
-
-			//Fakelag
-			{
-				LOAD_VAR(Vars::Misc::CL_Move::Fakelag);
-				LOAD_VAR(Vars::Misc::CL_Move::FakelagKey);
-				LOAD_VAR(Vars::Misc::CL_Move::FakelagOnKey);
-				LOAD_VAR(Vars::Misc::CL_Move::FakelagValue);
 			}
 		}
 
