@@ -306,7 +306,7 @@ void CVisuals::ARatio() {
 	if (ratio > 0.f)
 		RatioVar->SetValue(ratio);
 	else
-		RatioVar->SetValue((0.f) / 2);
+		RatioVar->SetValue((0.f));
 
 }
 
@@ -332,7 +332,7 @@ void CVisuals::ThirdPerson()
 				static float flPressedTime = g_Interfaces.Engine->Time();
 				float flElapsed = g_Interfaces.Engine->Time() - flPressedTime;
 
-				if ((GetAsyncKeyState(Vars::Visuals::ThirdPersonKey.m_Var) & 0x8000) && flElapsed > 0.f) {
+				if ((GetAsyncKeyState(Vars::Visuals::ThirdPersonKey.m_Var) & 0x8000) && flElapsed > 0.2f) {
 					Vars::Visuals::ThirdPerson.m_Var = !Vars::Visuals::ThirdPerson.m_Var;
 					flPressedTime = g_Interfaces.Engine->Time();
 				}
