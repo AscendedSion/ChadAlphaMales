@@ -192,19 +192,21 @@ void CAntiAim::Yaw(CUserCmd* pCmd)
 void CAntiAim::YawDirection(CUserCmd* pCmd)
 {
 	bRight = GetAsyncKeyState(Vars::AntiHack::AntiAim::Right.m_Var & 0x800);
-	bRight = !bRight;
+	//bRight = !bRight;
 
 	bLeft = GetAsyncKeyState(Vars::AntiHack::AntiAim::Left.m_Var & 0x800);
-	bLeft = !bLeft;
+	//bLeft = !bLeft;
 
 	if (bRight) {
 		m_CurrentDirection = Directions::YAW_LEFT;
 		pCmd->viewangles.y -= 90.f;
+		bLeft = false;
 		return;
 	}
 	else if (bLeft) {
 		m_CurrentDirection = Directions::YAW_RIGHT;
 		pCmd->viewangles.y += 90.f;
+		bRight = false;
 		return;
 	}
 	else if (bBack) {
@@ -232,53 +234,59 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 	g_GlobalInfo.m_vRealViewAngles = g_GlobalInfo.m_vViewAngles;
 	g_GlobalInfo.m_vFakeViewAngles = g_GlobalInfo.m_vViewAngles;
 
+	bool HasYaw = Vars::AntiHack::AntiAim::Yaw.m_Var;
+
 	if (!Vars::AntiHack::AntiAim::Active.m_Var)
 		return;
 
-	if (const auto& pLocal = g_EntityCache.m_pLocal)
-	{
-		if (!pLocal->IsAlive()
-			|| pLocal->IsTaunting()
-			|| pLocal->IsInBumperKart()
-			|| pLocal->IsAGhost())
-			return;
-
-		if (g_GlobalInfo.m_bAttacking)
-			return;
-
-		else
+	else {
+		if (const auto& pLocal = g_EntityCache.m_pLocal)
 		{
-			if (const auto& pWeapon = g_EntityCache.m_pLocalWeapon) {
-				if (Utils::IsAttacking(pCmd, pWeapon))
-					return;
+			if (!pLocal->IsAlive()
+				|| pLocal->IsTaunting()
+				|| pLocal->IsInBumperKart()
+				|| pLocal->IsAGhost())
+				return;
+
+			if (g_GlobalInfo.m_bAttacking)
+				return;
+
+			else
+			{
+				if (const auto& pWeapon = g_EntityCache.m_pLocalWeapon) {
+					if (Utils::IsAttacking(pCmd, pWeapon))
+						return;
+				}
 			}
+
+			Vec3 vOldAngles = pCmd->viewangles;
+			float fOldSideMove = pCmd->sidemove;
+			float fOldForwardMove = pCmd->forwardmove;
+
+			Vec3 vAngles = pCmd->viewangles;
+
+
+			static bool b = false;
+
+			if (b)
+			{
+				Yaw(pCmd);
+				if (HasYaw) {
+					YawDirection(pCmd);
+				}
+				g_GlobalInfo.m_vRealViewAngles.y = pCmd->viewangles.y;
+			}
+
+			else
+			{
+				FakeYaw(pCmd);
+				g_GlobalInfo.m_vFakeViewAngles.y = pCmd->viewangles.y;
+			}
+
+			*pSendPacket = b = !b;
+			Pitch(pCmd);
+			g_GlobalInfo.m_bAAActive = pCmd->viewangles.x || pCmd->viewangles.y;
+			FixMovement(pCmd, vOldAngles, fOldSideMove, fOldForwardMove);
 		}
-
-		Vec3 vOldAngles = pCmd->viewangles;
-		float fOldSideMove = pCmd->sidemove;
-		float fOldForwardMove = pCmd->forwardmove;
-
-		Vec3 vAngles = pCmd->viewangles;
-
-
-		static bool b = false;
-
-		if (b)
-		{
-			Yaw(pCmd);
-			YawDirection(pCmd);
-			g_GlobalInfo.m_vRealViewAngles.y = pCmd->viewangles.y;
-		}
-
-		else
-		{
-			FakeYaw(pCmd);
-			g_GlobalInfo.m_vFakeViewAngles.y = pCmd->viewangles.y;
-		}
-
-		*pSendPacket = b = !b;
-		Pitch(pCmd);
-		g_GlobalInfo.m_bAAActive = pCmd->viewangles.x || pCmd->viewangles.y;
-		FixMovement(pCmd, vOldAngles, fOldSideMove, fOldForwardMove);
 	}
 }

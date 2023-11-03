@@ -328,11 +328,38 @@ void AimbotTab() {
         ImGui::SetCursorPosX(7);
         ImGui::MenuChild(_("HvH / Exploits"), ImVec2(250, 210), false, ImGuiWindowFlags_NoScrollWithMouse);
         {
-            ImGui::Checkbox("Enabled", &Vars::AntiHack::AntiAim::Active.m_Var);
-            ImGui::Checkbox("Pitch", &Vars::AntiHack::AntiAim::Pitch.m_Var);
-            ImGui::Checkbox("Yaw", &Vars::AntiHack::AntiAim::Yaw.m_Var);
-            if (Vars::AntiHack::AntiAim::Yaw.m_Var) {
-                ImGui::Checkbox("Fake", &Vars::AntiHack::AntiAim::Fake.m_Var);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 8,8 });
+            ImGui::SetNextWindowSize(ImVec2(210, 0));
+            if (ImGui::BeginPopup(_("aasettings"), ImGuiWindowFlags_NoScrollWithMouse)) {
+                ImGui::Text(_(ICON_FA_EYE " AntiAim Settings"));
+                ImGui::Separator();
+                ImGui::PushItemWidth(200);
+                ImGui::Checkbox(_("Pitch"), &Vars::AntiHack::AntiAim::Pitch.m_Var);
+                ImGui::SetCursorPosX(2);
+                ImGui::Checkbox(_("Yaw"), &Vars::AntiHack::AntiAim::Yaw.m_Var);
+                ImGui::SetCursorPosX(2);
+                ImGui::Checkbox(_("Fake Yaw"), &Vars::AntiHack::AntiAim::Fake.m_Var);
+                ImGui::SetCursorPosX(8);
+                ImGui::Text(_("Right Manual"));
+                AlignToRight(45);
+                InputKeybind(_("Right Yaw"), Vars::AntiHack::AntiAim::Right);
+                ImGui::EndPopup();
+            }
+            ImGui::PopStyleVar();
+
+            ImGui::Checkbox(_("AntiAim"), &Vars::Misc::CL_Move::Doubletap.m_Var);
+            AlignToRight(70);
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
+            InputKeybind(_("Left Key"), Vars::AntiHack::AntiAim::Left);
+            ImGui::PopStyleColor(3);
+
+            AlignToRight(20);
+            ImGui::Text(ICON_FA_COG);
+            AlignToRight(23);
+            if (ImGui::InvisibleButton(_("aasettings"), ImVec2(20, 20))) {
+                ImGui::OpenPopup(_("aasettings"));
             }
             
         }
