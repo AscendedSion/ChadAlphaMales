@@ -544,6 +544,8 @@ void CConfigManager::Save(const wchar_t* name)
 				SAVE_VAR(Vars::AntiHack::AntiAim::Pitch);
 				SAVE_VAR(Vars::AntiHack::AntiAim::Yaw);
 				SAVE_VAR(Vars::AntiHack::AntiAim::Fake);
+				SAVE_VAR(Vars::AntiHack::AntiAim::Right);
+				SAVE_VAR(Vars::AntiHack::AntiAim::Left);
 			}
 		}
 
@@ -1015,6 +1017,8 @@ void CConfigManager::Load(const wchar_t* name)
 				LOAD_VAR(Vars::AntiHack::AntiAim::Pitch);
 				LOAD_VAR(Vars::AntiHack::AntiAim::Yaw);
 				LOAD_VAR(Vars::AntiHack::AntiAim::Fake);
+				LOAD_VAR(Vars::AntiHack::AntiAim::Right);
+				LOAD_VAR(Vars::AntiHack::AntiAim::Left);
 			}
 		}
 

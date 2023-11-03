@@ -151,11 +151,67 @@ void CAntiAim::Yaw(CUserCmd* pCmd)
 	bool bYawSet = Vars::AntiHack::AntiAim::Yaw.m_Var;
 	if (!bYawSet)
 		return;
+	const auto& pLocal = g_EntityCache.m_pLocal;
+	static bool bShould180z = false;
 
-	if (FindEdge(pCmd->viewangles.y))
-		pCmd->viewangles.y = UseEdge(pCmd->viewangles.y);
-	else
-		pCmd->viewangles.y = 180.f;
+	// choose your starting angle
+	float flStartPoint = 100.0f;
+
+	// fix it to one float
+	static float flCurrentAng = flStartPoint;
+
+	bool bInAir = (pLocal->IsOnGround());
+
+	if (!bInAir) {
+		// increment it if we're in air
+		flCurrentAng += 5.0f;
+
+		// clamp it incase it goes out of our maximum spin rage
+		if (flCurrentAng >= 250.f)
+			flCurrentAng = 250.f;
+
+		// yurr
+		bShould180z = true;
+
+		// do 180 z ))
+		pCmd->viewangles.y += flCurrentAng;
+	}
+	// next tick, start at starting point
+	else {
+		flCurrentAng = flStartPoint;
+
+		// if we were in air tick before, go back to start point 
+		// in order to properly rotate next (so fakelag doesnt fuck it up)
+		pCmd->viewangles.y += bShould180z ? flStartPoint : 180.f;
+
+		// set for future
+		bShould180z = false;
+	}
+}
+
+void CAntiAim::YawDirection(CUserCmd* pCmd)
+{
+	bRight = GetAsyncKeyState(Vars::AntiHack::AntiAim::Right.m_Var & 0x800);
+	bRight = !bRight;
+
+	bLeft = GetAsyncKeyState(Vars::AntiHack::AntiAim::Left.m_Var & 0x800);
+	bLeft = !bLeft;
+
+	if (bRight) {
+		m_CurrentDirection = Directions::YAW_LEFT;
+		pCmd->viewangles.y -= 90.f;
+		return;
+	}
+	else if (bLeft) {
+		m_CurrentDirection = Directions::YAW_RIGHT;
+		pCmd->viewangles.y += 90.f;
+		return;
+	}
+	else if (bBack) {
+		m_CurrentDirection = Directions::YAW_BACK;
+		pCmd->viewangles.y += 180.f;
+		return;
+	}
 }
 
 void CAntiAim::FakeYaw(CUserCmd* pCmd)
@@ -164,10 +220,9 @@ void CAntiAim::FakeYaw(CUserCmd* pCmd)
 	if (!bFakeSet)
 		return;
 
-	static bool jitter;
-	jitter = !jitter;
+	float SpinSpeed = fmod(g_Interfaces.GlobalVars->realtime * 10 / 10.0f * 360.0f, 360.0f);
 
-	pCmd->viewangles.y += jitter ? 35 : -35;
+	pCmd->viewangles.y += SpinSpeed;
 }
 
 
@@ -211,6 +266,7 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 		if (b)
 		{
 			Yaw(pCmd);
+			YawDirection(pCmd);
 			g_GlobalInfo.m_vRealViewAngles.y = pCmd->viewangles.y;
 		}
 
