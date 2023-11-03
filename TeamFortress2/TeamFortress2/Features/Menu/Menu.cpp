@@ -317,7 +317,7 @@ void AimbotTab() {
             ColorPicker(_("Cloaked"), Colors::Cloak);
             ImGui::Checkbox(_("Ignore friends"), &Vars::Aimbot::Global::IgnoreFriends.m_Var);
             ImGui::Checkbox(_("Ignore taunting"), &Vars::Aimbot::Global::IgnoreTaunting.m_Var);
-            ImGui::Checkbox(_("No Interp"), &Vars::Misc::DisableInterpolation.m_Var);
+            ImGui::Checkbox(_("Ignore Vaccinator"), &Vars::Aimbot::Global::IgnoreVaccinator.m_Var);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -333,40 +333,6 @@ void AimbotTab() {
             ImGui::Checkbox("Yaw", &Vars::AntiHack::AntiAim::Yaw.m_Var);
             if (Vars::AntiHack::AntiAim::Yaw.m_Var) {
                 ImGui::Checkbox("Fake", &Vars::AntiHack::AntiAim::Fake.m_Var);
-            }
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 8,8 });
-            ImGui::SetNextWindowSize(ImVec2(210, 0));
-            if (ImGui::BeginPopup(_("DTSettings"), ImGuiWindowFlags_NoScrollWithMouse)) {
-                ImGui::Text(_(ICON_FA_EYE " Doubletap settings"));
-                ImGui::Separator();
-                ImGui::PushItemWidth(200);
-                ImGui::SetCursorPosX(2);
-                ImGui::SliderInt(_("Ticks to shift"), &Vars::Misc::CL_Move::DTTicks.m_Var, 10, 24, _("%d"), ImGuiSliderFlags_ClampOnInput);
-                ImGui::SetCursorPosX(2);
-                ImGui::Checkbox(_("Wait for DT"), &Vars::Misc::CL_Move::WaitForDT.m_Var);
-                ImGui::SetCursorPosX(2);
-                ImGui::Checkbox(_("Don't DT in air"), &Vars::Misc::CL_Move::NotInAir.m_Var);
-                ImGui::SetCursorPosX(8);
-                ImGui::Text(_("Recharge Key"));
-                AlignToRight(45);
-                InputKeybind(_("Recharge Key"), Vars::Misc::CL_Move::RechargeKey);
-                ImGui::EndPopup();
-            }
-            ImGui::PopStyleVar();
-
-            ImGui::Checkbox(_("DoubleTap"), &Vars::Misc::CL_Move::Doubletap.m_Var);
-            AlignToRight(70);
-            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
-            InputKeybind(_("dt key"), Vars::Misc::CL_Move::DoubletapKey);
-            ImGui::PopStyleColor(3);
-
-            AlignToRight(20);
-            ImGui::Text(ICON_FA_COG);
-            AlignToRight(23);
-            if (ImGui::InvisibleButton(_("DTSettings"), ImVec2(20, 20))) {
-                ImGui::OpenPopup(_("DTSettings"));
             }
             
         }
@@ -592,6 +558,7 @@ void ESPTab() {
             ImGui::Checkbox(_("Local ESP"), &Vars::ESP::Players::ShowLocal.m_Var);
             AlignToRight(23);
             ColorPicker(_("Local / Friend"), Colors::Friend);
+            //ImGui::Checkbox(_("Player health"), &Vars::ESP::Players::Health.m_Var);
             ImGui::Checkbox(_("Player conditions"), &Vars::ESP::Players::Cond.m_Var);
             AlignToRight(23);
             ColorPicker(_("Conditions"), Colors::Cond);
@@ -632,6 +599,14 @@ void ESPTab() {
         {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 5,5 });
             ImGui::SetNextWindowSize(ImVec2(160, 0));
+            if (ImGui::BeginPopup(_("BuildingHealthBar"), ImGuiWindowFlags_NoScrollWithMouse)) {
+                ImGui::Text(_(ICON_FA_EYE " Building Health Bar"));
+                ImGui::Separator();
+                ImGui::SetCursorPosX(2);
+                ColorPicker2(_("Healthbar top color##2"), Colors::Healthbar, false);
+
+                ImGui::EndPopup();
+            }
             ImGui::PopStyleVar();
 
             ImGui::Checkbox(_("Enabled"), &Vars::ESP::Buildings::Active.m_Var);
@@ -1053,6 +1028,16 @@ void VisualsTab() {
                  "Merasmus Zap",
             };
             ImGui::Combo(_("Bullet Tracer"), &Vars::Visuals::TracerEffect.m_Var, weaponTracer, IM_ARRAYSIZE(weaponTracer));
+            static const char* ragdollEffect[]{
+                "None",
+                "Gib",
+                "Burning",
+                "Feign death",
+                "Become ash",
+                "Gold ragdoll",
+                "Ice ragdoll",
+            };
+            ImGui::Combo(_("Ragdoll effect"), &Vars::Visuals::RagdollEffect.m_Var, ragdollEffect, IM_ARRAYSIZE(ragdollEffect));
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -1124,6 +1109,7 @@ void VisualsTab() {
             static const char* ignoreTeammatespRadar[]{ "Off", "All", "Keep friends" };
             ImGui::Combo(_("Ignore teammates###radarplayersteam"), &Vars::Radar::Players::IgnoreTeam.m_Var, ignoreTeammatespRadar, IM_ARRAYSIZE(ignoreTeammatespRadar));
             ImGui::Checkbox(_("Ignore team building###radarbuildingsb"), &Vars::Radar::Buildings::IgnoreTeam.m_Var); //This feature is dumb anyway
+            ImGui::TextUnformatted(_(""));
             ImGui::Checkbox(_("Out of FoV arrows###arrows"), &Vars::ESP::Players::Arrows::Active.m_Var);
             FixSlider;
             ImGui::SliderFloat(_("Distance from center"), &Vars::ESP::Players::Arrows::DistFromCenter.m_Var, 20.f, 200.f, _("%.2f"), ImGuiSliderFlags_AlwaysClamp);
@@ -1147,9 +1133,12 @@ void MiscTab() {
             ImGui::Checkbox(_("Medal flip"), &Vars::Misc::MedalFlip.m_Var);
             ImGui::Checkbox(_("Noisemaker spam"), &Vars::Misc::NoisemakerSpam.m_Var);
             ImGui::Checkbox(_("Chat Spam"), &Vars::Misc::ChatSpam.m_Var);
+            ImGui::Checkbox(_("No Interp"), &Vars::Misc::DisableInterpolation.m_Var);
             ImGui::Checkbox(_("Remove Hats"), &Vars::Visuals::RemoveHats.m_Var);
             ImGui::Checkbox(_("PlayerList"), &Vars::Visuals::PlayerList.m_Var);
-            ImGui::Checkbox(_("Instant Respawn MVM"), &Vars::Misc::InstantRespawn.m_Var);
+            ImGui::Checkbox(_("Steam RPC"), &Vars::Misc::SteamRPC.m_Var);
+            ImGui::SameLine();
+            ImGui::InputTextWithHint(_("##customsteamrpc"), _("Custom Steam RPC"), &Vars::Misc::SteamRPCText);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -1167,6 +1156,53 @@ void MiscTab() {
             ImGui::Checkbox(_("Taunt Control"), &Vars::Misc::TauntControl.m_Var);
             ImGui::Checkbox(_("Mouse control"), &Vars::Misc::TauntControlMouse.m_Var);
             ImGui::Checkbox(_("No Push"), &Vars::Misc::NoPush.m_Var);
+        }
+        ImGui::EndChild();
+        ImGui::EndGroup();
+    }
+    
+    {//right
+        ImGui::SetCursorPosY(342);
+        ImGui::BeginGroup();
+        ImGui::SetCursorPosX(312);
+        ImGui::MenuChild(_("Exploits"), ImVec2(300, 169), false, ImGuiWindowFlags_NoScrollWithMouse);
+        {
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 8,8 });
+            ImGui::SetNextWindowSize(ImVec2(210, 0));
+            if (ImGui::BeginPopup(_("DTSettings"), ImGuiWindowFlags_NoScrollWithMouse)) {
+                ImGui::Text(_(ICON_FA_EYE " Doubletap settings"));
+                ImGui::Separator();
+                ImGui::PushItemWidth(200);
+                ImGui::SetCursorPosX(2);
+                ImGui::SliderInt(_("Ticks to shift"), &Vars::Misc::CL_Move::DTTicks.m_Var, 10, 24, _("%d"), ImGuiSliderFlags_ClampOnInput);
+                ImGui::SetCursorPosX(2);
+                ImGui::Checkbox(_("Wait for DT"), &Vars::Misc::CL_Move::WaitForDT.m_Var);
+                ImGui::SetCursorPosX(2);
+                ImGui::Checkbox(_("Don't DT in air"), &Vars::Misc::CL_Move::NotInAir.m_Var);
+                ImGui::SetCursorPosX(8);
+                ImGui::Text(_("Recharge Key"));
+                AlignToRight(45);
+                InputKeybind(_("Recharge Key"), Vars::Misc::CL_Move::RechargeKey);
+                ImGui::EndPopup();
+            }
+            ImGui::PopStyleVar();
+
+            ImGui::Checkbox(_("DoubleTap"), &Vars::Misc::CL_Move::Doubletap.m_Var);
+            AlignToRight(70);
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
+            InputKeybind(_("dt key"), Vars::Misc::CL_Move::DoubletapKey);
+            ImGui::PopStyleColor(3);
+
+            AlignToRight(20);
+            ImGui::Text(ICON_FA_COG);
+            AlignToRight(23);
+            if (ImGui::InvisibleButton(_("DTSettings"), ImVec2(20, 20))) {
+                ImGui::OpenPopup(_("DTSettings"));
+            }
+
+            ImGui::Checkbox(_("Instant Respawn MVM"), &Vars::Misc::InstantRespawn.m_Var);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
@@ -1196,7 +1232,7 @@ void ConfigsTab() {
             }
             */
             for (const auto& entry : std::filesystem::directory_iterator(g_CFG.m_sConfigPath)) {
-                if (std::string(std::filesystem::path(entry).filename().string()).find(_("poop")) == std::string_view::npos) {
+                if (std::string(std::filesystem::path(entry).filename().string()).find(_(".poop")) == std::string_view::npos) {
                     continue;
                 }
                 nConfig++;
