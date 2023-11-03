@@ -7,9 +7,7 @@ private:
 	void FixMovement(CUserCmd *pCmd, Vec3 vOldAngles, float fOldSideMove, float fOldForwardMove);
 
 public:
-	bool bRight;
-	bool bBack;
-	bool bLeft;
+	bool bRight, bLeft, bBack;
 
 	enum class Directions : int {
 		YAW_RIGHT,
