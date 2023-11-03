@@ -129,7 +129,7 @@ void CAntiAim::Pitch(CUserCmd* pCmd)
 		pCmd->viewangles.x = 89.f;
 		break;
 	case CLASS_HEAVY:
-		pCmd->viewangles.x = 89.f;
+		pCmd->viewangles.x = -89.f;
 		break;
 	case CLASS_ENGINEER:
 		pCmd->viewangles.x = 89.f;
