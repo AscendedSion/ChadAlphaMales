@@ -244,6 +244,22 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 	g_Misc.AutoRocketJump(pCmd);
 	g_Misc.CheatsBypass();
 	g_GlobalInfo.m_vViewAngles = pCmd->viewangles;
+	if (const auto& pLocal = g_EntityCache.m_pLocal) {
+		int m_nMaxLag;
+		int nLimit;
+		int      m_nLag;
+		bool bOnGround = pLocal->GetFlags() == FL_ONGROUND;
+		m_nMaxLag = (bOnGround) ? 24 : 20;
+		nLimit = std::min(Vars::AntiHack::FakeLag::Value.m_Var, m_nMaxLag);
+		m_nLag = g_Interfaces.ClientState->chokedcommands;
+		
+				if (Vars::AntiHack::FakeLag::Active.m_Var) {
+					*pSendPacket = false;
+					if (m_nLag >= nLimit)
+						*pSendPacket = true;
+				}
+	}
+
 
 	if (Vars::Misc::TauntSlide.m_Var)
 	{
@@ -297,7 +313,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 			nChoked++;
 		else nChoked = 0;
 
-		if (nChoked > 14)
+		if (nChoked > 20)
 			*pSendPacket = true;
 	}
 

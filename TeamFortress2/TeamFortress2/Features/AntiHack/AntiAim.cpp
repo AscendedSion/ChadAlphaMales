@@ -198,7 +198,7 @@ void CAntiAim::HandleYaw(CUserCmd* pCmd) {
 	if (m_CurrentDirection != Directions::YAW_BACK) {
 		switch (m_CurrentDirection) {
 		case Directions::YAW_RIGHT:
-			pCmd->viewangles.y += -90.f;
+			pCmd->viewangles.y += 90.f;
 			return;
 			break;
 		case Directions::YAW_BACK:
@@ -206,7 +206,7 @@ void CAntiAim::HandleYaw(CUserCmd* pCmd) {
 			return;
 			break;
 		case Directions::YAW_LEFT:
-			pCmd->viewangles.y += 90.f;
+			pCmd->viewangles.y -= 90.f;
 			return;
 			break;
 		default:

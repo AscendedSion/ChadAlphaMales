@@ -520,5 +520,9 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 			inline CVar<int>  Left{ 0x0, L"Left Manual" };
 			inline CVar<int>  Back{ 0x0, L"Back Manual" };
 		}
+		namespace FakeLag {
+			inline CVar<bool> Active{ false, L"Active" };
+			inline CVar<int>  Value{ 2, L"Value" };
+		}
 	}
 }

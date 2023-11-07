@@ -61,6 +61,14 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 			auto OtherDraws = [&]() -> void
 			{
 
+					if (Vars::AntiHack::FakeLag::Active.m_Var) {
+						const auto& pLocal = g_EntityCache.m_pLocal;
+						const int nY = (g_ScreenSize.h / 2) + 50;
+						if (pLocal->GetLifeState() == LIFE_ALIVE) {
+							g_Draw.String(FONT_MENU, 30, nY + 60, { 255,255,255,255 }, ALIGN_DEFAULT, std::string(std::to_string(g_Interfaces.Engine->GetNetChannelInfo()->m_nChokedPackets)).c_str());
+						}
+				}
+
 				//Tickbase info
 				if (Vars::Misc::CL_Move::Doubletap.m_Var)
 				{

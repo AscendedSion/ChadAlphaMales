@@ -366,7 +366,8 @@ void AimbotTab() {
             if (ImGui::InvisibleButton(_("aasettings"), ImVec2(20, 20))) {
                 ImGui::OpenPopup(_("aasettings"));
             }
-            
+            ImGui::Checkbox("Fake Lag", &Vars::AntiHack::FakeLag::Active.m_Var);
+            ImGui::SliderInt(_("Fake Lag Value"), &Vars::AntiHack::FakeLag::Value.m_Var, 2, 20, _("%d"), ImGuiSliderFlags_ClampOnInput);
         }
         ImGui::EndChild();
         ImGui::EndGroup();
