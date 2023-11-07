@@ -518,6 +518,7 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 			inline CVar<bool> Fake{ false, L"Fake Yaw" };
 			inline CVar<int>  Right{ 0x0, L"Right Manual" };
 			inline CVar<int>  Left{ 0x0, L"Left Manual" };
+			inline CVar<int>  Back{ 0x0, L"Back Manual" };
 		}
 	}
 }

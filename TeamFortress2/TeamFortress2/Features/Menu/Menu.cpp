@@ -343,16 +343,21 @@ void AimbotTab() {
                 ImGui::Text(_("Right Manual"));
                 AlignToRight(45);
                 InputKeybind(_("Right Yaw"), Vars::AntiHack::AntiAim::Right);
+                ImGui::Text("Back Manual");
+                AlignToRight(45);
+                InputKeybind("Back Yaw", Vars::AntiHack::AntiAim::Back);
+                ImGui::Text("Left Manual");
+                AlignToRight(45);
+                InputKeybind("Left Key", Vars::AntiHack::AntiAim::Left);
                 ImGui::EndPopup();
             }
             ImGui::PopStyleVar();
 
-            ImGui::Checkbox(_("AntiAim"), &Vars::Misc::CL_Move::Doubletap.m_Var);
+            ImGui::Checkbox(_("AntiAim"), &Vars::AntiHack::AntiAim::Active.m_Var);
             AlignToRight(70);
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
-            InputKeybind(_("Left Key"), Vars::AntiHack::AntiAim::Left);
             ImGui::PopStyleColor(3);
 
             AlignToRight(20);

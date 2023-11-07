@@ -11,14 +11,15 @@ public:
 
 	enum class Directions : int {
 		YAW_RIGHT,
-		YAW_BACK,
-		YAW_LEFT
+		YAW_LEFT,
+		YAW_BACK
 	};
 
 	Directions m_CurrentDirection = Directions::YAW_BACK;
 
 	void Pitch(CUserCmd* pCmd);
-	void Yaw(CUserCmd* pCmd);
+	void BaseYaw(CUserCmd* pCmd);
+	void HandleYaw(CUserCmd* pCmd);
 	void YawDirection(CUserCmd* pCmd);
 	void FakeYaw(CUserCmd* pCmd);
 	void Run(CUserCmd *pCmd, bool *pSendPacket);

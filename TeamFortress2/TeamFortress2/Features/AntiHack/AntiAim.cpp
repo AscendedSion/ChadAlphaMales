@@ -146,7 +146,7 @@ void CAntiAim::Pitch(CUserCmd* pCmd)
 	}
 }
 
-void CAntiAim::Yaw(CUserCmd* pCmd)
+void CAntiAim::BaseYaw(CUserCmd* pCmd)
 {
 	bool bYawSet = Vars::AntiHack::AntiAim::Yaw.m_Var;
 	if (!bYawSet)
@@ -189,29 +189,53 @@ void CAntiAim::Yaw(CUserCmd* pCmd)
 	}
 }
 
+void CAntiAim::HandleYaw(CUserCmd* pCmd) {
+
+	// base yaw first.
+	YawDirection(pCmd);
+
+	// manual override everything
+	if (m_CurrentDirection != Directions::YAW_BACK) {
+		switch (m_CurrentDirection) {
+		case Directions::YAW_RIGHT:
+			pCmd->viewangles.y += -90.f;
+			return;
+			break;
+		case Directions::YAW_BACK:
+			pCmd->viewangles.y += 180.f;
+			return;
+			break;
+		case Directions::YAW_LEFT:
+			pCmd->viewangles.y += 90.f;
+			return;
+			break;
+		default:
+			break;
+		}
+		return;
+	}
+	// first do yaws
+	BaseYaw(pCmd);
+}
+
 void CAntiAim::YawDirection(CUserCmd* pCmd)
 {
-	bRight = GetAsyncKeyState(Vars::AntiHack::AntiAim::Right.m_Var & 0x800);
 	//bRight = !bRight;
-
-	bLeft = GetAsyncKeyState(Vars::AntiHack::AntiAim::Left.m_Var & 0x800);
 	//bLeft = !bLeft;
-
-	if (bRight) {
-		m_CurrentDirection = Directions::YAW_LEFT;
-		pCmd->viewangles.y -= 90.f;
-		bLeft = false;
-		return;
-	}
-	else if (bLeft) {
+	
+	if (GetAsyncKeyState (Vars::AntiHack::AntiAim::Right.m_Var)) {
 		m_CurrentDirection = Directions::YAW_RIGHT;
-		pCmd->viewangles.y += 90.f;
-		bRight = false;
+		bRight = !bRight;
 		return;
 	}
-	else if (bBack) {
+	else if (GetAsyncKeyState(Vars::AntiHack::AntiAim::Left.m_Var)) {
+		m_CurrentDirection = Directions::YAW_LEFT;
+		bLeft = !bLeft;
+		return;
+	}
+	else if (GetAsyncKeyState(Vars::AntiHack::AntiAim::Back.m_Var)) {
 		m_CurrentDirection = Directions::YAW_BACK;
-		pCmd->viewangles.y += 180.f;
+		bBack = !bBack;
 		return;
 	}
 }
@@ -235,11 +259,9 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 	g_GlobalInfo.m_vFakeViewAngles = g_GlobalInfo.m_vViewAngles;
 
 	bool HasYaw = Vars::AntiHack::AntiAim::Yaw.m_Var;
+	bool isAntiAiming = Vars::AntiHack::AntiAim::Active.m_Var;
 
-	if (!Vars::AntiHack::AntiAim::Active.m_Var)
-		return;
-
-	else {
+	if (isAntiAiming) {
 		if (const auto& pLocal = g_EntityCache.m_pLocal)
 		{
 			if (!pLocal->IsAlive()
@@ -270,10 +292,10 @@ void CAntiAim::Run(CUserCmd* pCmd, bool* pSendPacket)
 
 			if (b)
 			{
-				Yaw(pCmd);
-				if (HasYaw) {
-					YawDirection(pCmd);
-				}
+				HandleYaw(pCmd);
+				//if (HasYaw) {
+				//	YawDirection(pCmd);
+				//}
 				g_GlobalInfo.m_vRealViewAngles.y = pCmd->viewangles.y;
 			}
 
