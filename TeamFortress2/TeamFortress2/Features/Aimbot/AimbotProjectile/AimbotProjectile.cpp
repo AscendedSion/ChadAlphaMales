@@ -338,7 +338,7 @@ bool CAimbotProjectile::SolveProjectile(CBaseEntity* pLocal, CBaseCombatWeapon* 
 		float fCorrectTime = (fPredTime + fLatency);
 		Vec3 vPredictedPos{};
 		vPredictedPos = Vars::Aimbot::Projectile::R8Method.m_Var ? Predictor.Extrapolate2(fCorrectTime) : Predictor.Extrapolate(fCorrectTime);
-		/*if (Predictor.m_vVelocity.IsZero() ||
+		if (Predictor.m_vVelocity.IsZero() ||
 			pWeapon->GetWeaponID() == 56 ||
 			pWeapon->GetWeaponID() == 1005 ||
 			pWeapon->GetWeaponID() == 1092) {
@@ -346,7 +346,7 @@ bool CAimbotProjectile::SolveProjectile(CBaseEntity* pLocal, CBaseCombatWeapon* 
 		}
 		else {
 			vPredictedPos = Predictor.Extrapolate2(fCorrectTime);
-		}*/
+		}
 
 		switch (pWeapon->GetWeaponID())
 		{
@@ -446,7 +446,7 @@ bool CAimbotProjectile::SolveProjectile(CBaseEntity* pLocal, CBaseCombatWeapon* 
 			}
 
 			//DrawDebugArrow(vVisCheck, vPredictedPos);
-			Utils::TraceHull(vVisCheck, vPredictedPos, Vec3(-2, -2, -2), Vec3(2, 2, 2), MASK_SOLID_BRUSHONLY, &TraceFilter, &Trace);
+			//Utils::TraceHull(vVisCheck, vPredictedPos, Vec3(-2, -2, -2), Vec3(2, 2, 2), MASK_SOLID_BRUSHONLY, &TraceFilter, &Trace);
 
 			if (Trace.DidHit())
 				return false;
@@ -668,7 +668,7 @@ bool CAimbotProjectile::GetTarget(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapo
 		return true;
 	}
 
-	/*
+	
 	if (Vars::Aimbot::Projectile::PerformanceMode.m_Var)
 	{
 		Target_t Target = g_AimbotGlobal.GetBestTarget(GetSortMethod());
@@ -694,7 +694,7 @@ bool CAimbotProjectile::GetTarget(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapo
 			return true;
 		}
 	}
-	*/
+	
 	return false;
 }
 

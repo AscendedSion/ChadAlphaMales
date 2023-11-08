@@ -7,7 +7,7 @@ bool CChams::ShouldRun()
 {
 	return true;
 	//return !g_Interfaces.EngineVGui->IsGameUIVisible();
-	//return Vars::Chams::Main::Active.m_Var && !g_Interfaces.EngineVGui->IsGameUIVisible();
+	//return Vars::Chams::Main::Active.m_Var;
 }
 
 void CChams::DrawModel(CBaseEntity* pEntity)
@@ -209,9 +209,9 @@ void CChams::RenderPlayers(CBaseEntity* pLocal, IMatRenderContext* pRenderContex
 	if (Vars::Chams::Players::Alpha.m_Var < 1.0f)
 		g_Interfaces.RenderView->SetBlend(Vars::Chams::Players::Alpha.m_Var);
 
-	if (Vars::Chams::Players::IgnoreZ.m_Var)
+	if (Vars::Chams::Players::IgnoreZ.m_Var) {
 		pRenderContext->DepthRange(0.0f, 0.2f);
-
+	}
 	for (const auto& Player : Players)
 	{
 		
@@ -456,8 +456,9 @@ void CChams::RenderWorld(CBaseEntity* pLocal, IMatRenderContext* pRenderContext)
 	if (Vars::Chams::World::Alpha.m_Var < 1.0f)
 		g_Interfaces.RenderView->SetBlend(Vars::Chams::World::Alpha.m_Var);
 
-	if (Vars::Chams::World::IgnoreZ.m_Var)
+	if (Vars::Chams::World::IgnoreZ.m_Var) {
 		pRenderContext->DepthRange(0.0f, 0.2f);
+	}
 
 	if (Vars::Chams::World::Health.m_Var)
 	{

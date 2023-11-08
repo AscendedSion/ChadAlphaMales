@@ -255,7 +255,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		
 				if (Vars::AntiHack::FakeLag::Active.m_Var) {
 					*pSendPacket = false;
-					if (m_nLag >= nLimit)
+					if (m_nLag >= nLimit || pCmd->buttons == IN_ATTACK || dt.Charged > 0)
 						*pSendPacket = true;
 				}
 	}

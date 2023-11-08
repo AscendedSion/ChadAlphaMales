@@ -131,7 +131,7 @@ CConfigManager::CConfigManager()
 
 void CConfigManager::Save(const wchar_t* name)
 {
-	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L".poop"));
+	m_Write = std::wofstream(m_sConfigPath + L"\\" + name + _(L"poop"));
 
 	if (m_Write.is_open())
 	{

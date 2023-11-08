@@ -100,8 +100,16 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 
 							g_Draw.Rect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 40,40,40, dt.barAlpha });
 							g_Draw.OutlinedRect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 0, 0, 0, dt.barAlpha });
-							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Charged, nY + 51 + 4, { Vars::Menu::Colors::WidgetActive.r, Vars::Menu::Colors::WidgetActive.g, Vars::Menu::Colors::WidgetActive.b, 255 },
+							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Charged, nY + 51 + 4, 
+								{ 
+									// first color.
+									Vars::Menu::Colors::ShadowColor.r,
+									Vars::Menu::Colors::ShadowColor.g,
+									Vars::Menu::Colors::ShadowColor.b,
+									255 
+								},
 								{
+									// second color
 									Vars::Menu::Colors::WidgetActive.r,
 									Vars::Menu::Colors::WidgetActive.g,
 									Vars::Menu::Colors::WidgetActive.b,
@@ -189,7 +197,7 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 				int ms = std::max(0, (int)std::round(g_GlobalInfo.m_Latency * 1000.f));
 				// Change admin to something else if you really need to, it was for the protection thing
 				//_snprintf(buff, sizeof(buff), _("CAM [v1.5] | fps: %i | delay: %ims") ,fps, ms);
-				std::string waterMark = tfm::format(_("%s"), (__DATE__));
+				std::string waterMark = tfm::format(_("test"));
 				std::wstring waterMarkW(waterMark.begin(), waterMark.end());
 
 				g_Interfaces.Surface->GetTextSize(g_Draw.m_vecFonts[FONT_MENU].dwFont, waterMarkW.c_str(), label_w, label_h);

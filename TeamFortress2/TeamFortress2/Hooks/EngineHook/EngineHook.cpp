@@ -6,22 +6,20 @@
 
 void __cdecl EngineHook::CL_Move::Hook(float accumulated_extra_samples, bool bFinalTick)
 {
+	if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && g_GlobalInfo.m_nShifted) //teleport
+	{
+		while (g_GlobalInfo.m_nShifted);
+		{
+			//Func.Original<fn>()(accumulated_extra_samples, (g_GlobalInfo.m_nShifted));
+			g_GlobalInfo.m_nShifted++;
+			dt.Charged--;
+		}
+		return;
+	}
+
 	if (Vars::Misc::CL_Move::Doubletap.m_Var)
 	{
 		dt.FastStop = true;
-		
-
-
-		if (Vars::Misc::CL_Move::TeleportKey.m_Var && (GetAsyncKeyState(Vars::Misc::CL_Move::TeleportKey.m_Var)) && g_GlobalInfo.m_nShifted) //teleport
-		{
-			while (g_GlobalInfo.m_nShifted);
-			{
-				Func.Original<fn>()(accumulated_extra_samples, (g_GlobalInfo.m_nShifted));
-				g_GlobalInfo.m_nShifted++;
-				dt.Charged--;
-			}
-			return;
-		}
 		
 		if (GetAsyncKeyState(Vars::Misc::CL_Move::RechargeKey.m_Var)) {//recharge key
 			dt.FastStop = false;

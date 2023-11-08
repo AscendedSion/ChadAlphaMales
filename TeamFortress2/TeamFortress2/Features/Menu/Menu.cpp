@@ -1216,6 +1216,9 @@ void MiscTab() {
                 ImGui::Text(_("Recharge Key"));
                 AlignToRight(45);
                 InputKeybind(_("Recharge Key"), Vars::Misc::CL_Move::RechargeKey);
+                ImGui::Text("Teleport Key");
+                AlignToRight(45);
+                InputKeybind("Teleport Key", Vars::Misc::CL_Move::TeleportKey);
                 ImGui::EndPopup();
             }
             ImGui::PopStyleVar();
