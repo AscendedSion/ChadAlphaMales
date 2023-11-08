@@ -249,7 +249,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		int nLimit;
 		int      m_nLag;
 		bool bOnGround = pLocal->GetFlags() == FL_ONGROUND;
-		m_nMaxLag = (bOnGround) ? 24 : 20;
+		m_nMaxLag = (bOnGround) ? 16 : 15;
 		nLimit = std::min(Vars::AntiHack::FakeLag::Value.m_Var, m_nMaxLag);
 		m_nLag = g_Interfaces.ClientState->chokedcommands;
 		
