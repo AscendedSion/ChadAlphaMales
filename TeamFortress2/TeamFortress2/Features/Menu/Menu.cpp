@@ -412,6 +412,7 @@ void AimbotTab() {
         {
             ImGui::Checkbox(_("Active###Projectile"), &Vars::Aimbot::Projectile::Active.m_Var);
             ImGui::Checkbox(_("Performance mode"), &Vars::Aimbot::Projectile::PerformanceMode.m_Var);
+            ImGui::Checkbox("Aim Feet If on Ground(demoman)", &Vars::Aimbot::Projectile::FeetAimIfOnGround.m_Var);
             //static const char* projectileSortMethod[]{ "FOV", "Distance" };
             //ImGui::Combo(_("Sort method###projectileSortMethod"), &Vars::Aimbot::Projectile::SortMethod.m_Var, projectileSortMethod, IM_ARRAYSIZE(projectileSortMethod));
 
