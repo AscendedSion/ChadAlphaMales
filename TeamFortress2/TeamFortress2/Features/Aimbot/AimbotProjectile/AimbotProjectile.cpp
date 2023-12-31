@@ -374,7 +374,7 @@ bool CAimbotProjectile::SolveProjectile(CBaseEntity* pLocal, CBaseCombatWeapon* 
 		default: break;
 		}
 
-		Utils::TraceHull(Predictor.m_vPosition, vPredictedPos, Vec3(-2, -2, -2), Vec3(2, 2, 2), MASK_SOLID_BRUSHONLY, &TraceFilter, &Trace);
+		Utils::TraceHull(Predictor.m_vPosition, vPredictedPos, Vec3(-4.0f, -4.0f, -4.0f), Vec3(4.0f, 4.0f, 4.0f), MASK_SOLID, &TraceFilter, &Trace);
 
 		if (Trace.DidHit()) {
 
