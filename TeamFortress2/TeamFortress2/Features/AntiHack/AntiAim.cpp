@@ -110,38 +110,22 @@ float UseEdge(float EdgeViewAngle)
 
 void CAntiAim::Pitch(CUserCmd* pCmd)
 {
-	bool bPitchSet = Vars::AntiHack::AntiAim::Pitch.m_Var;
-
-	if (!bPitchSet)
+	if (!Vars::AntiHack::AntiAim::Pitch.m_Var)
 		return;
 
 	switch (g_EntityCache.m_pLocal->GetClassNum()) {
 	case CLASS_SCOUT:
-		pCmd->viewangles.x = -89.f;
-		break;
+	case CLASS_HEAVY:
 	case CLASS_SOLDIER:
+	case CLASS_MEDIC:
+	case CLASS_SNIPER:
+	case CLASS_SPY:
 		pCmd->viewangles.x = -89.f;
 		break;
 	case CLASS_PYRO:
-		pCmd->viewangles.x = 89.f;
-		break;
 	case CLASS_DEMOMAN:
-		pCmd->viewangles.x = 89.f;
-		break;
-	case CLASS_HEAVY:
-		pCmd->viewangles.x = -89.f;
-		break;
 	case CLASS_ENGINEER:
 		pCmd->viewangles.x = 89.f;
-		break;
-	case CLASS_MEDIC:
-		pCmd->viewangles.x = -89.f;
-		break;
-	case CLASS_SNIPER:
-		pCmd->viewangles.x = -89.f;
-		break;
-	case CLASS_SPY:
-		pCmd->viewangles.x = -89.f;
 		break;
 	}
 }
@@ -149,9 +133,12 @@ void CAntiAim::Pitch(CUserCmd* pCmd)
 void CAntiAim::BaseYaw(CUserCmd* pCmd)
 {
 	bool bYawSet = Vars::AntiHack::AntiAim::Yaw.m_Var;
-	if (!bYawSet)
+
+	if (!Vars::AntiHack::AntiAim::Yaw.m_Var)
 		return;
+
 	const auto& pLocal = g_EntityCache.m_pLocal;
+
 	static bool bShould180z = false;
 
 	// choose your starting angle
@@ -195,7 +182,7 @@ void CAntiAim::HandleYaw(CUserCmd* pCmd) {
 	YawDirection(pCmd);
 
 	// manual override everything
-	if (m_CurrentDirection != Directions::YAW_BACK) {
+	if (m_CurrentDirection != Directions::YAW_NONE) {
 		switch (m_CurrentDirection) {
 		case Directions::YAW_RIGHT:
 			pCmd->viewangles.y += 90.f;
