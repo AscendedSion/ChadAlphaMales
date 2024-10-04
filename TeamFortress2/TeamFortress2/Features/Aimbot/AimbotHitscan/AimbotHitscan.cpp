@@ -599,18 +599,16 @@ void CAimbotHitscan::Run(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapon, CUserC
 
 		Aim(pCmd, Target.m_vAngleTo);
 
-
+		if (Vars::Misc::CL_Move::Doubletap.m_Var && dt.Shifted > 22 - dt.ticks)
+		{
+			dt.shifting = true;
+			pCmd->buttons |= IN_ATTACK; // i will literally rape you, if you remove this. -vannie
+		}
+		
 		if (ShouldFire(pLocal, pWeapon, pCmd, Target))
 		{
 
-			if (Vars::Misc::CL_Move::Doubletap.m_Var && dt.Shifted > 22 - dt.ticks)
-			{
-				dt.shifting = true;
-				pCmd->buttons |= IN_ATTACK; // i will literally rape you, if you remove this. -vannie
-				// >" ooo why does it exist then?"
-				// beacuse this hitscan is too horrible that it has to fucking do complicated shit just for pCmd->buttons |= IN_ATTACK;
-				// calls IN_ATTACK; too late or something, bcuz if i dont do it, it just doesnt DT properly.
-			}
+			
 			if (nWeaponID == TF_WEAPON_MINIGUN)
 				pCmd->buttons |= IN_ATTACK2;
 
