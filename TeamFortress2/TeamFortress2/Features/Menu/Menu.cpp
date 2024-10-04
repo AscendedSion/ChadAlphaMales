@@ -1186,7 +1186,7 @@ void MiscTab() {
             ImGui::Checkbox(_("Bhop"), &Vars::Misc::AutoJump.m_Var);
             ImGui::Checkbox(_("AutoStrafer"), &Vars::Misc::AutoStrafe.m_Var);
             ImGui::Checkbox(_("Auto RocketJump"), &Vars::Misc::AutoRocketJump.m_Var);
-            ImGui::Checkbox(_("Taunt Slide"), &Vars::Misc::TauntSlide.m_Var);
+            //ImGui::Checkbox(_("Taunt Slide"), &Vars::Misc::TauntSlide.m_Var);
             ImGui::Checkbox(_("Taunt Control"), &Vars::Misc::TauntControl.m_Var);
             ImGui::Checkbox(_("Mouse control"), &Vars::Misc::TauntControlMouse.m_Var);
             ImGui::Checkbox(_("No Push"), &Vars::Misc::NoPush.m_Var);
