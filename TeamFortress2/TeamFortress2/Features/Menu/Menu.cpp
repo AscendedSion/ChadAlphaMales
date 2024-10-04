@@ -1207,19 +1207,11 @@ void MiscTab() {
                 ImGui::Text(_(ICON_FA_EYE " Doubletap settings"));
                 ImGui::Separator();
                 ImGui::PushItemWidth(200);
-                ImGui::SetCursorPosX(2);
-                ImGui::SliderInt(_("Ticks to shift"), &Vars::Misc::CL_Move::DTTicks.m_Var, 10, 24, _("%d"), ImGuiSliderFlags_ClampOnInput);
-                ImGui::SetCursorPosX(2);
-                ImGui::Checkbox(_("Wait for DT"), &Vars::Misc::CL_Move::WaitForDT.m_Var);
-                ImGui::SetCursorPosX(2);
-                ImGui::Checkbox(_("Don't DT in air"), &Vars::Misc::CL_Move::NotInAir.m_Var);
-                ImGui::SetCursorPosX(8);
                 ImGui::Text(_("Recharge Key"));
                 AlignToRight(45);
+                ImGui::Checkbox(_("Anti-Warp"), &Vars::Misc::CL_Move::AntiWarp.m_Var);
+                ImGui::SetCursorPosX(8);
                 InputKeybind(_("Recharge Key"), Vars::Misc::CL_Move::RechargeKey);
-                ImGui::Text("Teleport Key");
-                AlignToRight(45);
-                InputKeybind("Teleport Key", Vars::Misc::CL_Move::TeleportKey);
                 ImGui::EndPopup();
             }
             ImGui::PopStyleVar();
@@ -1229,7 +1221,7 @@ void MiscTab() {
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));
-            InputKeybind(_("dt key"), Vars::Misc::CL_Move::DoubletapKey);
+            //InputKeybind(_("dt key"), Vars::Misc::CL_Move::DoubletapKey);
             ImGui::PopStyleColor(3);
 
             AlignToRight(20);

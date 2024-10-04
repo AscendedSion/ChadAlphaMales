@@ -7,13 +7,13 @@ void __fastcall ViewRenderHook::LevelInit::Hook() {
 	g_Visuals.DevTextures();
 	g_Visuals.SkyboxChanger();
 	g_Chams.Init();
-
+	/*
 	dt.Shifting = false;
 	dt.Recharging = false;
 	dt.Charged = 0;
 	dt.ChargedReverse = Vars::Misc::CL_Move::DTTicks.m_Var;
 	dt.ToWait = 0;
-	
+	*/
 	Table.Original<fn>(index)(g_Interfaces.ViewRender);
 }
 

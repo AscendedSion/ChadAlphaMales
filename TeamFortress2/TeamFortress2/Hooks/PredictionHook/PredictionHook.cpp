@@ -25,8 +25,9 @@ int CalculateTick(int simTicks, CBaseEntity* player)
 void __stdcall PredictionHook::RunCommand2::Hook(CBaseEntity* pEntity, CUserCmd* pCmd, CMoveHelper* pMoveHelper)
 {
 	if (pMoveHelper && !g_Interfaces.MoveHelper)
-		g_Interfaces.MoveHelper = pMoveHelper;\
+		g_Interfaces.MoveHelper = pMoveHelper;
 
+	/*
 	if (!Vars::Misc::CL_Move::Doubletap.m_Var || !dt.Shifting) {
 		return Table.Original<fn>(index)(g_Interfaces.Prediction, pEntity, pCmd, pMoveHelper);
 	}
@@ -56,4 +57,5 @@ void __stdcall PredictionHook::RunCommand2::Hook(CBaseEntity* pEntity, CUserCmd*
 		pEntity->SetTickBase(BackupTick);
 		g_Interfaces.GlobalVars->curtime = CurtimeBackup;
 	}
+	*/ // dumb nigger, we have cl_sendmove rebuild now. We dont need this niggerlicious activities.
 }

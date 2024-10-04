@@ -563,6 +563,7 @@ void CAimbotHitscan::Run(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapon, CUserC
 
 	//Rev minigun if enabled and aimbot active
 	if (bShouldAim) {
+
 		if (Vars::Aimbot::Hitscan::AutoRev.m_Var && nWeaponID == TF_WEAPON_MINIGUN)
 			pCmd->buttons |= IN_ATTACK2;
 	}
@@ -580,21 +581,11 @@ void CAimbotHitscan::Run(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapon, CUserC
 				return;
 			}
 
+
 			if (Vars::Aimbot::Hitscan::ScopedOnly.m_Var && !bScoped)
 				return;
 		}
 
-		if (Vars::Misc::CL_Move::Doubletap.m_Var && (pCmd->buttons & IN_ATTACK) && (dt.Charged > 0) && (dt.ToWait == 0))
-		{
-			if (GetAsyncKeyState(Vars::Misc::CL_Move::DoubletapKey.m_Var)) {
-				dt.Shifting = true;
-			}
-		}
-
-		if (Vars::Misc::CL_Move::WaitForDT.m_Var) {
-			if (dt.ToWait > 0 && (dt.Charged > 0) && GetAsyncKeyState(Vars::Misc::CL_Move::DoubletapKey.m_Var)) //if dt not ready and "ticks" = 0 and key is held, dont aimbot
-				return;
-		}
 
 		g_GlobalInfo.m_nCurrentTargetIdx = Target.m_pEntity->GetIndex();
 		g_GlobalInfo.m_bHitscanRunning = true;
@@ -611,20 +602,25 @@ void CAimbotHitscan::Run(CBaseEntity* pLocal, CBaseCombatWeapon* pWeapon, CUserC
 
 		if (ShouldFire(pLocal, pWeapon, pCmd, Target))
 		{
+
+			if (Vars::Misc::CL_Move::Doubletap.m_Var && dt.Shifted > 22 - dt.ticks)
+			{
+				dt.shifting = true;
+				pCmd->buttons |= IN_ATTACK; // i will literally rape you, if you remove this. -vannie
+				// >" ooo why does it exist then?"
+				// beacuse this hitscan is too horrible that it has to fucking do complicated shit just for pCmd->buttons |= IN_ATTACK;
+				// calls IN_ATTACK; too late or something, bcuz if i dont do it, it just doesnt DT properly.
+			}
 			if (nWeaponID == TF_WEAPON_MINIGUN)
 				pCmd->buttons |= IN_ATTACK2;
 
 			if (g_GlobalInfo.m_nCurItemDefIndex == Engi_s_TheWrangler || g_GlobalInfo.m_nCurItemDefIndex == Engi_s_FestiveWrangler)
 				pCmd->buttons |= IN_ATTACK2;
 
+			
 			pCmd->buttons |= IN_ATTACK;
 
-			if (Vars::Misc::CL_Move::Doubletap.m_Var && (pCmd->buttons & IN_ATTACK) && (dt.Charged > 0) && (dt.ToWait == 0))
-			{
-				if (GetAsyncKeyState(Vars::Misc::CL_Move::DoubletapKey.m_Var)) {
-					dt.Shifting = true;
-				}
-			}
+			
 
 			if (g_GlobalInfo.m_bAAActive && !g_GlobalInfo.m_bWeaponCanAttack)
 				pCmd->buttons &= ~IN_ATTACK;

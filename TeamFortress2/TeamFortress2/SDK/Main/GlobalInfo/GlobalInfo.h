@@ -41,13 +41,15 @@ struct GlobalInfo_t
 #define DT_WAIT_CALLS 26
 
 struct DoubletapInfo {
-	bool Shifting = false;
-	bool Recharging = false;
-	bool FastStop = false;
-	int Charged = 0;
-	int ChargedReverse = 19;
-	int ToShift = 19;
-	int ToWait = 0;
+	bool Recharging;
+	bool Warp;
+	bool DoubleTap;
+	bool AntiWarp;
+	bool shifting = false;
+	int ticks = 0;
+	int Shifted = 0;
+	int DTBarStyle = 1;
+	CUserCmd* shift_user_cmd = nullptr; // retarded!!!!!!
 	BYTE barAlpha = 127;
 };
 

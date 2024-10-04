@@ -498,13 +498,9 @@ inline CVar<int> TracerEffect{ 0, L"Tracer style" };
 		inline std::string SteamRPCText	= "ChadAlphaMales.club";
 		namespace CL_Move
 		{
-			inline CVar<int> DTTicks{ 19, L"DT Ticks"};
 			inline CVar<bool> Doubletap{ true, L"Doubletap" };
-			inline CVar<bool> NotInAir{ true, L"Dont DT in air" };
-			inline CVar<int> TeleportKey{ 0x0, L"Teleport Key" };
 			inline CVar<int> RechargeKey{ 0x52, L"Recharge Key" }; //R
-			inline CVar<int> DoubletapKey{ 0x10, L"Doubletap Key" }; //V
-			inline CVar<bool> WaitForDT{ true, L"Wait for DT" };
+			inline CVar<bool> AntiWarp{ true, L"Anti-Warp" };
 		}
 	}
 

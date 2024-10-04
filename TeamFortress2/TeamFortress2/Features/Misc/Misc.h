@@ -46,7 +46,7 @@ private:
     void InstantRespawn();
     void NoPush();
 public:
-
+    void AntiWarp(CUserCmd* pCmd);
     Vec3 m_strafe_angles = { };
     bool m_pressing_move = false;
 

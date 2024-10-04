@@ -526,13 +526,13 @@ void CConfigManager::Save(const wchar_t* name)
 			// CL_Move
 			{
 				SAVE_VAR(Vars::Misc::CL_Move::Doubletap);// { true, L"Doubletap" };
-				SAVE_VAR(Vars::Misc::CL_Move::WaitForDT);// { true, L"Doubletap" };
-				SAVE_VAR(Vars::Misc::CL_Move::NotInAir);// { true, L"Doubletap" };
-				SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
+				//SAVE_VAR(Vars::Misc::CL_Move::WaitForDT);// { true, L"Doubletap" };
+				//SAVE_VAR(Vars::Misc::CL_Move::NotInAir);// { true, L"Doubletap" };
+				//SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
 				SAVE_VAR(Vars::Misc::CL_Move::RechargeKey);// { 0x52, L"Recharge Key" }; //R
-				SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
-				SAVE_VAR(Vars::Misc::CL_Move::TeleportKey);
-				SAVE_VAR(Vars::Misc::CL_Move::DTTicks);
+				//SAVE_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
+				//SAVE_VAR(Vars::Misc::CL_Move::TeleportKey);
+				//SAVE_VAR(Vars::Misc::CL_Move::DTTicks);
 			}
 		}
 
@@ -999,13 +999,13 @@ void CConfigManager::Load(const wchar_t* name)
 			// CL_Move
 			{
 				LOAD_VAR(Vars::Misc::CL_Move::Doubletap);// { true, L"Doubletap" };
-				LOAD_VAR(Vars::Misc::CL_Move::WaitForDT);// { true, L"Doubletap" };
-				LOAD_VAR(Vars::Misc::CL_Move::NotInAir);// { true, L"Doubletap" };
-				LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
+				//LOAD_VAR(Vars::Misc::CL_Move::WaitForDT);// { true, L"Doubletap" };
+				//LOAD_VAR(Vars::Misc::CL_Move::NotInAir);// { true, L"Doubletap" };
+				//LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { true, L"Doubletap" };
 				LOAD_VAR(Vars::Misc::CL_Move::RechargeKey);// { 0x52, L"Recharge Key" }; //R
-				LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
-				LOAD_VAR(Vars::Misc::CL_Move::TeleportKey);
-				LOAD_VAR(Vars::Misc::CL_Move::DTTicks);
+				//LOAD_VAR(Vars::Misc::CL_Move::DoubletapKey);// { 0x52, L"Recharge Key" }; //R
+				//LOAD_VAR(Vars::Misc::CL_Move::TeleportKey);
+				//LOAD_VAR(Vars::Misc::CL_Move::DTTicks);
 			}
 		}
 

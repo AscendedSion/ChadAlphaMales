@@ -110,7 +110,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 	if (OriginalFn(g_Interfaces.ClientMode, input_sample_frametime, pCmd))
 		g_Interfaces.Prediction->SetLocalViewAngles(pCmd->viewangles);
 
-	if (dt.Charged == 0 && dt.barAlpha > 0) {
+	if (dt.Shifted == 0 && dt.barAlpha > 0) {
 		if (!dt.barAlpha - 3 < 0) {
 			dt.barAlpha -= 3;
 		}
@@ -152,42 +152,13 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 	Vec3 vOldAngles = pCmd->viewangles;
 	float fOldSide = pCmd->sidemove;
 	float fOldForward = pCmd->forwardmove;
-
-	auto AntiWarp = [](CUserCmd* cmd) -> void
-	{
-		int shiftcheck = dt.ChargedReverse;
-		auto pLocal = GLOCAL;
-
-		if (shiftcheck < 19)
-		{
-			if (shiftcheck < 19)
-			{
-				// should be -1 btw
-				cmd->forwardmove *= -1;
-				cmd->sidemove *= -1;
-			}
-			else
-			{
-				cmd->forwardmove = 0;
-				cmd->sidemove = 0;
-			}
-		}
-		else {
-			dt.FastStop = true;
-		}
-	};
-
-	if (dt.FastStop) {
-		AntiWarp(pCmd);
-	}
-
 	g_Visuals.FreecamCM(pCmd);
 
 	if (const auto& pLocal = g_EntityCache.m_pLocal)
 	{
-		if (dt.Shifting) {
-			QuickStop(pLocal, pCmd);
-		}
+		//if (dt.Shifting) {
+		//	QuickStop(pLocal, pCmd);
+		//}
 		Ray_t trace;
 		g_GlobalInfo.m_Latency = g_Interfaces.ClientState->m_NetChannel->GetLatency(0);
 		nOldFlags = pLocal->GetFlags();
@@ -196,8 +167,8 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		{
 			const int nItemDefIndex = pWeapon->GetItemDefIndex();
 
-			if (g_GlobalInfo.m_nCurItemDefIndex != nItemDefIndex || !pWeapon->GetClip1())
-				dt.ToWait = DT_WAIT_CALLS;
+			//if (g_GlobalInfo.m_nCurItemDefIndex != nItemDefIndex || !pWeapon->GetClip1())
+			//	dt.ToWait = DT_WAIT_CALLS;
 
 			g_GlobalInfo.m_nCurItemDefIndex = nItemDefIndex;
 			g_GlobalInfo.m_bWeaponCanHeadShot = pWeapon->CanWeaponHeadShot();
@@ -230,7 +201,14 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 	else {
 		badcode++;
   }
-
+	if (you->GetClassNum() == ETFClass::CLASS_SCOUT)
+	{
+		dt.ticks = 2;
+	}
+	else
+	{
+		dt.ticks = 1;
+	}
 	g_Misc.Run(pCmd);
 	g_EnginePrediction.Start(pCmd);
 	{
@@ -255,7 +233,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		
 				if (Vars::AntiHack::FakeLag::Active.m_Var) {
 					*pSendPacket = false;
-					if (m_nLag >= nLimit || pCmd->buttons == IN_ATTACK || dt.Charged > 0)
+					if (m_nLag >= nLimit || pCmd->buttons == IN_ATTACK || dt.Shifted > 0)
 						*pSendPacket = true;
 				}
 	}
@@ -305,15 +283,30 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		}
 	}
 
-	//failsafe
+	static int choked = 0;
+	if (dt.shifting)
+	{
+		dt.shift_user_cmd = pCmd;
+		if (Vars::Misc::CL_Move::AntiWarp.m_Var)
+		{
+			//WalkTo(pBaseEntity->m_vecOrigin(), pBaseEntity->m_vecOrigin(), Math::RemapValClamped(static_cast<float>(22), 14.0f, 22.0f, 0.605f, 1.0f));
+			//F::Misc.DoAntiWarp(pCmd); later
+			g_Misc.AntiWarp(pCmd);
+		}
+		*pSendPacket = dt.Shifted == dt.ticks + 1;
+		//input_sample_time = 0.0f;
+		//i::cvar->ConsoleColorPrintf( { 0, 255, 255, 255 }, "[Doubletap] CreateMove( %i - %.8f, %d )\n", cmd->command_number, input_sample_time, *send_packet );
+	}
 	{
 		static int nChoked = 0;
+		const int nAmount = 22;
 
 		if (!*pSendPacket)
 			nChoked++;
+
 		else nChoked = 0;
 
-		if (nChoked > 20)
+		if (nChoked > nAmount)
 			*pSendPacket = true;
 	}
 

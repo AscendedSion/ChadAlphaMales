@@ -313,7 +313,7 @@ class INetMessage
 {
 public:
 	virtual				~INetMessage() {};
-	virtual void		SetNetChannel(CNetChannel *netchan) = 0;
+	virtual void		SetNetChannel(INetChannel *netchan) = 0;
 	virtual void		SetReliable(bool state) = 0;
 	virtual bool		Process(void) = 0;
 	virtual	bool		ReadFromBuffer(bf_read &buffer) = 0;
@@ -322,52 +322,71 @@ public:
 	virtual int			GetType(void) const = 0;
 	virtual int			GetGroup(void) const = 0;
 	virtual const char	*GetName(void) const = 0;
-	virtual CNetChannel *GetNetChannel(void) const = 0;
+	virtual INetChannel *GetNetChannel(void) const = 0;
 	virtual const char	*ToString(void) const = 0;
 };
 
-class CNetMessage : public INetMessage
-{
+class CNetMessage : public INetMessage {
 public:
-	CNetMessage()
-	{
+	CNetMessage() {
 		m_bReliable = true;
-		m_NetChannel = 0;
+		m_NetChannel = nullptr;
 	}
 
 	virtual ~CNetMessage() {};
 
-	virtual int GetGroup() const
-	{
-		return INetChannelInfo::GENERIC;
-	}
+	virtual int GetGroup() const { return INetChannelInfo::GENERIC; }
+	INetChannel* GetNetChannel() const { return m_NetChannel; }
 
-	virtual void SetReliable(bool state)
-	{
-		m_bReliable = state;
-	};
-	virtual bool IsReliable() const
-	{
-		return m_bReliable;
-	};
-	virtual void SetNetChannel(INetChannel* netchan)
-	{
-		m_NetChannel = netchan;
-	}
-	virtual bool Process()
-	{
-		return false;
-	}; // no handler set
+	virtual void SetReliable(bool state) { m_bReliable = state; };
+	virtual bool IsReliable() const { return m_bReliable; };
+	virtual void SetNetChannel(INetChannel* netchan) { m_NetChannel = netchan; }
+	virtual bool Process() { return false; }; // no handler set
 
 protected:
 	bool m_bReliable;          // true if message should be send reliable
 	INetChannel* m_NetChannel; // netchannel this message is from/for
 };
 
+#define NUM_NEW_COMMAND_BITS		4
+#define MAX_NEW_COMMANDS			((1 << NUM_NEW_COMMAND_BITS)-1)
+#define NUM_BACKUP_COMMAND_BITS		3
+#define MAX_BACKUP_COMMANDS			((1 << NUM_BACKUP_COMMAND_BITS)-1)
+#define NETMSG_TYPE_BITS	6	// must be 2^NETMSG_TYPE_BITS > SVC_LASTMSG
+#define clc_Move 9 
 class CLC_Move : public CNetMessage
 {
 public:
-	void *m_pMessageHandler;
+	bool ReadFromBuffer(bf_read& buffer)
+	{
+		m_nNewCommands = buffer.ReadUBitLong(NUM_NEW_COMMAND_BITS);
+		m_nBackupCommands = buffer.ReadUBitLong(NUM_BACKUP_COMMAND_BITS);
+		m_nLength = buffer.ReadWord();
+		m_DataIn = buffer;
+		return buffer.SeekRelative(m_nLength);
+	}
+
+	bool WriteToBuffer(bf_write& buffer)
+	{
+		buffer.WriteUBitLong(GetType(), NETMSG_TYPE_BITS);
+		m_nLength = m_DataOut.GetNumBitsWritten();
+
+		buffer.WriteUBitLong(m_nNewCommands, NUM_NEW_COMMAND_BITS);
+		buffer.WriteUBitLong(m_nBackupCommands, NUM_BACKUP_COMMAND_BITS);
+
+		buffer.WriteWord(m_nLength);
+
+		return buffer.WriteBits(m_DataOut.GetData(), m_nLength);
+	}
+
+	const char* ToString() const { return "CLC_Move"; }
+	int GetType() const { return clc_Move; }
+	const char* GetName() const { return "clc_Move"; }
+	void* m_pMessageHandler;
+	int GetGroup() const { return INetChannelInfo::MOVE; }
+	CLC_Move() { m_bReliable = false; }
+
+public:
 	int m_nBackupCommands;
 	int m_nNewCommands;
 	int m_nLength;

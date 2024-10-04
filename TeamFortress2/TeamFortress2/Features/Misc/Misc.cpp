@@ -383,3 +383,33 @@ void CMisc::NoPush() {
 		if (noPush->GetInt() == 0) noPush->SetValue(1);
 	}
 }
+
+void CMisc::AntiWarp(CUserCmd* pCmd)
+{
+	const auto& pLocal = g_EntityCache.m_pLocal;
+
+	if (!pLocal || !pLocal->IsAlive()
+		|| !Vars::Misc::CL_Move::AntiWarp.m_Var || !dt.shifting)
+		return;
+
+	Vector Velocity = pLocal->GetVelocity();
+	float Speed = Velocity.Lenght();
+	INetChannelInfo* pNetChannel = reinterpret_cast<INetChannelInfo*>(g_Interfaces.Engine->GetNetChannelInfo());
+	if (!pNetChannel || !g_Interfaces.ClientState ||
+		Speed < 23.5f)
+		return;
+
+	Vector Angles, Forward;
+	VectorAngles(Velocity, Angles);
+	Vector Viewangles;
+	g_Interfaces.Engine->GetViewAngles(Viewangles);
+	Angles.y = Viewangles.y - Angles.y;
+	Math::AngleVectors(Angles, &Forward);
+	Forward *= Speed;
+
+	float Scale = (pLocal->GetMaxSpeed() / Speed) +
+		pNetChannel->GetLatency(0);
+
+	pCmd->forwardmove = -Forward.x * Scale;
+	pCmd->sidemove = -Forward.y * Scale;
+}

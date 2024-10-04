@@ -66,7 +66,7 @@ void CHooks::Init()
 		using namespace PredictionHook;
 
 		Table.Init(g_Interfaces.Prediction);
-		Table.Hook(RunCommand::index, &RunCommand2::Hook);
+		Table.Hook(RunCommand::index, &RunCommand::Hook);
 	}
 
 	if (g_Interfaces.Surface)
@@ -148,6 +148,10 @@ void CHooks::Init()
 
 		//CL_SendMove
 		{
+			using namespace CL_SendMove;
+
+			fn CLSendMove = reinterpret_cast<fn>(g_Pattern.Find(L"engine.dll", L"55 8B EC 81 EC ? ? ? ? A1 ? ? ? ? 8D"));
+			Func.Hook(reinterpret_cast<void*>(CLSendMove), reinterpret_cast<void*>(Hook));
 
 		}
 	}

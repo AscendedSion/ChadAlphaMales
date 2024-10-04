@@ -149,6 +149,12 @@ public:
 		typedef ISpatialQuery *(__thiscall *FN)(PVOID);
 		return GetVFunc<FN>(this, 42)(this);
 	}
+	void FireEvents()
+	{
+		typedef void(__thiscall* FireEvent_FN)(void*);
+		//M::CallVirtual<FireEvent_FN>(this, 56)(this);
+		GetVFunc<FireEvent_FN>(this, 56)(this);
+	}
 };
 
 #define VENGINE_CLIENT_INTERFACE_VERSION_13	"VEngineClient013"

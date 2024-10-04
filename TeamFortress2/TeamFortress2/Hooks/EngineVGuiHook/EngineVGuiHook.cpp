@@ -93,14 +93,14 @@ void __stdcall EngineVGuiHook::Paint::Hook(int mode)
 							g_Draw.String(FONT_MENU, 0, nY + 60, { 255,255,255,255 }, ALIGN_DEFAULT, std::string("Shifting: " + std::to_string(dt.Shifting)).c_str());
 							g_Draw.String(FONT_MENU, 0, nY + 80, { 255,255,255,255 }, ALIGN_DEFAULT, std::string("Ticks to shift: " + std::to_string(dt.ToShift)).c_str());
 							g_Draw.String(FONT_MENU, 0, nY + 99, { 255,255,255,255 }, ALIGN_DEFAULT, std::string("Wait ticks: " + std::to_string(dt.ToWait)).c_str());*/
-							int ticks = dt.Charged;
+							int ticks = dt.Shifted;
 							int tickWidth = 5;
-							int barWidth = (tickWidth * Vars::Misc::CL_Move::DTTicks.m_Var) + 2;
+							int barWidth = (tickWidth * 22) + 2;
 
 
 							g_Draw.Rect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 40,40,40, dt.barAlpha });
 							g_Draw.OutlinedRect(g_ScreenSize.c - (barWidth / 2), nY + 50, barWidth, 6, { 0, 0, 0, dt.barAlpha });
-							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Charged, nY + 51 + 4, 
+							g_Draw.GradientRect(g_ScreenSize.c - (barWidth / 2) + 1, nY + 51, (g_ScreenSize.c - (barWidth / 2) + 1) + tickWidth * dt.Shifted, nY + 51 + 4, 
 								{ 
 									// first color.
 									Vars::Menu::Colors::ShadowColor.r,

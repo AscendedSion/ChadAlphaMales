@@ -17,6 +17,9 @@ namespace EngineHook
 	}
 	namespace CL_SendMove
 	{
+		inline SEOHook::Func Func;
 
+		using fn = void(__fastcall*)(void*, void*);
+		void __fastcall Hook(void* ecx, void* edx);
 	}
 }
