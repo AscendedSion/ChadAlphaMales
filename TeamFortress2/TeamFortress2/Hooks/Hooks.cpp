@@ -118,7 +118,13 @@ void CHooks::Init()
 		Table.Init(g_Interfaces.UniformRandomStream);
 		Table.Hook(RandInt::index, &RandInt::Hook);
 	}
+	if (g_Interfaces.Input)
+	{
+		using namespace ClientHook; 
 
+		TableInput.Init(g_Interfaces.Input);
+		TableInput.Hook(GetUserCmd::index, &GetUserCmd::Hooked_GetUserCmd);
+	}
 	//Inventory expander
 	{
 		CTFInventoryManager* InventoryManager = nullptr;
@@ -155,7 +161,24 @@ void CHooks::Init()
 
 		}
 	}
+	// CritHook
+	{
+		using namespace ClientHook;
 
+		// CalcIsAttackCritical
+		{
+			using namespace CalcIsAttackCritical;
+
+			fn CalcIsAttackCriticalPattern = reinterpret_cast<fn>(g_Pattern.Find(L"client.dll", L"53 57 6A ? 68 ? ? ? ? 68 ? ? ? ? 6A ? 8B F9 E8 ? ? ? ? 50 E8 ? ? ? ? 8B D8 83 C4 ? 85 DB 0F 84"));
+			Func.Hook(reinterpret_cast<void*>(CalcIsAttackCriticalPattern), reinterpret_cast<void*>(Hook));
+		}
+		// AddToCritBucket
+		{
+			using namespace AddToCritBucket;
+
+			fn AddToCritBucketPattern = reinterpret_cast<fn>(g_Pattern.Find(L"client.dll", L"55 8B EC A1 ? ? ? ? F3 0F 10 81 ? ? ? ? F3 0F 10 48 ? 0F 2F C8 76 1D F3 0F 58 45 ? 0F 2F C8 F3 0F 11 81 ? ? ? ? 77 03 0F 28 C1 F3 0F 11 81 ? ? ? ?"));
+		}
+	}
 	//EndSceneHook::Init();
 
 	//GetDrawPosition

@@ -2,22 +2,34 @@
 #pragma once
 
 #include "../BaseEntity/BaseEntity.h"
-
+#define OFFSETThing( name, type, offset ) inline type& name( ) { \
+	return *reinterpret_cast< type* >( reinterpret_cast< uint32_t >( this ) + offset ); \
+}
 class CBaseCombatWeapon : public CBaseEntity
 {
 public: //Netvars
-    M_DYNVARGET(Clip1, int, this, _("DT_BaseCombatWeapon"), _("LocalWeaponData"), _("m_iClip1"))
-        M_DYNVARGET(Clip2, int, this, _("DT_BaseCombatWeapon"), _("LocalWeaponData"), _("m_iClip2"))
-        M_DYNVARGET(ItemDefIndex, int, this, _("DT_EconEntity"), _("m_AttributeManager"), _("m_Item"), _("m_iItemDefinitionIndex"))
-        M_DYNVARGET(ChargeBeginTime, float, this, _("DT_WeaponPipebombLauncher"), _("PipebombLauncherLocalData"), _("m_flChargeBeginTime"))
-        M_DYNVARGET(ChargeDamage, float, this, _("DT_TFSniperRifle"), _("SniperRifleLocalData"), _("m_flChargedDamage"))
-        M_DYNVARGET(LastFireTime, float, this, _("DT_TFWeaponBase"), _("LocalActiveTFWeaponData"), _("m_flLastFireTime"))
-        M_DYNVARGET(NextSecondaryAttack, float, this, _("DT_BaseCombatWeapon"), _("LocalActiveWeaponData"), _("m_flNextSecondaryAttack"))
-        M_DYNVARGET(NextPrimaryAttack, float, this, _("DT_BaseCombatWeapon"), _("LocalActiveWeaponData"), _("m_flNextPrimaryAttack"))
+	M_DYNVARGET(Clip1, int, this, _("DT_BaseCombatWeapon"), _("LocalWeaponData"), _("m_iClip1"))
+		M_DYNVARGET(Clip2, int, this, _("DT_BaseCombatWeapon"), _("LocalWeaponData"), _("m_iClip2"))
+		M_DYNVARGET(ItemDefIndex, int, this, _("DT_EconEntity"), _("m_AttributeManager"), _("m_Item"), _("m_iItemDefinitionIndex"))
+		M_DYNVARGET(ChargeBeginTime, float, this, _("DT_WeaponPipebombLauncher"), _("PipebombLauncherLocalData"), _("m_flChargeBeginTime"))
+		M_DYNVARGET(ChargeDamage, float, this, _("DT_TFSniperRifle"), _("SniperRifleLocalData"), _("m_flChargedDamage"))
+		M_DYNVARGET(LastFireTime, float, this, _("DT_TFWeaponBase"), _("LocalActiveTFWeaponData"), _("m_flLastFireTime"))
+		M_DYNVARGET(NextSecondaryAttack, float, this, _("DT_BaseCombatWeapon"), _("LocalActiveWeaponData"), _("m_flNextSecondaryAttack"))
+		M_DYNVARGET(NextPrimaryAttack, float, this, _("DT_BaseCombatWeapon"), _("LocalActiveWeaponData"), _("m_flNextPrimaryAttack"))
 
-        M_OFFSETGET(UberCharge, float, 0xC6C) //DT_WeaponMedigun -> NonLocalTFWeaponMedigundata -> m_flChargeLevel
-        //M_OFFSETGET(HealingTarget, int, 0xC48) //DT_WeaponMedigun -> m_hHealingTarget
-        M_OFFSETGET(Healing, int, 0xC51) //DT_WeaponMedigun -> m_bHealing
+		M_OFFSETGET(UberCharge, float, 0xC6C) //DT_WeaponMedigun -> NonLocalTFWeaponMedigundata -> m_flChargeLevel
+		//M_OFFSETGET(HealingTarget, int, 0xC48) //DT_WeaponMedigun -> m_hHealingTarget
+		M_OFFSETGET(Healing, int, 0xC51) //DT_WeaponMedigun -> m_bHealing
+		/*
+		OFFSETThing(m_crit_token_bucket, float, 0xa54);
+	OFFSETThing(m_weapon_mode, int, 0xb24);
+	OFFSETThing(m_last_crit_check_time, float, 0xb54);
+	OFFSETThing(m_last_rapid_fire_crit_check_time, float, 0xb60);
+		*/
+		OFFSETThing(CritTokenBucket, float, 0xa54);
+		OFFSETThing(WeaponMode, int, 0xb24);
+		OFFSETThing(LastCritCheckTime, float, 0xb54);
+		OFFSETThing(LastRapidFireCritCheckTime, float, 0xb60);
 
 public: //Virtuals
 	M_VIRTUALGET(WeaponID, int, this, int(__thiscall*)(void*), 381)
@@ -177,5 +189,9 @@ public: //Everything else, lol
 
 	__inline int GetMinigunState() {
 		return *reinterpret_cast<int *>(this + 0xC48);
+	}
+	bool CalcIsAttackCritical() {
+		typedef bool(__thiscall* calc_is_attack_critical_fn)(CBaseCombatWeapon*);
+		return GetVFunc< calc_is_attack_critical_fn >(this, 396)(this);
 	}
 };

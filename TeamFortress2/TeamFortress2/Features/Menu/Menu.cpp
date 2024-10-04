@@ -1203,6 +1203,8 @@ void MiscTab() {
         {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 8,8 });
             ImGui::SetNextWindowSize(ImVec2(210, 0));
+            ImGui::Checkbox(_("Enable CritHack"), &Vars::Aimbot::CritHack::Active.m_Var);
+            InputKeybind(_("Crithack Key"), Vars::Aimbot::CritHack::CritKey);
             if (ImGui::BeginPopup(_("DTSettings"), ImGuiWindowFlags_NoScrollWithMouse)) {
                 ImGui::Text(_(ICON_FA_EYE " Doubletap settings"));
                 ImGui::Separator();
@@ -1218,6 +1220,10 @@ void MiscTab() {
 
             ImGui::Checkbox(_("DoubleTap"), &Vars::Misc::CL_Move::Doubletap.m_Var);
             AlignToRight(70);
+            
+            //ImGui::Checkbox(_("Crit Bar"), &Vars::Aimbot::CritHack::CritBar.m_Var);
+            //ImGui::Checkbox(_("Melee Crits"), &Vars::Aimbot::CritHack::MeleeCrits.m_Var);
+            //ImGui::Checkbox(_("Save Bucket"), &Vars::Aimbot::CritHack::SaveBucket.m_Var);
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(MenuCol.x / 1.5, MenuCol.y / 1.5, MenuCol.z / 1.5, 255));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(MenuCol.x, MenuCol.y, MenuCol.z, 255));

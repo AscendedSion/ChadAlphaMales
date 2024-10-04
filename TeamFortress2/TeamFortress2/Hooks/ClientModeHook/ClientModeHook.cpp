@@ -9,7 +9,7 @@
 #include "../../SDK/Timer.h"
 #include "../../Features/Cache/Cache.h"
 #include "../../Features/ESP/ESP.h"
-
+#include "../../Features/CritHack/CritHack.h"
 //#include "../../Features/KatzeB0t/AntiCat.h"
 
 void __stdcall ClientModeHook::OverrideView::Hook(CViewSetup* pView)
@@ -70,32 +70,6 @@ static void updateAntiAfk(CUserCmd* pCmd)
 }
 
 int badcode = 0;
-void QuickStop(CBaseEntity* pEntity, CUserCmd* pCmd) {
-	// convert velocity to angular momentum.
-	Vec3 angle;
-	Math::VectorAngles(pEntity->GetVecVelocity(), angle);
-
-	// get our current speed of travel.
-	float speed = pEntity->GetVecVelocity().Lenght2D();
-
-	// fix direction by factoring in where we are looking.
-	angle.y = pEntity->GetEyeAngles().y - angle.y;
-
-	// convert corrected angle back to a direction.
-	Vec3 direction;
-	Math::AngleVectors(angle, &direction);
-
-	Vec3 stop = direction * -speed;
-
-	if (pEntity->GetVelocity().Lenght2D() > 13.f) {
-		pCmd->forwardmove = stop.x;
-		pCmd->sidemove = stop.y;
-	}
-	else {
-		pCmd->forwardmove = pCmd->sidemove = 0.f;
-	}
-}
-
 
 bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CUserCmd* pCmd)
 {
@@ -109,7 +83,14 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 
 	if (OriginalFn(g_Interfaces.ClientMode, input_sample_frametime, pCmd))
 		g_Interfaces.Prediction->SetLocalViewAngles(pCmd->viewangles);
-
+	g_Interfaces.Prediction->Update // thanks to fourteen for pointing out this fucking exists :steamhappy:
+	(
+		g_Interfaces.ClientState->m_nDeltaTick,
+		g_Interfaces.ClientState->m_nDeltaTick > 0,
+		g_Interfaces.ClientState->last_command_ack,
+		g_Interfaces.ClientState->lastoutgoingcommand + g_Interfaces.ClientState->chokedcommands
+	);
+	/*
 	if (dt.Shifted == 0 && dt.barAlpha > 0) {
 		if (!dt.barAlpha - 3 < 0) {
 			dt.barAlpha -= 3;
@@ -129,7 +110,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 			g_PlayerArrows.upAlpha = true;
 		}
 	}
-
+	*/
 
 	uintptr_t _bp; __asm mov _bp, ebp;
 	bool* pSendPacket = (bool*)(***(uintptr_t***)_bp - 0x1);
@@ -210,6 +191,7 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		dt.ticks = 1;
 	}
 	g_Misc.Run(pCmd);
+	g_CritHack.run(pCmd);
 	g_EnginePrediction.Start(pCmd);
 	{
 		g_Aimbot.Run(pCmd);
@@ -237,33 +219,6 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 						*pSendPacket = true;
 				}
 	}
-
-
-	if (Vars::Misc::TauntSlide.m_Var)
-	{
-		if (const auto& pLocal = g_EntityCache.m_pLocal)
-		{
-			if (pLocal->IsTaunting())
-			{
-				if (Vars::Misc::TauntControl.m_Var)
-				{
-					if (Vars::Misc::TauntControlMouse.m_Var)
-					{
-						Vec3 vAngle = g_Interfaces.Engine->GetViewAngles();
-						pCmd->viewangles.y = vAngle.y;
-
-						return false;
-					}
-					else
-					{
-						pCmd->viewangles.x = (pCmd->buttons & IN_BACK) ? 91.0f : (pCmd->buttons & IN_FORWARD) ? 0.0f : 90.0f;
-					}
-				}
-				return false;
-			}
-		}
-	}
-
 	static bool bWasSet = false;
 
 	if (g_GlobalInfo.m_bSilentTime) {
@@ -309,7 +264,13 @@ bool __stdcall ClientModeHook::CreateMove::Hook(float input_sample_frametime, CU
 		if (nChoked > nAmount)
 			*pSendPacket = true;
 	}
-
+	if (g_EntityCache.m_pLocalWeapon)
+	{
+		if (g_EntityCache.m_pLocalWeapon->CanShoot(g_EntityCache.m_pLocal))
+			g_CritHack.finished_last_shot = true;
+		else
+			g_CritHack.finished_last_shot = false;
+	}
 	g_GlobalInfo.shiftedCmd = pCmd;
 	
 
