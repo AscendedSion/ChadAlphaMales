@@ -7,3 +7,4 @@ i guess
 - Ateris (i pasted their Anti-Warp and CL_SendMove)
 - Fedware
 - Jengaware (Some hook functions & crithack)
+- Ascended$ION and Kit (i forked their CAM base)
